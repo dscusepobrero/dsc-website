@@ -270,7 +270,7 @@ export default function Team() {
         <TeamSection 
           title="Lead" 
           members={teamData.lead.members}
-          gradient="center"
+          gradient="both"
         />
 
         <div className="relative">
