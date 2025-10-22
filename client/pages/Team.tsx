@@ -68,24 +68,6 @@ const teamData: Record<string, { description?: string; members: TeamMember[] }> 
         role: "Technical Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
-      },
-      {
-        name: "John Renan N. Labay",
-        role: "Logistics Officer\n\n*insert quote?",
-        image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-        socialLinks: { linkedin: "#", github: "#", facebook: "#" }
-      },
-      {
-        name: "Asher Grey Morial",
-        role: "Logistics Officer\n\n*insert quote?",
-        image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-        socialLinks: { linkedin: "#", github: "#", facebook: "#" }
-      },
-      {
-        name: "Jayce Lorenz Gulmatico",
-        role: "Auditor\n\n*insert quote?",
-        image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-        socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       }
     ]
   },
