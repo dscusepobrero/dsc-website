@@ -18,7 +18,7 @@ const teamData: Record<string, { description?: string; members: TeamMember[] }> 
     members: [
       {
         name: "Kent Paulo R. Delgado",
-        role: "Lead",
+        role: "Lead\nBSCS\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       }
@@ -29,55 +29,61 @@ const teamData: Record<string, { description?: string; members: TeamMember[] }> 
     members: [
       {
         name: "Mariel Rossini C. Go",
-        role: "Chief Operations Officer",
+        role: "Chief Operations Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Marc Alvienth T. Hernandez",
-        role: "Secretary",
+        role: "Secretary\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Baberose I. Silmaro",
-        role: "Communications Officer",
+        role: "Communications Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "John Marcellin E. Tan",
-        role: "Events Officer",
+        role: "Events Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Kimberly S. Bermoy",
-        role: "Events Officer",
+        role: "Events Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
-        name: "Jivin Java",
-        role: "Logistics Manager",
+        name: "Ken Erik Y. Justiniani",
+        role: "Technical Officer\n\n*insert quote?",
+        image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        socialLinks: { linkedin: "#", github: "#", facebook: "#" }
+      },
+      {
+        name: "Ace Jonathan D. Briones",
+        role: "Technical Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "John Renan N. Labay",
-        role: "Logistics Officer",
+        role: "Logistics Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Asher Grey Morial",
-        role: "Logistics Officer",
+        role: "Logistics Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Jayce Lorenz Gulmatico",
-        role: "Auditor",
+        role: "Auditor\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       }
@@ -88,37 +94,25 @@ const teamData: Record<string, { description?: string; members: TeamMember[] }> 
     members: [
       {
         name: "Julse M. Merencillo",
-        role: "Chief Technology Officer",
+        role: "Chief Technology Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Kervy Chrystan G. Caranto",
-        role: "Engineering Lead",
+        role: "Engineering Lead\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Dave Shanna Marie E. Gigawin",
-        role: "Design Lead",
+        role: "Design Lead\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Decyrel P. Dahan",
-        role: "Data Science Lead",
-        image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-        socialLinks: { linkedin: "#", github: "#", facebook: "#" }
-      },
-      {
-        name: "Ken Erik Y. Justiniani",
-        role: "Technical Officer",
-        image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-        socialLinks: { linkedin: "#", github: "#", facebook: "#" }
-      },
-      {
-        name: "Ace Jonathan D. Briones",
-        role: "Technical Officer",
+        role: "Data Science Lead\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       }
@@ -129,7 +123,7 @@ const teamData: Record<string, { description?: string; members: TeamMember[] }> 
     members: [
       {
         name: "Lance Marvin Libron",
-        role: "Chief Finance Officer",
+        role: "Chief Finance Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       }
@@ -140,37 +134,37 @@ const teamData: Record<string, { description?: string; members: TeamMember[] }> 
     members: [
       {
         name: "Jaylord Jan A. Boladola",
-        role: "Chief Creatives Officer",
+        role: "Chief Creatives Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Kurt Ashton G. Montebon",
-        role: "Branding Officer",
+        role: "Branding Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Arndria A. Basco",
-        role: "Promotion Officer",
+        role: "Promotion Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Elvie May P. Mara",
-        role: "Promotion Officer",
+        role: "Promotion Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Julio Cedrick D. Maghanoy",
-        role: "Documentation Officer",
+        role: "Documentation Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       },
       {
         name: "Mcjustin Andrew S. Palen",
-        role: "Documentation Officer",
+        role: "Documentation Officer\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       }
@@ -180,7 +174,7 @@ const teamData: Record<string, { description?: string; members: TeamMember[] }> 
     members: [
       {
         name: "Nancy S. Mozo",
-        role: "Adviser",
+        role: "Adviser\n\n*insert quote?",
         image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" }
       }
