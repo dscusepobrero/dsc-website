@@ -29,7 +29,7 @@ export default function TeamMemberCard({
         <h3 className="font-rethink font-bold text-2xl text-gray-900 mb-2">
           {name}
         </h3>
-        <p className="font-rethink text-xl text-gray-900 mb-6">{role}</p>
+        <p className="font-rethink text-base text-gray-600 mb-6 whitespace-pre-line">{role}</p>
 
         <div className="flex items-center gap-4 mt-auto">
           {socialLinks.linkedin && (
