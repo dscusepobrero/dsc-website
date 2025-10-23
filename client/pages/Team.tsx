@@ -209,7 +209,7 @@ const TeamSection = ({ title, description, members, gradient = "left" }: {
           </p>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,320px))] gap-8 sm:gap-10 lg:gap-12 justify-center justify-items-center">
           {members.map((member, index) => (
             <div key={index} className="flex justify-center">
               <TeamMemberCard {...member} />
