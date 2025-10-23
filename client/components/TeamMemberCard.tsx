@@ -16,7 +16,7 @@ export default function TeamMemberCard({
   socialLinks,
 }: TeamMemberCardProps) {
   return (
-    <div className="flex flex-col bg-white border border-gray-200 rounded-lg shadow-[13px_13px_6.2px_0_rgba(239,79,31,0.25)] overflow-hidden hover:shadow-[15px_15px_8px_0_rgba(239,79,31,0.3)] transition-shadow">
+    <div className="w-[330px] flex flex-col bg-white border border-gray-200 rounded-lg shadow-[13px_13px_6.2px_0_rgba(239,79,31,0.25)] overflow-hidden hover:shadow-[15px_15px_8px_0_rgba(239,79,31,0.3)] transition-shadow">
       <div className="w-full h-[247px] bg-gray-100 overflow-hidden">
         <img
           src={image}
