@@ -18,18 +18,16 @@ export default function TeamMemberCard({
   return (
     <div className="w-[330px] flex flex-col bg-white border border-gray-200 rounded-lg shadow-[13px_13px_6.2px_0_rgba(239,79,31,0.25)] overflow-hidden hover:shadow-[15px_15px_8px_0_rgba(239,79,31,0.3)] transition-shadow">
       <div className="w-full h-[247px] bg-gray-100 overflow-hidden">
-        <img
-          src={image}
-          alt={name}
-          className="w-full h-full object-cover"
-        />
+        <img src={image} alt={name} className="w-full h-full object-cover" />
       </div>
 
       <div className="p-4 flex-1 flex flex-col">
         <h3 className="font-rethink font-bold text-2xl text-gray-900 mb-2">
           {name}
         </h3>
-        <p className="font-rethink text-base text-gray-600 mb-6 whitespace-pre-line">{role}</p>
+        <p className="font-rethink text-base text-gray-600 mb-6 whitespace-pre-line">
+          {role}
+        </p>
 
         <div className="flex items-center gap-4 mt-auto">
           {socialLinks.linkedin && (
