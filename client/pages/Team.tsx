@@ -240,109 +240,65 @@ const teamData: Record<
   },
 };
 
-const TeamSection = ({
+const SectionHeader = ({
   title,
-  description,
-  members,
-  gradient = "left",
   leftGrow = 1,
   rightGrow = 1,
 }: {
   title: string;
-  description?: string;
-  members: TeamMember[];
-  gradient?: "left" | "right" | "both";
   leftGrow?: number;
   rightGrow?: number;
-}) => {
-  return (
-    <section className="relative py-12 sm:py-16 lg:py-20">
-      <div className="relative max-w-full mx-auto">
-        <div className="flex items-center justify-center mb-8 sm:mb-12">
-          {gradient === "left" || gradient === "both" ? (
-            <div
-              style={{ flexGrow: leftGrow }}
-              className="h-[52px] bg-gradient-to-r from-transparent via-dsc-orange to-dsc-maroon"
-            />
-          ) : null}
-          <h2 className="font-rethink font-bold text-dsc-maroon text-4xl sm:text-5xl lg:text-[50px] text-center px-6 sm:px-8 whitespace-nowrap">
-            {title}
-          </h2>
-          {gradient === "right" || gradient === "both" ? (
-            <div
-              style={{ flexGrow: rightGrow }}
-              className="h-[52px] bg-gradient-to-l from-transparent via-dsc-orange to-dsc-maroon"
-            />
-          ) : null}
-        </div>
-
-        {description && (
-          <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
-            {description}
-          </p>
-        )}
-
-        <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-          {members.map((member, index) => (
-            <TeamMemberCard key={index} {...member} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+}) => (
+  <div className="flex items-center justify-center mb-8 sm:mb-12">
+    <div
+      style={{ flexGrow: leftGrow }}
+      className="h-[52px] bg-gradient-to-r from-transparent via-dsc-orange to-dsc-maroon"
+    />
+    <h2 className="font-rethink font-bold text-dsc-maroon text-4xl sm:text-5xl lg:text-[50px] text-center px-6 sm:px-8 whitespace-nowrap">
+      {title}
+    </h2>
+    <div
+      style={{ flexGrow: rightGrow }}
+      className="h-[52px] bg-gradient-to-l from-transparent via-dsc-orange to-dsc-maroon"
+    />
+  </div>
+);
 
 export default function Team() {
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-white relative overflow-x-hidden">
       <Header />
 
-      <svg
-        className="absolute w-[507px] h-[522px] -left-[203px] top-[268px] pointer-events-none"
-        viewBox="0 0 507 522"
-        fill="none"
-      >
-        <ellipse
-          cx="253.5"
-          cy="261"
-          rx="253.5"
-          ry="261"
-          fill="#EF4F1F"
-          fillOpacity="0.5"
-        />
-      </svg>
+      {/* Decorative Background Circles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Top cluster (for header and Lead) */}
+        <div className="absolute top-[200px] -left-[200px] w-[400px] h-[400px] bg-dsc-orange/30 rounded-full" />
+        <div className="absolute top-[400px] -left-[100px] w-[300px] h-[300px] bg-dsc-maroon/20 rounded-full" />
+        <div className="absolute top-[250px] -right-[250px] w-[500px] h-[500px] bg-dsc-orange/30 rounded-full" />
+        <div className="absolute top-[500px] -right-[100px] w-[200px] h-[200px] bg-dsc-maroon/20 rounded-full" />
 
-      <svg
-        className="absolute w-[292px] h-[300px] left-[147px] top-[526px] pointer-events-none"
-        viewBox="0 0 292 300"
-        fill="none"
-      >
-        <ellipse
-          cx="146"
-          cy="150"
-          rx="146"
-          ry="150"
-          fill="#801817"
-          fillOpacity="0.3"
-        />
-      </svg>
+        {/* Operations cluster */}
+        <div className="absolute top-[1200px] -right-[200px] w-[450px] h-[450px] bg-dsc-orange/30 rounded-full" />
+        <div className="absolute top-[1350px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/20 rounded-full" />
 
-      <svg
-        className="absolute w-[507px] h-[522px] left-[1030px] top-[451px] pointer-events-none"
-        viewBox="0 0 507 522"
-        fill="none"
-      >
-        <ellipse
-          cx="253.5"
-          cy="261"
-          rx="253.5"
-          ry="261"
-          fill="#EF4F1F"
-          fillOpacity="0.4"
-        />
-      </svg>
+        {/* Technology cluster */}
+        <div className="absolute top-[2100px] -left-[250px] w-[500px] h-[500px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute top-[2300px] -left-[150px] w-[350px] h-[350px] bg-dsc-maroon/10 rounded-full" />
 
-      <main className="relative">
+        {/* Finance cluster */}
+        <div className="absolute top-[2900px] -right-[220px] w-[400px] h-[400px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute top-[3100px] -right-[120px] w-[250px] h-[250px] bg-dsc-maroon/10 rounded-full" />
+
+        {/* Creatives cluster */}
+        <div className="absolute top-[4200px] -right-[200px] w-[450px] h-[450px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute top-[4300px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/10 rounded-full" />
+
+        {/* Adviser cluster */}
+        <div className="absolute top-[5500px] -right-[250px] w-[500px] h-[500px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute top-[5600px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/10 rounded-full" />
+      </div>
+
+      <main className="relative z-0">
         <div className="px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20">
           <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
             <div className="flex items-center justify-center gap-4 sm:gap-6">
@@ -373,52 +329,103 @@ export default function Team() {
         </div>
 
         <div className="flex flex-col">
-          <TeamSection
-            title="Lead"
-            members={teamData.lead.members}
-            gradient="both"
-            leftGrow={2}
-            rightGrow={2}
-          />
-          <TeamSection
-            title="Operations"
-            description={teamData.operations.description}
-            members={teamData.operations.members}
-            gradient="both"
-            leftGrow={1}
-            rightGrow={2}
-          />
-          <TeamSection
-            title="Technology"
-            description={teamData.technology.description}
-            members={teamData.technology.members}
-            gradient="both"
-            leftGrow={2}
-            rightGrow={1}
-          />
-          <TeamSection
-            title="Finance"
-            description={teamData.finance.description}
-            members={teamData.finance.members}
-            gradient="both"
-            leftGrow={1}
-            rightGrow={2}
-          />
-          <TeamSection
-            title="Creatives"
-            description={teamData.creatives.description}
-            members={teamData.creatives.members}
-            gradient="both"
-            leftGrow={2}
-            rightGrow={1}
-          />
-          <TeamSection
-            title="Adviser"
-            members={teamData.adviser.members}
-            gradient="both"
-            leftGrow={2}
-            rightGrow={2}
-          />
+          {/* Lead Section */}
+          <section className="relative py-12 sm:py-16 lg:py-20">
+            <SectionHeader title="Lead" leftGrow={2} rightGrow={2} />
+            <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+              {teamData.lead.members.map((member, index) => (
+                <TeamMemberCard key={index} {...member} />
+              ))}
+            </div>
+          </section>
+
+          {/* Operations Section */}
+          <section className="relative py-12 sm:py-16 lg:py-20">
+            <SectionHeader title="Operations" leftGrow={1} rightGrow={2} />
+            {teamData.operations.description && (
+              <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
+                {teamData.operations.description}
+              </p>
+            )}
+            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.operations.members.slice(0, 3).map((member, index) => (
+                  <TeamMemberCard key={index} {...member} />
+                ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.operations.members.slice(3, 5).map((member, index) => (
+                  <TeamMemberCard key={index + 3} {...member} />
+                ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.operations.members.slice(5, 7).map((member, index) => (
+                  <TeamMemberCard key={index + 5} {...member} />
+                ))}
+              </div>
+            </div>
+          </section>
+          
+          {/* Technology Section */}
+          <section className="relative py-12 sm:py-16 lg:py-20">
+            <SectionHeader title="Technology" leftGrow={2} rightGrow={1} />
+            {teamData.technology.description && (
+                <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
+                {teamData.technology.description}
+                </p>
+            )}
+            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
+                <TeamMemberCard {...teamData.technology.members[0]} />
+                <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                    {teamData.technology.members.slice(1).map((member, index) => (
+                        <TeamMemberCard key={index} {...member} />
+                    ))}
+                </div>
+            </div>
+          </section>
+
+          {/* Finance Section */}
+          <section className="relative py-12 sm:py-16 lg:py-20">
+            <SectionHeader title="Finance" leftGrow={1} rightGrow={2} />
+             {teamData.finance.description && (
+                <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
+                {teamData.finance.description}
+                </p>
+            )}
+            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
+                <TeamMemberCard {...teamData.finance.members[0]} />
+                <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                    {teamData.finance.members.slice(1).map((member, index) => (
+                        <TeamMemberCard key={index} {...member} />
+                    ))}
+                </div>
+            </div>
+          </section>
+          
+          {/* Creatives Section */}
+          <section className="relative py-12 sm:py-16 lg:py-20">
+            <SectionHeader title="Creatives" leftGrow={2} rightGrow={1} />
+            {teamData.creatives.description && (
+              <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
+                {teamData.creatives.description}
+              </p>
+            )}
+            <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+              {teamData.creatives.members.map((member, index) => (
+                <TeamMemberCard key={index} {...member} />
+              ))}
+            </div>
+          </section>
+
+          {/* Adviser Section */}
+          <section className="relative py-12 sm:py-16 lg:py-20">
+            <SectionHeader title="Adviser" leftGrow={2} rightGrow={2} />
+            <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+              {teamData.adviser.members.map((member, index) => (
+                <TeamMemberCard key={index} {...member} />
+              ))}
+            </div>
+          </section>
         </div>
       </main>
 

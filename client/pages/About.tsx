@@ -2,12 +2,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 
-const teamMembers = [
+const designTeamMembers = [
   {
     name: "Jaylord Jan Boladola",
     role: "Design and Content Head",
     image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-    quote: "",
+    quote: "VIVA LA VIDA",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -18,7 +18,7 @@ const teamMembers = [
     name: "Kurt Ashton Montebon",
     role: "Design Co-Head",
     image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-    quote: "",
+    quote: "Choose whatever makes your heart happy and your mind stress-free.",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -29,7 +29,7 @@ const teamMembers = [
     name: "Dave Shanna Marie Gigawin",
     role: "Design Co-Head",
     image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-    quote: "",
+    quote: "good things take time",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -40,7 +40,7 @@ const teamMembers = [
     name: "Arndria Basco",
     role: "Design Co-Head",
     image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-    quote: "",
+    quote: "Unsaon imung kaugmaon kung dili ka maugmaan",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -51,7 +51,7 @@ const teamMembers = [
     name: "Elvie May Mara",
     role: "Content Co-Head",
     image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-    quote: "",
+    quote: "pwede muparking? sa imong bakante nga kasing-kasing",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -62,7 +62,7 @@ const teamMembers = [
     name: "Julio Cedrick Maghanoy",
     role: "Content Co-Head",
     image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-    quote: "",
+    quote: "The ironic tragedy that life is to be lived forward but only makes sense in reverse.",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -70,6 +70,26 @@ const teamMembers = [
     },
   },
 ];
+
+const developerTeamMembers = [
+      {
+        name: "Julse M. Merencillo",
+        role: "DSC Website Developer",
+        image:
+          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        quote: "1+1=2 kaya't tayo na dalawa pls",
+        socialLinks: { linkedin: "#", github: "#", facebook: "#" },
+      },
+      {
+        name: "Kent Paulo R. Delgado",
+        role: "DSC Website Developer",
+        image:
+          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        quote:
+          "We can't anticipate or even predict our future, but we can begin preparing for it",
+        socialLinks: { linkedin: "#", github: "#", facebook: "#" },
+      },
+]
 
 export default function About() {
   return (
@@ -349,12 +369,22 @@ export default function About() {
 
         <section className="bg-white px-6 sm:px-12 lg:px-24 py-16 sm:py-20 lg:py-24">
           <div className="max-w-7xl mx-auto">
-            <h2 className="font-rethink font-bold text-dsc-maroon text-center text-4xl sm:text-5xl lg:text-[64px] leading-tight mb-12 sm:mb-16 lg:mb-20">
-              The Website Team
+            <h2 className="font-rethink font-bold text-dsc-maroon text-center text-4xl sm:text-5xl lg:text-[64px] leading-tight mb-12">
+              The Website Design Team
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-              {teamMembers.map((member) => (
+            <div className="flex flex-wrap justify-center gap-8 lg:gap-12">
+              {designTeamMembers.map((member) => (
+                <TeamMemberCard key={member.name} {...member} />
+              ))}
+            </div>
+
+            <h2 className="font-rethink font-bold text-dsc-maroon text-center text-4xl sm:text-5xl lg:text-[64px] leading-tight mt-16 mb-12">
+              The Website Developer Team
+            </h2>
+            
+            <div className="flex flex-wrap justify-center gap-8 lg:gap-12">
+              {developerTeamMembers.map((member) => (
                 <TeamMemberCard key={member.name} {...member} />
               ))}
             </div>

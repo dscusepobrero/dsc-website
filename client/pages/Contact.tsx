@@ -144,10 +144,15 @@ export default function Contact() {
                   We are students. We are innovators. We are the future. We are DSC.
                 </p>
 
-                {/* CTA Button */}
-                <button className="w-full sm:w-auto px-6 py-2 rounded-lg bg-gradient-to-r from-[#9A0000] via-[#AA2B2B] to-[#BA5656] text-white font-rethink font-bold text-sm shadow-[0_0_4px_0_rgba(0,0,0,0.75)] hover:opacity-90 transition-opacity">
+                {/* CTA Link */}
+                <a
+                  href="https://forms.gle/PRMHj5wAtW8xposi7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto text-center px-6 py-2 rounded-lg bg-gradient-to-r from-[#9A0000] via-[#AA2B2B] to-[#BA5656] text-white font-rethink font-bold text-sm shadow-[0_0_4px_0_rgba(0,0,0,0.75)] hover:opacity-90 transition-opacity"
+                >
                   Be a DSC member
-                </button>
+                </a>
 
                 {/* Social Links & Contact Info */}
                 <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-4">
