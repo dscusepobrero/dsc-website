@@ -52,7 +52,8 @@ export default function TeamMemberCard({
   socialLinks,
 }: TeamMemberCardProps) {
   return (
-    <div className="group relative w-[330px] h-[482px] rounded-lg overflow-hidden shadow-[13px_13px_6.2px_0_rgba(239,79,31,0.25)] hover:shadow-[15px_15px_8px_0_rgba(239,79,31,0.3)] transition-all duration-300 ease-in-out hover:-translate-y-2">
+    // UPDATED: Made the card width responsive for smaller screens.
+    <div className="group relative w-full max-w-[330px] sm:w-[330px] mx-auto h-[482px] rounded-lg overflow-hidden shadow-[13px_13px_6.2px_0_rgba(239,79,31,0.25)] hover:shadow-[15px_15px_8px_0_rgba(239,79,31,0.3)] transition-all duration-300 ease-in-out hover:-translate-y-2">
       {/* Default State */}
       <div className="absolute inset-0 flex flex-col bg-white transition-opacity duration-300 ease-in-out group-hover:opacity-0">
         <div className="w-full h-[247px] bg-gray-100 overflow-hidden">

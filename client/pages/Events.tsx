@@ -3,15 +3,48 @@ import Footer from "@/components/Footer";
 import EventSlider from "@/components/EventSlider";
 import PhotoGallery from "@/components/PhotoGallery";
 import MilestonesTimeline from "@/components/MilestonesTimeline";
+import { motion, Variants } from "framer-motion";
+
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.25, // Delay between each child section animation
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
 
 export default function Events() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
 
-      <main className="w-full">
+      <motion.main
+        className="w-full"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* Section 1: Projects & Initiatives (White) */}
-        <section className="bg-white px-6 sm:px-12 lg:px-24 pt-8 sm:pt-12 lg:pt-16 pb-12 sm:pb-16 lg:pb-20">
+        <motion.section
+          className="bg-white px-6 sm:px-12 lg:px-24 pt-8 sm:pt-12 lg:pt-16 pb-12 sm:pb-16 lg:pb-20"
+          variants={itemVariants}
+        >
           <div className="max-w-7xl mx-auto text-center space-y-6 sm:space-y-8">
             <h1 className="font-rethink font-bold text-dsc-maroon text-4xl sm:text-5xl lg:text-[55px] leading-tight">
               Projects & Initiatives
@@ -20,20 +53,24 @@ export default function Events() {
               Our ongoing and recent work in the community.
             </p>
           </div>
-        </section>
+        </motion.section>
 
         {/* Section 2: Event Slider (Red) */}
-        <section
+        <motion.section
           className="relative w-full py-10 sm:py-12 lg:py-16"
           style={{ background: "rgba(128, 24, 23, 0.96)" }}
+          variants={itemVariants}
         >
           <div className="px-6 sm:px-8 lg:px-12">
             <EventSlider />
           </div>
-        </section>
+        </motion.section>
 
         {/* Section 3: DSC in Action Title (White) */}
-        <section className="bg-white px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20">
+        <motion.section
+          className="bg-white px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20"
+          variants={itemVariants}
+        >
           <div className="max-w-7xl mx-auto text-center space-y-6 sm:space-y-8">
             <h2 className="font-rethink font-bold text-dsc-maroon text-4xl sm:text-5xl lg:text-[55px] leading-tight">
               DSC in Action
@@ -42,15 +79,16 @@ export default function Events() {
               Key achievements and memorable moments
             </p>
           </div>
-        </section>
+        </motion.section>
 
         {/* Section 4: Photo Gallery (Red) */}
-        <section
+        <motion.section
           className="relative px-6 sm:px-12 lg:px-24 py-8 sm:py-10 lg:py-12 overflow-hidden"
           style={{
             background:
               "linear-gradient(180deg, rgba(239, 79, 31, 0.00) 56.56%, rgba(239, 79, 31, 0.50) 99.88%), #801817",
           }}
+          variants={itemVariants}
         >
           {/* SVGs */}
           <svg
@@ -132,10 +170,13 @@ export default function Events() {
               <PhotoGallery direction="left" />
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Milestones Section */}
-        <section className="bg-white px-6 sm:px-12 lg:px-24 py-16 sm:py-20 lg:py-24">
+        <motion.section
+          className="bg-white px-6 sm:px-12 lg:px-24 py-16 sm:py-20 lg:py-24"
+          variants={itemVariants}
+        >
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12 sm:mb-16 lg:mb-20">
               <h2 className="font-rethink font-bold text-dsc-maroon text-4xl sm:text-5xl lg:text-[55px] leading-tight mb-4">
@@ -147,8 +188,8 @@ export default function Events() {
             </div>
             <MilestonesTimeline />
           </div>
-        </section>
-      </main>
+        </motion.section>
+      </motion.main>
 
       <Footer />
     </div>

@@ -2,6 +2,31 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EventImageSlideshow from "@/components/EventImageSlideshow";
+import { motion, Variants } from "framer-motion"; // Import Variants type
+
+// Animation variants for the container and its children
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3, // Time delay between each child animation
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 }, // Start invisible and 20px down
+  visible: {
+    opacity: 1,
+    y: 0, // Animate to visible and original position
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
 
 export default function Contact() {
   return (
@@ -9,9 +34,16 @@ export default function Contact() {
       <Header />
 
       <main className="flex-1 py-12 sm:py-16 lg:py-20 px-6 sm:px-12 lg:px-24">
-        <div className="max-w-[1440px] mx-auto">
-          {/* Header Section */}
-          <div className="text-center mb-12 sm:mb-16">
+        <motion.div
+          className="max-w-[1440px] mx-auto"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div
+            className="text-center mb-12 sm:mb-16"
+            variants={itemVariants}
+          >
             <h1 className="font-rethink font-bold text-[#FE1B1B] text-3xl sm:text-4xl lg:text-[45px] mb-2">
               CONNECT WITH US!
             </h1>
@@ -20,11 +52,12 @@ export default function Contact() {
               us today for event information, sponsorship opportunities, or
               collaboration discussions.
             </p>
-          </div>
+          </motion.div>
 
-          {/* Main Contact Container */}
-          <div className="relative bg-dsc-maroon rounded-[15px] shadow-[0_0_60px_30px_rgba(0,0,0,0.03)] overflow-hidden">
-            {/* Background Eagle Image */}
+          <motion.div
+            className="relative bg-dsc-maroon rounded-[15px] shadow-[0_0_60px_30px_rgba(0,0,0,0.03)] overflow-hidden"
+            variants={itemVariants}
+          >
             <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/6baeeaab227fea6423f62cc9113eadbb79a8e205?width=1384"
               alt=""
@@ -32,7 +65,6 @@ export default function Contact() {
               style={{ filter: "drop-shadow(0 0 4px rgba(0, 0, 0, 0.75))" }}
             />
 
-            {/* Decorative Circles */}
             <svg
               className="absolute right-0 bottom-0 w-[247px] h-[245px] pointer-events-none hidden lg:block"
               width="173"
@@ -60,9 +92,7 @@ export default function Contact() {
             </svg>
 
             <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 p-8 sm:p-12 lg:p-16">
-              {/* Left Side - Info Section */}
               <div className="flex flex-col items-center lg:items-start gap-6 lg:gap-8">
-                {/* Logo */}
                 <div className="flex items-center gap-4">
                   <svg
                     className="w-[60px] h-[42px] sm:w-[89px] sm:h-[62px] flex-shrink-0"
@@ -117,19 +147,16 @@ export default function Contact() {
                   </div>
                 </div>
 
-                {/* Description */}
                 <p className="text-white font-inter text-sm sm:text-base text-center lg:text-left max-w-md leading-7">
                   DSC USeP is a student-driven community for developers
                   passionate about technology, learning, and collaboration.
                 </p>
 
-                {/* Tagline */}
                 <p className="text-white font-inter text-sm sm:text-base font-bold italic text-center lg:text-left">
                   We are students. We are innovators. We are the future. We are
                   DSC.
                 </p>
 
-                {/* CTA Link */}
                 <a
                   href="https://forms.gle/PRMHj5wAtW8xposi7"
                   target="_blank"
@@ -139,7 +166,6 @@ export default function Contact() {
                   Be a DSC member
                 </a>
 
-                {/* Social Links & Contact Info */}
                 <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-4">
                   <a
                     href="https://www.facebook.com/DSCUSePObrero"
@@ -247,12 +273,13 @@ export default function Contact() {
                   <span>dsc@usep.edu.ph</span>
                 </div>
               </div>
-              <div className="flex items-center justify-center aspect-video">
+              {/* UPDATED: Added responsive aspect ratio for the slideshow */}
+              <div className="flex items-center justify-center w-full aspect-square lg:aspect-video">
                 <EventImageSlideshow />
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </main>
 
       <Footer />

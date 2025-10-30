@@ -1,6 +1,32 @@
+// client/pages/About.tsx
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
+import { motion, Variants } from "framer-motion";
+
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.25,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
 
 const imageBasePath = "/assets/officer pictures 2025/2025-2026 Officers";
 
@@ -64,7 +90,8 @@ const designTeamMembers = [
     name: "Julio Cedrick Maghanoy",
     role: "Content Co-Head",
     image: `${imageBasePath}/Creatives/Maghanoy/Maghanoy.png`,
-    quote: "The ironic tragedy that life is to be lived forward but only makes sense in reverse.",
+    quote:
+      "The ironic tragedy that life is to be lived forward but only makes sense in reverse.",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -74,40 +101,54 @@ const designTeamMembers = [
 ];
 
 const developerTeamMembers = [
-      {
-        name: "Julse M. Merencillo",
-        role: "DSC Website Developer",
-        image: `${imageBasePath}/Technology/Merencillo/Merencillo.jpg`,
-        quote: "1+1=2 kaya't tayo na dalawa pls",
-        socialLinks: { linkedin: "#", github: "#", facebook: "#" },
-      },
-      {
-        name: "Kent Paulo R. Delgado",
-        role: "DSC Website Developer",
-        image: `${imageBasePath}/Lead/Delgado.jpg`,
-        quote:
-          "We can't anticipate or even predict our future, but we can begin preparing for it",
-        socialLinks: { linkedin: "#", github: "#", facebook: "#" },
-      },
-]
+  {
+    name: "Julse M. Merencillo",
+    role: "DSC Website Developer",
+    image: `${imageBasePath}/Technology/Merencillo/Merencillo.jpg`,
+    quote: "1+1=2 kaya't tayo na dalawa pls",
+    socialLinks: { linkedin: "#", github: "#", facebook: "#" },
+  },
+  {
+    name: "Kent Paulo R. Delgado",
+    role: "DSC Website Developer",
+    image: `${imageBasePath}/Lead/Delgado.jpg`,
+    quote:
+      "We can't anticipate or even predict our future, but we can begin preparing for it",
+    socialLinks: { linkedin: "#", github: "#", facebook: "#" },
+  },
+];
 
 export default function About() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
 
-      <main className="w-full">
-        <section className="relative bg-white px-6 sm:px-12 lg:px-24 pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
+      <motion.main
+        className="w-full"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.section
+          className="relative bg-white px-6 sm:px-12 lg:px-24 pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 lg:pb-24 overflow-hidden"
+          variants={itemVariants}
+        >
           <img
             src="https://api.builder.io/api/v1/image/assets/TEMP/d9ba77265078fd003cc3c5e3f64b2c190fc062a0?width=1166"
             alt=""
             className="absolute top-4 left-0 w-[300px] sm:w-[450px] lg:w-[583px] h-auto opacity-70 pointer-events-none"
+            style={{ animation: "image-float 10s ease-in-out infinite" }}
           />
-          <img
-            src="https://api.builder.io/api/v1/image/assets/TEMP/d9ba77265078fd003cc3c5e3f64b2c190fc062a0?width=1166"
-            alt=""
-            className="absolute bottom-4 right-0 w-[300px] sm:w-[450px] lg:w-[583px] h-auto opacity-70 pointer-events-none transform-gpu scale-x-[-1] scale-y-[-1]"
-          />
+          <div
+            className="absolute bottom-4 right-0 w-[300px] sm:w-[450px] lg:w-[583px] h-auto pointer-events-none transform-gpu"
+            style={{ animation: "image-float 10s ease-in-out infinite -5s" }}
+          >
+            <img
+              src="https://api.builder.io/api/v1/image/assets/TEMP/d9ba77265078fd003cc3c5e3f64b2c190fc062a0?width=1166"
+              alt=""
+              className="w-full h-full opacity-70 scale-x-[-1] scale-y-[-1]"
+            />
+          </div>
 
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
@@ -262,10 +303,11 @@ export default function About() {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        <section
+        <motion.section
           className="relative bg-gradient-to-b from-red-900 to-red-700 text-white px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20 overflow-hidden"
+          variants={itemVariants}
         >
           <div className="absolute inset-0 z-0">
             <div className="absolute -top-24 -left-48 w-96 h-96 bg-white/10 rounded-full" />
@@ -273,7 +315,7 @@ export default function About() {
             <div className="absolute top-1/2 -right-48 w-96 h-96 bg-white/10 rounded-full" />
             <div className="absolute bottom-0 -left-32 w-64 h-64 bg-white/5 rounded-full" />
           </div>
-          
+
           <div className="max-w-7xl mx-auto relative z-10 space-y-12 sm:space-y-16 lg:space-y-20">
             {/* Mission Section */}
             <div>
@@ -281,9 +323,10 @@ export default function About() {
                 OUR MISSION
               </h2>
               <p className="font-rethink text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-6xl">
-                To empower and inspire students at the University of Southeastern
-                Philippines by providing access to diverse technologies and
-                fostering a collaborative learning environment. We promote{" "}
+                To empower and inspire students at the University of
+                Southeastern Philippines by providing access to diverse
+                technologies and fostering a collaborative learning
+                environment. We promote{" "}
                 <span className="font-bold">
                   innovation, research, creativity, and technological passion
                 </span>{" "}
@@ -295,8 +338,9 @@ export default function About() {
                 <span className="font-bold">
                   strategic partnerships and collaborations
                 </span>
-                , we enable members to play an active role in advancing technology
-                and promoting socio-economic progress—positioning them as{" "}
+                , we enable members to play an active role in advancing
+                technology and promoting socio-economic progress—positioning
+                them as{" "}
                 <span className="font-bold">catalysts for positive change</span>{" "}
                 in an ever-evolving digital world.
               </p>
@@ -312,8 +356,8 @@ export default function About() {
                 <span className="font-bold">
                   leading student-driven tech community
                 </span>{" "}
-                that shapes the next generation of innovators and leaders. We aim
-                to equip students with the{" "}
+                that shapes the next generation of innovators and leaders. We
+                aim to equip students with the{" "}
                 <span className="font-bold">
                   skills, mindset, and opportunities
                 </span>{" "}
@@ -321,8 +365,8 @@ export default function About() {
                 <span className="font-bold">
                   education, collaboration, and innovation
                 </span>
-                , we envision a future where our members leave a lasting impact on
-                the local and global tech landscape.
+                , we envision a future where our members leave a lasting impact
+                on the local and global tech landscape.
               </p>
             </div>
 
@@ -343,37 +387,40 @@ export default function About() {
                   commitment to the community.
                 </p>
                 <p>
-                  <span className="font-bold">E – Excellence</span> We strive for
-                  academic and technical excellence by continuously learning and
-                  applying our skills effectively.
+                  <span className="font-bold">E – Excellence</span> We strive
+                  for academic and technical excellence by continuously learning
+                  and applying our skills effectively.
                 </p>
                 <p>
                   <span className="font-bold">A – Adaptability</span> We embrace
-                  change, learn from challenges, and stay agile in a fast-evolving
-                  tech landscape.
+                  change, learn from challenges, and stay agile in a
+                  fast-evolving tech landscape.
                 </p>
                 <p>
-                  <span className="font-bold">T – Tech-Driven Innovation</span> We
-                  are passionate about technology and use it as a tool for creative
-                  problem-solving and real-world impact.
+                  <span className="font-bold">T – Tech-Driven Innovation</span>{" "}
+                  We are passionate about technology and use it as a tool for
+                  creative problem-solving and real-world impact.
                 </p>
                 <p>
-                  <span className="font-bold">E – Empowerment</span> We uplift one
-                  another, create inclusive spaces, and help students realize their
-                  potential as future leaders.
+                  <span className="font-bold">E – Empowerment</span> We uplift
+                  one another, create inclusive spaces, and help students
+                  realize their potential as future leaders.
                 </p>
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        <section className="bg-white px-6 sm:px-12 lg:px-24 py-16 sm:py-20 lg:py-24">
+        <motion.section
+          className="bg-white px-6 sm:px-12 lg:px-24 py-16 sm:py-20 lg:py-24"
+          variants={itemVariants}
+        >
           <div className="max-w-7xl mx-auto">
             <h2 className="font-rethink font-bold text-dsc-maroon text-center text-4xl sm:text-5xl lg:text-[64px] leading-tight mb-12">
               The Website Design Team
             </h2>
-
-            <div className="flex flex-wrap justify-center gap-8 lg:gap-12">
+            {/* UPDATED: Replaced flex-wrap with a responsive grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 justify-items-center">
               {designTeamMembers.map((member) => (
                 <TeamMemberCard key={member.name} {...member} />
               ))}
@@ -382,15 +429,27 @@ export default function About() {
             <h2 className="font-rethink font-bold text-dsc-maroon text-center text-4xl sm:text-5xl lg:text-[64px] leading-tight mt-16 mb-12">
               The Website Developer Team
             </h2>
-            
-            <div className="flex flex-wrap justify-center gap-8 lg:gap-12">
+            {/* UPDATED: Replaced flex-wrap with a responsive grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 justify-items-center">
               {developerTeamMembers.map((member) => (
                 <TeamMemberCard key={member.name} {...member} />
               ))}
             </div>
           </div>
-        </section>
-      </main>
+        </motion.section>
+      </motion.main>
+
+      {/* Inline styles for the levitating animation */}
+      <style>{`
+        @keyframes image-float {
+          0%, 100% {
+            transform: translate(0, 0);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+      `}</style>
 
       <Footer />
     </div>
