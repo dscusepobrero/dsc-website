@@ -5,6 +5,11 @@ import fs from "fs/promises";
 import path from "path";
 import { handleDemo } from "./routes/demo";
 
+// Get the directory of the current module
+const __dirname = import.meta.dirname;
+// Construct a path to the project's root directory, which is one level up from `server/`
+const projectRoot = path.join(__dirname, '..');
+
 export function createServer() {
   const app = express();
 
@@ -23,9 +28,9 @@ export function createServer() {
 
   app.get("/api/events/:year/:folder/images", async (req, res) => {
     const { year, folder } = req.params;
-    // Point to the 'events' directory for the slider's featured images
+    // Use the robust projectRoot path
     const base = path.join(
-      process.cwd(),
+      projectRoot,
       "public",
       "assets",
       "events",
@@ -55,7 +60,8 @@ export function createServer() {
 
   // Return all images under `public/assets/events all pictures` as public URLs
   app.get("/api/event-photos", async (_req, res) => {
-    const base = path.join(process.cwd(), "public", "assets", "events all pictures");
+    // Use the robust projectRoot path
+    const base = path.join(projectRoot, "public", "assets", "events all pictures");
 
     try {
       const images: string[] = [];
