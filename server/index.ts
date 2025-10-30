@@ -23,29 +23,32 @@ export function createServer() {
 
   app.get("/api/events/:year/:folder/images", async (req, res) => {
     const { year, folder } = req.params;
+    // Point to the 'events' directory for the slider's featured images
     const base = path.join(
       process.cwd(),
       "public",
       "assets",
-      "events all pictures",
+      "events",
       year,
-      folder
+      folder,
     );
 
     try {
       const dirents = await fs.readdir(base, { withFileTypes: true });
       const images = dirents
         .filter(
-          (d) => d.isFile() && /\.(jpe?g|png|gif|webp|avif)$/i.test(d.name)
+          (d) => d.isFile() && /\.(jpe?g|png|gif|webp|avif)$/i.test(d.name),
         )
         .map(
           (d) =>
-            `/assets/events all pictures/${encodeURIComponent(
-              year
+            // Update the URL to match the new directory
+            `/assets/events/${encodeURIComponent(
+              year,
             )}/${encodeURIComponent(folder)}/${encodeURIComponent(d.name)}`
         );
       res.status(200).json({ images });
     } catch (err) {
+      // It's okay if a folder doesn't exist, just return no images.
       res.status(200).json({ images: [] });
     }
   });
@@ -53,35 +56,45 @@ export function createServer() {
   // Return all images under `public/assets/events all pictures` as public URLs
   app.get("/api/event-photos", async (_req, res) => {
     const base = path.join(process.cwd(), "public", "assets", "events all pictures");
-    const yearFilter = typeof _req.query.year === "string" ? _req.query.year : undefined;
 
     try {
       const images: string[] = [];
       const years = await fs.readdir(base, { withFileTypes: true });
 
-      for (const y of years) {
-        if (!y.isDirectory()) continue;
-        const year = y.name;
-        if (yearFilter && year !== yearFilter) continue;
+      for (const yearDir of years) {
+        if (!yearDir.isDirectory()) continue;
+        const year = yearDir.name;
+
         const yearPath = path.join(base, year);
-        let dirents = [] as any[];
         try {
-          dirents = await fs.readdir(yearPath, { withFileTypes: true });
+          const eventFolders = await fs.readdir(yearPath, { withFileTypes: true });
+
+          for (const eventDir of eventFolders) {
+            if (!eventDir.isDirectory()) continue;
+            const eventFolder = eventDir.name;
+            const eventPath = path.join(yearPath, eventFolder);
+
+            try {
+              const imageFiles = await fs.readdir(eventPath);
+              for (const imageFile of imageFiles) {
+                if (/\.(jpe?g|png|gif|webp|avif)$/i.test(imageFile)) {
+                  const url = `/assets/events all pictures/${encodeURIComponent(year)}/${encodeURIComponent(eventFolder)}/${encodeURIComponent(imageFile)}`;
+                  images.push(url);
+                }
+              }
+            } catch (e) {
+              // Ignore if a subdirectory can't be read
+            }
+          }
         } catch (e) {
+          // Ignore if a year directory can't be read
           continue;
         }
-
-        for (const d of dirents) {
-          if (!d.isFile()) continue;
-          if (!/\.(jpe?g|png|gif|webp|avif)$/i.test(d.name)) continue;
-          const url = `/assets/events all pictures/${encodeURIComponent(year)}/${encodeURIComponent(d.name)}`;
-          images.push(url);
-        }
       }
-
       res.status(200).json({ images });
     } catch (err) {
-      res.status(200).json({ images: [] });
+      console.error("Failed to read event photos:", err);
+      res.status(500).json({ images: [], error: "Could not retrieve photos." });
     }
   });
 

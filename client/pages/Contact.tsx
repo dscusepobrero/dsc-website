@@ -1,28 +1,9 @@
+// client/pages/Contact.tsx
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { useState } from "react";
+import EventImageSlideshow from "@/components/EventImageSlideshow";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Handle form submission logic here
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Header />
@@ -35,7 +16,9 @@ export default function Contact() {
               CONNECT WITH US!
             </h1>
             <p className="font-inter text-[#717171] text-sm sm:text-base max-w-md mx-auto leading-relaxed">
-              Ready to partner with us or learn more about what we do? Contact us today for event information, sponsorship opportunities, or collaboration discussions.
+              Ready to partner with us or learn more about what we do? Contact
+              us today for event information, sponsorship opportunities, or
+              collaboration discussions.
             </p>
           </div>
 
@@ -136,12 +119,14 @@ export default function Contact() {
 
                 {/* Description */}
                 <p className="text-white font-inter text-sm sm:text-base text-center lg:text-left max-w-md leading-7">
-                  DSC USeP is a student-driven community for developers passionate about technology, learning, and collaboration.
+                  DSC USeP is a student-driven community for developers
+                  passionate about technology, learning, and collaboration.
                 </p>
 
                 {/* Tagline */}
                 <p className="text-white font-inter text-sm sm:text-base font-bold italic text-center lg:text-left">
-                  We are students. We are innovators. We are the future. We are DSC.
+                  We are students. We are innovators. We are the future. We are
+                  DSC.
                 </p>
 
                 {/* CTA Link */}
@@ -163,7 +148,12 @@ export default function Contact() {
                     className="hover:opacity-70 transition-opacity"
                     aria-label="Facebook"
                   >
-                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 30 30"
+                      fill="none"
+                    >
                       <g clipPath="url(#clip0_fb)">
                         <path
                           d="M27.8855 29.4846C28.7683 29.4846 29.4842 28.7686 29.4842 27.8857V2.11488C29.4842 1.23173 28.7684 0.516052 27.8855 0.516052H2.11447C1.2313 0.516052 0.515625 1.23184 0.515625 2.115V27.8858C0.515625 28.7687 1.23119 29.4847 2.11447 29.4847H27.8855V29.4846Z"
@@ -189,7 +179,12 @@ export default function Contact() {
                     className="hover:opacity-70 transition-opacity"
                     aria-label="LinkedIn"
                   >
-                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 30 30"
+                      fill="none"
+                    >
                       <g clipPath="url(#clip0_li)">
                         <path
                           d="M4.83057 5.21204H25.0426V25.2966H4.83057V5.21204Z"
@@ -213,7 +208,12 @@ export default function Contact() {
                     className="hover:opacity-70 transition-opacity"
                     aria-label="Email"
                   >
-                    <svg width="40" height="30" viewBox="0 0 40 30" fill="none">
+                    <svg
+                      width="40"
+                      height="30"
+                      viewBox="0 0 40 30"
+                      fill="none"
+                    >
                       <g clipPath="url(#clip0_gmail)">
                         <path
                           d="M37.3178 29.9374H2.52406C1.175 29.9374 0.0390625 28.8481 0.0390625 27.4777V2.60025C0.0389063 1.26495 1.13937 0.140564 2.52406 0.140564H37.3178C38.6669 0.140564 39.8031 1.22984 39.8031 2.60025V27.4777C39.8031 28.8481 38.7025 29.9374 37.3178 29.9374Z"
@@ -225,11 +225,7 @@ export default function Contact() {
                           fill="#231F20"
                         />
                         <path
-                          d="M2.52422 29.9374C1.13953 29.9374 0.0390625 28.8481 0.0390625 27.4777V2.56502C0.0390625 1.19476 1.13953 0.94873 2.52422 0.94873C3.90891 0.94873 5.00953 1.22986 5.00953 2.56502V29.9374H2.52422Z"
-                          fill="#801817"
-                        />
-                        <path
-                          d="M37.3178 29.9374H34.8325V2.49481C34.8325 1.1244 35.9331 0.94873 37.3178 0.94873C38.7025 0.94873 39.8031 1.1244 39.8031 2.49481V27.513C39.8031 28.8481 38.7025 29.9374 37.3178 29.9374Z"
+                          d="M2.52422 2.56502V29.9374H5.00953V2.56502C5.00953 1.22986 3.90891 0.94873 2.52422 0.94873C1.13953 0.94873 0.0390625 1.19476 0.0390625 2.56502V27.4777C0.0390625 28.8481 1.13953 29.9374 2.52422 29.9374H37.3178C38.7025 29.9374 39.8031 28.8481 39.8031 27.513V2.49481C39.8031 1.1244 38.7025 0.94873 37.3178 0.94873C35.9331 0.94873 34.8325 1.1244 34.8325 2.49481V29.9374H37.3178L2.52422 29.9374Z"
                           fill="#801817"
                         />
                         <path
@@ -251,66 +247,9 @@ export default function Contact() {
                   <span>dsc@usep.edu.ph</span>
                 </div>
               </div>
-
-              {/* Right Side - Contact Form */}
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div className="flex flex-col">
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      placeholder="First Name"
-                      className="w-full px-4 py-3 rounded border border-[rgba(235,235,245,0.6)] bg-transparent text-white placeholder:text-[rgba(235,235,245,0.6)] font-inter text-sm focus:outline-none focus:border-white transition-colors"
-                      required
-                    />
-                  </div>
-
-                  <div className="flex flex-col">
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      placeholder="Last Name"
-                      className="w-full px-4 py-3 rounded border border-[rgba(235,235,245,0.6)] bg-transparent text-white placeholder:text-[rgba(235,235,245,0.6)] font-inter text-sm focus:outline-none focus:border-white transition-colors"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col">
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Email"
-                    className="w-full px-4 py-3 rounded border border-[rgba(235,235,245,0.6)] bg-transparent text-white placeholder:text-[rgba(235,235,245,0.6)] font-inter text-sm focus:outline-none focus:border-white transition-colors"
-                    required
-                  />
-                </div>
-
-                <div className="flex flex-col">
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Message"
-                    rows={6}
-                    className="w-full px-4 py-3 rounded border border-[rgba(235,235,245,0.6)] bg-transparent text-white placeholder:text-[rgba(235,235,245,0.6)] font-inter text-sm focus:outline-none focus:border-white transition-colors resize-none"
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-3 rounded bg-white text-black font-rethink font-bold text-sm hover:bg-gray-100 transition-colors"
-                >
-                  Submit
-                </button>
-              </form>
+              <div className="flex items-center justify-center aspect-video">
+                <EventImageSlideshow />
+              </div>
             </div>
           </div>
         </div>

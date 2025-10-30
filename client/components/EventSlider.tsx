@@ -45,7 +45,7 @@ const events: EventSlide[] = [
   {
     title: "From Pixels to Prototypes: Explore UI Designing Through Figma",
     date: "March 2025",
-    description: "An introduction to UI design and Figma. Students are taught the basics of designing user interfaces, along with some tips and tricks for more complex UI elements. In the end, students made and shared their own UI designs, showcasing their knowledge in this session.",
+    description: "An introduction to UI design and Figma. Students are taught the basics of designing user interfaces, along with some tips and tricks for more complex UI elements.",
       year: "2024-2025",
       folder: "From Pixels to Prototypes Explore UI Designing Through Figma",
       image: encodeURI(

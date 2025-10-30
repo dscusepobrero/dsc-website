@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 
+
 interface TeamMember {
   name: string;
   role: string;
@@ -14,6 +15,8 @@ interface TeamMember {
   };
 }
 
+const imageBasePath = "/assets/officer pictures 2025/2025-2026 Officers";
+
 const teamData: Record<
   string,
   { description?: string; members: TeamMember[] }
@@ -23,8 +26,7 @@ const teamData: Record<
       {
         name: "Kent Paulo R. Delgado",
         role: "Lead, DSC",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Lead/Delgado.jpg`,
         quote:
           "We can't anticipate or even predict our future, but we can begin preparing for it",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
@@ -36,8 +38,7 @@ const teamData: Record<
       {
         name: "Nancy S. Mozo",
         role: "Adviser",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Adviser/Mozo/Mozo.png`,
         quote: "-",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
@@ -50,56 +51,49 @@ const teamData: Record<
       {
         name: "Mariel Rossini C. Go",
         role: "Chief Operations Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Go/Go.PNG`,
         quote: "Stay humble, stay hungry.",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Marc Alvienth T. Hernandez",
         role: "Secretary",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Hernandez/Hernandez.png`,
         quote: "Hindi mahalaga ang magwagi, ang mahalaga, ikaw ay nakibahagi",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Baberose I. Silmaro",
         role: "Communications Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Silmaro/Silmaro.png`,
         quote: "Don't! Don't! Don't!!!... Don't stoOoOoOP~ Go OooOoonn~",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "John Marcellin E. Tan",
         role: "Events Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Tan/Tan.png`,
         quote: "Collect moments, not grudges.",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Kimberly S. Bermoy",
         role: "Events Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Bermoy/Bermoy.jpg`,
         quote: "Thank u, next",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Ken Erik Y. Justiniani",
         role: "Technical Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Justiniani/Justiniani.jpg`,
         quote: "Kapag ang jeep ay lumipad sa tubig, huwag umihi dito.",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Ace Jonathan D. Briones",
         role: "Technical Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Briones/Briones.png`,
         quote: "If there's a will, there's a water",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
@@ -112,32 +106,28 @@ const teamData: Record<
       {
         name: "Julse M. Merencillo",
         role: "Chief Technology Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Technology/Merencillo/Merencillo.jpg`,
         quote: "1+1=2 kaya't tayo na dalawa pls",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Kervy Chrystan G. Caranto",
         role: "Engineering Lead",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Technology/Caranto/Caranto.png`,
         quote: "There are only two hard problems in Computer Science; cache invalidation, naming things, and off-by-one errors",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Dave Shanna Marie E. Gigawin",
         role: "Design Lead",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Technology/Gigawin/Gigawin.jpg`,
         quote: "good things take time",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Decyrel P. Dahan",
         role: "Data Science Lead",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Technology/Dahan/Dahan.png`,
         quote: "HAHAHAHAHAHAHA",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
@@ -150,24 +140,21 @@ const teamData: Record<
       {
         name: "Lance Marvin Libron",
         role: "Chief Finance Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Finance/Libron/Libron.jpg`,
         quote: "Ang kabataan ang pag asa ng bayan",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "John Renan N. Labay",
         role: "Logistics Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Finance/Labay/Labay.jpg`,
         quote: "Life is easy when you know your priorities",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Asher Grey Morial",
         role: "Logistics Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Finance/Morial/Morial.png`,
         quote:
           "Voluntary exposure to that which freezes and terrifies you in measured proportions is curative.",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
@@ -175,8 +162,7 @@ const teamData: Record<
       {
         name: "Jayce Lorenz Gulmatico",
         role: "Auditor",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Finance/Gulmatico/Gulmatico.jpg`,
         quote:
           "すいらゃんがずっと作れないものは半熟のゆで卵。これだけはね、何をどう頑張ってもなぜかずっと作れない。",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
@@ -190,40 +176,35 @@ const teamData: Record<
       {
         name: "Jaylord Jan A. Boladola",
         role: "Chief Creatives Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Creatives/Boladola/Boladola.jpg`,
         quote: "VIVA LA VIDA",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Kurt Ashton G. Montebon",
         role: "Branding Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Creatives/Montebon/Montebon.png`,
         quote: "Choose whatever makes your heart happy and your mind stress-free.",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Arndria A. Basco",
         role: "Promotion Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Creatives/Basco/Basco.png`,
         quote: "Unsaon imung kaugmaon kung dili ka maugmaan",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Elvie May P. Mara",
         role: "Promotion Officer",
-        image:
-          "https.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Creatives/Mara/Mara.png`,
         quote: "pwede muparking? sa imong bakante nga kasing-kasing",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Julio Cedrick D. Maghanoy",
         role: "Documentation Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Creatives/Maghanoy/Maghanoy.png`,
         quote:
           "The ironic tragedy that life is to be lived forward but only makes sense in reverse.",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
@@ -231,14 +212,14 @@ const teamData: Record<
       {
         name: "Mcjustin Andrew S. Palen",
         role: "Documentation Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Creatives/Palen/Palen.jpg`,
         quote: "Small progress is still progress",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
     ],
   },
 };
+
 
 const SectionHeader = ({
   title,
@@ -264,41 +245,72 @@ const SectionHeader = ({
   </div>
 );
 
+
 export default function Team() {
   return (
-    <div className="min-h-screen bg-white relative overflow-x-hidden">
+    <div className="min-h-screen bg-white relative">
       <Header />
 
+
       {/* Decorative Background Circles */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Top cluster (for header and Lead) */}
         <div className="absolute top-[200px] -left-[200px] w-[400px] h-[400px] bg-dsc-orange/30 rounded-full" />
         <div className="absolute top-[400px] -left-[100px] w-[300px] h-[300px] bg-dsc-maroon/20 rounded-full" />
         <div className="absolute top-[250px] -right-[250px] w-[500px] h-[500px] bg-dsc-orange/30 rounded-full" />
         <div className="absolute top-[500px] -right-[100px] w-[200px] h-[200px] bg-dsc-maroon/20 rounded-full" />
 
+
         {/* Operations cluster */}
         <div className="absolute top-[1200px] -right-[200px] w-[450px] h-[450px] bg-dsc-orange/30 rounded-full" />
         <div className="absolute top-[1350px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/20 rounded-full" />
+
 
         {/* Technology cluster */}
         <div className="absolute top-[2100px] -left-[250px] w-[500px] h-[500px] bg-dsc-orange/20 rounded-full" />
         <div className="absolute top-[2300px] -left-[150px] w-[350px] h-[350px] bg-dsc-maroon/10 rounded-full" />
 
+
         {/* Finance cluster */}
         <div className="absolute top-[2900px] -right-[220px] w-[400px] h-[400px] bg-dsc-orange/20 rounded-full" />
         <div className="absolute top-[3100px] -right-[120px] w-[250px] h-[250px] bg-dsc-maroon/10 rounded-full" />
 
+
         {/* Creatives cluster */}
+        <div className="absolute top-[3800px] -left-[180px] w-[400px] h-[400px] bg-dsc-maroon/20 rounded-full" />
+        <div className="absolute top-[4000px] -left-[100px] w-[320px] h-[320px] bg-dsc-orange/15 rounded-full" />
         <div className="absolute top-[4200px] -right-[200px] w-[450px] h-[450px] bg-dsc-orange/20 rounded-full" />
-        <div className="absolute top-[4300px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/10 rounded-full" />
+        <div className="absolute top-[4400px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/10 rounded-full" />
+        <div className="absolute top-[4650px] -left-[220px] w-[380px] h-[380px] bg-dsc-orange/18 rounded-full" />
+
 
         {/* Adviser cluster */}
-        <div className="absolute top-[5500px] -right-[250px] w-[500px] h-[500px] bg-dsc-orange/20 rounded-full" />
-        <div className="absolute top-[5600px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/10 rounded-full" />
+        <div className="absolute top-[5000px] -right-[250px] w-[500px] h-[500px] bg-dsc-orange/22 rounded-full" />
+        <div className="absolute top-[5200px] -right-[150px] w-[350px] h-[350px] bg-dsc-maroon/15 rounded-full" />
+        <div className="absolute top-[5400px] -left-[200px] w-[420px] h-[420px] bg-dsc-maroon/18 rounded-full" />
+        
+        {/* Extended bottom clusters */}
+        <div className="absolute top-[5700px] -left-[180px] w-[450px] h-[450px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute top-[5900px] -left-[100px] w-[300px] h-[300px] bg-dsc-maroon/15 rounded-full" />
+        <div className="absolute top-[6100px] -right-[220px] w-[480px] h-[480px] bg-dsc-orange/25 rounded-full" />
+        <div className="absolute top-[6300px] -right-[130px] w-[320px] h-[320px] bg-dsc-maroon/20 rounded-full" />
+        <div className="absolute top-[6550px] -left-[200px] w-[400px] h-[400px] bg-dsc-orange/18 rounded-full" />
+        <div className="absolute top-[6750px] -right-[180px] w-[380px] h-[380px] bg-dsc-maroon/16 rounded-full" />
+        <div className="absolute top-[6950px] -left-[150px] w-[350px] h-[350px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute top-[7150px] -right-[200px] w-[420px] h-[420px] bg-dsc-maroon/18 rounded-full" />
+        
+        {/* Footer area clusters */}
+        <div className="absolute top-[7350px] -left-[180px] w-[400px] h-[400px] bg-dsc-orange/22 rounded-full" />
+        <div className="absolute top-[7550px] -right-[160px] w-[360px] h-[360px] bg-dsc-maroon/20 rounded-full" />
+        <div className="absolute top-[7750px] -left-[200px] w-[450px] h-[450px] bg-dsc-orange/18 rounded-full" />
+        <div className="absolute top-[7950px] -right-[190px] w-[400px] h-[400px] bg-dsc-maroon/15 rounded-full" />
+        <div className="absolute bottom-[400px] -left-[220px] w-[500px] h-[500px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute bottom-[200px] -right-[180px] w-[420px] h-[420px] bg-dsc-maroon/18 rounded-full" />
+        <div className="absolute bottom-[50px] -left-[150px] w-[350px] h-[350px] bg-dsc-orange/16 rounded-full" />
       </div>
 
-      <main className="relative z-0">
+
+      <main className="relative z-0 overflow-x-hidden">
         <div className="px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20">
           <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
             <div className="flex items-center justify-center gap-4 sm:gap-6">
@@ -315,10 +327,12 @@ export default function Team() {
               </h1>
             </div>
 
+
             <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl leading-10 max-w-3xl mx-auto">
               Meet the amazing individuals behind DSC USeP Obrero, dedicated to
               establishing and nurturing a thriving tech community.
             </p>
+
 
             <div className="inline-flex items-center justify-center bg-dsc-maroon rounded-lg px-6 py-2">
               <span className="font-rethink font-bold text-white text-xl sm:text-2xl">
@@ -327,6 +341,7 @@ export default function Team() {
             </div>
           </div>
         </div>
+
 
         <div className="flex flex-col">
           {/* Lead Section */}
@@ -338,6 +353,7 @@ export default function Team() {
               ))}
             </div>
           </section>
+
 
           {/* Operations Section */}
           <section className="relative py-12 sm:py-16 lg:py-20">
@@ -365,7 +381,7 @@ export default function Team() {
               </div>
             </div>
           </section>
-          
+         
           {/* Technology Section */}
           <section className="relative py-12 sm:py-16 lg:py-20">
             <SectionHeader title="Technology" leftGrow={2} rightGrow={1} />
@@ -384,6 +400,7 @@ export default function Team() {
             </div>
           </section>
 
+
           {/* Finance Section */}
           <section className="relative py-12 sm:py-16 lg:py-20">
             <SectionHeader title="Finance" leftGrow={1} rightGrow={2} />
@@ -401,7 +418,7 @@ export default function Team() {
                 </div>
             </div>
           </section>
-          
+         
           {/* Creatives Section */}
           <section className="relative py-12 sm:py-16 lg:py-20">
             <SectionHeader title="Creatives" leftGrow={2} rightGrow={1} />
@@ -410,12 +427,20 @@ export default function Team() {
                 {teamData.creatives.description}
               </p>
             )}
-            <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-              {teamData.creatives.members.map((member, index) => (
-                <TeamMemberCard key={index} {...member} />
-              ))}
+            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.creatives.members.slice(0, 3).map((member, index) => (
+                  <TeamMemberCard key={index} {...member} />
+                ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.creatives.members.slice(3, 6).map((member, index) => (
+                  <TeamMemberCard key={index + 3} {...member} />
+                ))}
+              </div>
             </div>
           </section>
+
 
           {/* Adviser Section */}
           <section className="relative py-12 sm:py-16 lg:py-20">
@@ -428,6 +453,7 @@ export default function Team() {
           </section>
         </div>
       </main>
+
 
       <Footer />
     </div>

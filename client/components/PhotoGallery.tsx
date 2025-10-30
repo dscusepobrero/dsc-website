@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { EventImagesResponse, EventListResponse } from "@shared/api";
+import { EventImagesResponse } from "@shared/api";
 
 interface PhotoGalleryProps {
   direction?: "left" | "right";
@@ -54,13 +54,20 @@ export default function PhotoGallery({
         }
       }
 
-      // Otherwise discover all event folders and use their first images
+      // Otherwise load all photos for the gallery
       try {
-        const res = await fetch(`/api/events`);
-        if (!res.ok) throw new Error("Failed to fetch events list");
-        const data = (await res.json()) as EventListResponse;
-        const discovered = (data.events || []).map((e) => e.firstImage).filter(Boolean) as string[];
+        const res = await fetch(`/api/event-photos`);
+        if (!res.ok) throw new Error("Failed to fetch gallery photos");
+        const data = (await res.json()) as EventImagesResponse;
+        let discovered = data.images || [];
         if (mounted && discovered.length > 0) {
+          // --- NEW: Shuffle the array to make the gallery feel more dynamic ---
+          // Fisher-Yates shuffle algorithm
+          for (let i = discovered.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [discovered[i], discovered[j]] = [discovered[j], discovered[i]];
+          }
+          // --- End of new code ---
           setImages(discovered);
           return;
         }

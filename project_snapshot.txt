@@ -10,14 +10,18 @@ dsc-website
 ├── .npmrc
 ├── .prettierrc
 ├── AGENTS.md
+├── api
+│   └── index.ts
 ├── client
 │   ├── App.tsx
 │   ├── components
+│   │   ├── EventImageSlideshow.tsx
 │   │   ├── EventSlider.tsx
 │   │   ├── Footer.tsx
 │   │   ├── Header.tsx
 │   │   ├── MilestonesTimeline.tsx
 │   │   ├── PhotoGallery.tsx
+│   │   ├── ScrollToTop.tsx
 │   │   ├── TeamMemberCard.tsx
 │   │   └── ui
 │   │       ├── accordion.tsx
@@ -88,21 +92,7 @@ dsc-website
 │   └── vite-env.d.ts
 ├── components.json
 ├── create_snapshot.py
-├── DSC Events Documentations
-│   ├── 2024-2025
-│   │   ├── A Beginner’s Guide to Competitive Programming
-│   │   ├── A First Timer's Guide to Linux
-│   │   ├── DSC USEP Obrero Info Session 2025
-│   │   ├── From Pixels to Prototypes Explore UI Designing Through Figma
-│   │   └── Hudyaka 2025 DSC USEP Obrero Booth
-│   └── 2025-2026
-│       ├── DSC Campus Tour 2025
-│       └── DSC Speedrun Ethereum
 ├── index.html
-├── netlify
-│   └── functions
-│       └── api.ts
-├── netlify.toml
 ├── package-lock.json
 ├── package.json
 ├── pnpm-lock.yaml
@@ -119,16 +109,46 @@ dsc-website
 │   │   │   └── 2025-2026
 │   │   │       ├── DSC Campus Tour 2025
 │   │   │       └── DSC Speedrun Ethereum
-│   │   └── events all pictures
-│   │       ├── 2024-2025
-│   │       │   ├── A Beginner’s Guide to Competitive Programming
-│   │       │   ├── 𝐀 𝐅𝐢𝐫𝐬𝐭 𝐓𝐢𝐦𝐞𝐫’𝐬 𝐆𝐮𝐢𝐝𝐞 𝐭𝐨 𝐋𝐢𝐧𝐮𝐱
-│   │       │   ├── 𝐃𝐒𝐂 𝐔𝐒𝐞𝐏 𝐎𝐛𝐫𝐞𝐫𝐨 𝐈𝐧𝐟𝐨 𝐒𝐞𝐬𝐬𝐢𝐨𝐧 𝟐𝟎𝟐𝟓
-│   │       │   ├── 𝐅𝐫𝐨𝐦 𝐏𝐢𝐱𝐞𝐥𝐬 𝐭𝐨 𝐏𝐫𝐨𝐭𝐨𝐭𝐲𝐩𝐞𝐬_ 𝐄𝐱𝐩𝐥𝐨𝐫𝐞 𝐔𝐈 𝐃𝐞𝐬𝐢𝐠𝐧𝐢𝐧𝐠 𝐓𝐡𝐫𝐨𝐮𝐠𝐡 𝐅𝐢𝐠𝐦𝐚
-│   │       │   └── 𝐇𝐮𝐝𝐲𝐚𝐤𝐚 𝟐𝟎𝟐𝟓 _ 𝐃𝐒𝐂 𝐔𝐒𝐞𝐏 𝐎𝐛𝐫𝐞𝐫𝐨 𝐁𝐨𝐨𝐭𝐡
-│   │       └── 2025-2026
-│   │           ├── DSC Campus Tour 2025
-│   │           └── DSC Speedrun Ethereum
+│   │   ├── events all pictures
+│   │   │   ├── 2024-2025
+│   │   │   │   ├── A Beginner’s Guide to Competitive Programming
+│   │   │   │   ├── 𝐀 𝐅𝐢𝐫𝐬𝐭 𝐓𝐢𝐦𝐞𝐫’𝐬 𝐆𝐮𝐢𝐝𝐞 𝐭𝐨 𝐋𝐢𝐧𝐮𝐱
+│   │   │   │   ├── 𝐃𝐒𝐂 𝐔𝐒𝐞𝐏 𝐎𝐛𝐫𝐞𝐫𝐨 𝐈𝐧𝐟𝐨 𝐒𝐞𝐬𝐬𝐢𝐨𝐧 𝟐𝟎𝟐𝟓
+│   │   │   │   ├── 𝐅𝐫𝐨𝐦 𝐏𝐢𝐱𝐞𝐥𝐬 𝐭𝐨 𝐏𝐫𝐨𝐭𝐨𝐭𝐲𝐩𝐞𝐬_ 𝐄𝐱𝐩𝐥𝐨𝐫𝐞 𝐔𝐈 𝐃𝐞𝐬𝐢𝐠𝐧𝐢𝐧𝐠 𝐓𝐡𝐫𝐨𝐮𝐠𝐡 𝐅𝐢𝐠𝐦𝐚
+│   │   │   │   └── 𝐇𝐮𝐝𝐲𝐚𝐤𝐚 𝟐𝟎𝟐𝟓 _ 𝐃𝐒𝐂 𝐔𝐒𝐞𝐏 𝐎𝐛𝐫𝐞𝐫𝐨 𝐁𝐨𝐨𝐭𝐡
+│   │   │   └── 2025-2026
+│   │   │       ├── DSC Campus Tour 2025
+│   │   │       └── DSC Speedrun Ethereum
+│   │   └── officer pictures 2025
+│   │       └── 2025-2026 Officers
+│   │           ├── Adviser
+│   │           │   └── Mozo
+│   │           ├── Creatives
+│   │           │   ├── Basco
+│   │           │   ├── Boladola
+│   │           │   ├── Maghanoy
+│   │           │   ├── Mara
+│   │           │   ├── Montebon
+│   │           │   └── Palen
+│   │           ├── Finance
+│   │           │   ├── Gulmatico
+│   │           │   ├── Labay
+│   │           │   ├── Libron
+│   │           │   └── Morial
+│   │           ├── Lead
+│   │           ├── Operations
+│   │           │   ├── Bermoy
+│   │           │   ├── Briones
+│   │           │   ├── Go
+│   │           │   ├── Hernandez
+│   │           │   ├── Justiniani
+│   │           │   ├── Silmaro
+│   │           │   └── Tan
+│   │           └── Technology
+│   │               ├── Caranto
+│   │               ├── Dahan
+│   │               ├── Gigawin
+│   │               └── Merencillo
 │   └── robots.txt
 ├── server
 │   ├── index.ts
@@ -141,7 +161,9 @@ dsc-website
 ├── shared
 │   └── api.ts
 ├── tailwind.config.ts
+├── tempCodeRunnerFile.py
 ├── tsconfig.json
+├── vercel.json
 ├── vite.config.server.ts
 └── vite.config.ts
 
@@ -457,6 +479,17 @@ const data: MyRouteResponse = await response.json();
 - Type-safe API communication via shared interfaces
 --- END FILE: AGENTS.md ---
 
+--- START FILE: api\index.ts ---
+import { createServer } from '../server';
+
+/**
+ * This file acts as the entry point for Vercel's serverless functions.
+ * It imports and exports your existing Express app, allowing Vercel to
+ * run it as a single serverless function that handles all API requests.
+ */
+export default createServer();
+--- END FILE: api\index.ts ---
+
 --- START FILE: client\App.tsx ---
 import "./global.css";
 
@@ -472,6 +505,7 @@ import About from "./pages/About";
 import Events from "./pages/Events";
 import Team from "./pages/Team";
 import Contact from "./pages/Contact";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -481,15 +515,17 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/contact" element={<Contact />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <ScrollToTop>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/contact" element={<Contact />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ScrollToTop>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
@@ -497,6 +533,75 @@ const App = () => (
 
 createRoot(document.getElementById("root")!).render(<App />);
 --- END FILE: client\App.tsx ---
+
+--- START FILE: client\components\EventImageSlideshow.tsx ---
+import { useState, useEffect, useRef } from "react";
+import Autoplay from "embla-carousel-autoplay";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+
+export default function EventImageSlideshow() {
+  const [images, setImages] = useState<string[]>([]);
+  const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true }));
+
+  useEffect(() => {
+    async function loadImages() {
+      try {
+        const res = await fetch(`/api/event-photos`);
+        if (!res.ok) throw new Error("Failed to fetch gallery photos");
+        const data = await res.json();
+        const discovered = data.images || [];
+
+        // Shuffle the array for variety on each page load
+        for (let i = discovered.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [discovered[i], discovered[j]] = [discovered[j], discovered[i]];
+        }
+        setImages(discovered);
+      } catch (err) {
+        console.error("Failed to load slideshow images:", err);
+      }
+    }
+
+    loadImages();
+  }, []);
+
+  if (images.length === 0) {
+    return (
+      <div className="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+        <p className="text-gray-500">Loading Images...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative w-full h-full min-h-[400px] lg:min-h-full rounded-lg overflow-hidden">
+      <Carousel
+        className="w-full h-full"
+        plugins={[plugin.current]}
+        onMouseEnter={plugin.current.stop}
+        onMouseLeave={plugin.current.reset}
+      >
+        <CarouselContent className="h-full">
+          {images.map((imgSrc, index) => (
+            <CarouselItem key={index} className="h-full">
+              <img
+                src={imgSrc}
+                alt={`Event photo ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+      <div className="absolute inset-0 bg-dsc-maroon/40 pointer-events-none" />
+    </div>
+  );
+}
+--- END FILE: client\components\EventImageSlideshow.tsx ---
 
 --- START FILE: client\components\EventSlider.tsx ---
 import { useEffect, useState } from "react";
@@ -546,7 +651,7 @@ const events: EventSlide[] = [
   {
     title: "From Pixels to Prototypes: Explore UI Designing Through Figma",
     date: "March 2025",
-    description: "An introduction to UI design and Figma. Students are taught the basics of designing user interfaces, along with some tips and tricks for more complex UI elements. In the end, students made and shared their own UI designs, showcasing their knowledge in this session.",
+    description: "An introduction to UI design and Figma. Students are taught the basics of designing user interfaces, along with some tips and tricks for more complex UI elements.",
       year: "2024-2025",
       folder: "From Pixels to Prototypes Explore UI Designing Through Figma",
       image: encodeURI(
@@ -975,7 +1080,8 @@ export default function Header() {
 --- END FILE: client\components\Header.tsx ---
 
 --- START FILE: client\components\MilestonesTimeline.tsx ---
-import { Rocket } from "lucide-react";
+import { Rocket, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 
 interface Milestone {
   date: string;
@@ -985,56 +1091,130 @@ interface Milestone {
 
 const milestones: Milestone[] = [
   {
-    date: "August 2025",
-    title: "Launched DSC Website",
-    description: "Introduced a modern, accessible platform for our members.",
+    date: "August 2024",
+    title: "Establishment of DSC",
+    description: "The official launch of the Developer Student Community at the university.",
+  },
+  {
+    date: "November 2024",
+    title: "A First Timer's Guide to Linux",
+    description:
+      "A simple and beginner-friendly introduction to the world of Linux.",
+  },
+  {
+    date: "March 2025",
+    title: "Competitive Programming Guide",
+    description:
+      "An introduction to competitive programming and problem-solving skills.",
+  },
+  {
+    date: "March 2025",
+    title: "UI Designing Through Figma",
+    description:
+      "Exploring the basics of UI design and prototyping using Figma.",
+  },
+  {
+    date: "April 2025",
+    title: "DSC Info Session 2025",
+    description:
+      "Introducing new members to the community, our goals, and accomplishments.",
+  },
+  {
+    date: "April 2025",
+    title: "Hudyaka 2025 Booth",
+    description:
+      "Joining the Intrams spirit with fun activities like karaoke and gaming.",
   },
   {
     date: "August 2025",
-    title: "Launched DSC Website",
-    description: "Introduced a modern, accessible platform for our members.",
+    title: "DSC Campus Tour 2025",
+    description:
+      "Welcoming new freshmen with exciting games and community events.",
   },
   {
     date: "August 2025",
-    title: "Launched DSC Website",
-    description: "Introduced a modern, accessible platform for our members.",
+    title: "DSC Speedrun Ethereum",
+    description:
+      "A workshop introducing students to Ethereum, Web3, and cryptocurrencies.",
   },
   {
-    date: "August 2025",
-    title: "Launched DSC Website",
-    description: "Introduced a modern, accessible platform for our members.",
+    date: "October 2025",
+    title: "DSC Website Development",
+    description:
+      "Launched a modern, accessible platform for our community members.",
   },
 ];
 
 export default function MilestonesTimeline() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      // Scroll by the width of roughly one item plus gap for a smooth jump
+      const scrollAmount = direction === "left" ? -300 : 300;
+      scrollContainerRef.current.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <div className="relative w-full max-w-6xl mx-auto px-4">
-      <div className="relative">
-        <div className="absolute top-16 left-0 right-0 h-2 bg-[#7A7475]/40 rounded-full" />
+    <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-12">
+      <button
+        onClick={() => scroll("left")}
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-20 hidden sm:flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100/50 transition-colors"
+        aria-label="Scroll left"
+      >
+        <ChevronLeft className="w-6 h-6 text-gray-500" />
+      </button>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 relative">
-          {milestones.map((milestone, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center text-center"
-            >
-              <div className="w-16 h-16 rounded-full bg-[#F69C81] flex items-center justify-center mb-8 relative z-10">
-                <Rocket className="w-8 h-8 text-dsc-maroon" />
-              </div>
+      <button
+        onClick={() => scroll("right")}
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-20 hidden sm:flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100/50 transition-colors"
+        aria-label="Scroll right"
+      >
+        <ChevronRight className="w-6 h-6 text-gray-500" />
+      </button>
 
-              <div className="space-y-2">
-                <p className="font-rethink font-semibold text-dsc-maroon/60 text-lg sm:text-xl">
-                  {milestone.date}
-                </p>
-                <h3 className="font-rethink font-bold text-dsc-maroon text-xl sm:text-2xl">
-                  {milestone.title}
-                </h3>
-                <p className="font-rethink text-black/60 text-base sm:text-lg leading-relaxed">
-                  {milestone.description}
-                </p>
+      <div
+        ref={scrollContainerRef}
+        className="overflow-x-auto pb-4 scroll-smooth"
+        // Hide scrollbar for a cleaner look
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
+        <div
+          className="relative inline-block py-4 min-w-full"
+          // We manually set the width to accommodate all 9 items
+          style={{ width: `${milestones.length * 18}rem` }}
+        >
+          {/* Timeline Bar */}
+          <div className="absolute top-10 left-0 right-0 h-2 bg-[#7A7475]/40 rounded-full" />
+
+          <div className="flex flex-nowrap gap-x-8 lg:gap-x-12 px-2">
+            {milestones.map((milestone, index) => (
+              <div
+                key={index}
+                className="w-64 flex-shrink-0 flex flex-col items-center text-center"
+              >
+                <div className="w-16 h-16 rounded-full bg-[#F69C81] flex items-center justify-center mb-8 relative z-10">
+                  <Rocket className="w-8 h-8 text-dsc-maroon" />
+                </div>
+
+                <div className="space-y-2">
+                  <p className="font-rethink font-semibold text-dsc-maroon/60 text-lg sm:text-xl">
+                    {milestone.date}
+                  </p>
+                  <h3 className="font-rethink font-bold text-dsc-maroon text-xl sm:text-2xl h-16 flex items-center justify-center">
+                    {milestone.title}
+                  </h3>
+                  <p className="font-rethink text-black/60 text-base sm:text-lg leading-relaxed">
+                    {milestone.description}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -1044,7 +1224,7 @@ export default function MilestonesTimeline() {
 
 --- START FILE: client\components\PhotoGallery.tsx ---
 import { useEffect, useState } from "react";
-import { EventImagesResponse, EventListResponse } from "@shared/api";
+import { EventImagesResponse } from "@shared/api";
 
 interface PhotoGalleryProps {
   direction?: "left" | "right";
@@ -1099,13 +1279,20 @@ export default function PhotoGallery({
         }
       }
 
-      // Otherwise discover all event folders and use their first images
+      // Otherwise load all photos for the gallery
       try {
-        const res = await fetch(`/api/events`);
-        if (!res.ok) throw new Error("Failed to fetch events list");
-        const data = (await res.json()) as EventListResponse;
-        const discovered = (data.events || []).map((e) => e.firstImage).filter(Boolean) as string[];
+        const res = await fetch(`/api/event-photos`);
+        if (!res.ok) throw new Error("Failed to fetch gallery photos");
+        const data = (await res.json()) as EventImagesResponse;
+        let discovered = data.images || [];
         if (mounted && discovered.length > 0) {
+          // --- NEW: Shuffle the array to make the gallery feel more dynamic ---
+          // Fisher-Yates shuffle algorithm
+          for (let i = discovered.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [discovered[i], discovered[j]] = [discovered[j], discovered[i]];
+          }
+          // --- End of new code ---
           setImages(discovered);
           return;
         }
@@ -1137,7 +1324,24 @@ export default function PhotoGallery({
 }
 --- END FILE: client\components\PhotoGallery.tsx ---
 
+--- START FILE: client\components\ScrollToTop.tsx ---
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
+export default function ScrollToTop({ children }: { children: React.ReactNode }) {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return <>{children}</>;
+}
+--- END FILE: client\components\ScrollToTop.tsx ---
+
 --- START FILE: client\components\TeamMemberCard.tsx ---
+// client/components/TeamMemberCard.tsx
+
 interface TeamMemberCardProps {
   name: string;
   role: string;
@@ -1150,7 +1354,15 @@ interface TeamMemberCardProps {
   };
 }
 
-const SocialLink = ({ href, children, ariaLabel }: { href?: string; children: React.ReactNode; ariaLabel: string }) => {
+const SocialLink = ({
+  href,
+  children,
+  ariaLabel,
+}: {
+  href?: string;
+  children: React.ReactNode;
+  ariaLabel: string;
+}) => {
   const isValidLink = href && href !== "#";
 
   if (isValidLink) {
@@ -1159,7 +1371,7 @@ const SocialLink = ({ href, children, ariaLabel }: { href?: string; children: Re
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="hover:opacity-70 transition-opacity"
+        className="hover:opacity-70 transition-all duration-200 hover:-translate-y-1"
         aria-label={ariaLabel}
       >
         {children}
@@ -1182,103 +1394,205 @@ export default function TeamMemberCard({
   socialLinks,
 }: TeamMemberCardProps) {
   return (
-    <div className="w-[330px] flex flex-col bg-white border border-gray-200 rounded-lg shadow-[13px_13px_6.2px_0_rgba(239,79,31,0.25)] overflow-hidden hover:shadow-[15px_15px_8px_0_rgba(239,79,31,0.3)] transition-shadow">
-      <div className="w-full h-[247px] bg-gray-100 overflow-hidden">
-        <img src={image} alt={name} className="w-full h-full object-cover" />
-      </div>
-
-      <div className="p-4 flex-1 flex flex-col">
-        <h3 className="font-rethink font-bold text-2xl text-gray-900 mb-2">
-          {name}
-        </h3>
-        <p className="font-rethink text-base text-gray-600 mb-4 whitespace-pre-line">
-          {role}
-        </p>
-        <p className="font-rethink text-sm text-gray-500 italic mb-6 h-20 overflow-y-auto">
-          "{quote}"
-        </p>
-
-        <div className="flex items-center gap-4 mt-auto">
-          {socialLinks.linkedin && (
-            <SocialLink href={socialLinks.linkedin} ariaLabel="LinkedIn">
-              <svg
-                width="39"
-                height="35"
-                viewBox="0 0 39 35"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M26 11.6667C28.5859 11.6667 31.0658 12.5886 32.8943 14.2296C34.7228 15.8705 35.75 18.0961 35.75 20.4167V30.6251H29.25V20.4167C29.25 19.6432 28.9076 18.9013 28.2981 18.3544C27.6886 17.8074 26.862 17.5001 26 17.5001C25.138 17.5001 24.3114 17.8074 23.7019 18.3544C23.0924 18.9013 22.75 19.6432 22.75 20.4167V30.6251H16.25V20.4167C16.25 18.0961 17.2772 15.8705 19.1057 14.2296C20.9342 12.5886 23.4141 11.6667 26 11.6667Z"
-                  stroke="#801817"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M9.75 13.1251H3.25V30.6251H9.75V13.1251Z"
-                  stroke="#801817"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M6.5 8.75008C8.29493 8.75008 9.75 7.44425 9.75 5.83341C9.75 4.22258 8.29493 2.91675 6.5 2.91675C4.70507 2.91675 3.25 4.22258 3.25 5.83341C3.25 7.44425 4.70507 8.75008 6.5 8.75008Z"
-                  stroke="#801817"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </SocialLink>
-          )}
-
-          {socialLinks.github && (
-            <SocialLink href={socialLinks.github} ariaLabel="GitHub">
-              <svg
-                width="39"
-                height="35"
-                viewBox="0 0 39 35"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g clipPath="url(#clip0_655_1461)">
+    <div className="group relative w-[330px] h-[482px] rounded-lg overflow-hidden shadow-[13px_13px_6.2px_0_rgba(239,79,31,0.25)] hover:shadow-[15px_15px_8px_0_rgba(239,79,31,0.3)] transition-all duration-300 ease-in-out hover:-translate-y-2">
+      {/* Default State */}
+      <div className="absolute inset-0 flex flex-col bg-white transition-opacity duration-300 ease-in-out group-hover:opacity-0">
+        <div className="w-full h-[247px] bg-gray-100 overflow-hidden">
+          <img src={image} alt={name} className="w-full h-full object-cover" />
+        </div>
+        <div className="p-4 flex-1 flex flex-col">
+          <h3 className="font-rethink font-bold text-2xl text-gray-900 mb-2">
+            {name}
+          </h3>
+          <p className="font-rethink text-base text-gray-600 mb-4 whitespace-pre-line">
+            {role}
+          </p>
+          <p className="font-rethink text-sm text-gray-500 italic mb-6 h-20 overflow-y-auto">
+            "{quote}"
+          </p>
+          <div className="flex items-center gap-4 mt-auto">
+            {socialLinks.linkedin && (
+              <SocialLink href={socialLinks.linkedin} ariaLabel="LinkedIn">
+                <svg
+                  width="39"
+                  height="35"
+                  viewBox="0 0 39 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
-                    d="M14.625 27.7083C6.5 29.8958 6.5 24.0624 3.25 23.3333M26 32.0833V26.4395C26.061 25.7441 25.9563 25.0451 25.6929 24.3888C25.4295 23.7325 25.0135 23.1341 24.4725 22.6333C29.575 22.1228 34.9375 20.3874 34.9375 12.4249C34.9371 10.3888 34.0644 8.43084 32.5 6.95618C33.2408 5.17483 33.1884 3.20586 32.3537 1.45826C32.3537 1.45826 30.4363 0.947846 26 3.6166C22.2755 2.71071 18.3495 2.71071 14.625 3.6166C10.1887 0.947846 8.27125 1.45826 8.27125 1.45826C7.43661 3.20586 7.38423 5.17483 8.125 6.95618C6.54896 8.44178 5.67535 10.4175 5.6875 12.4687C5.6875 20.3728 11.05 22.1083 16.1525 22.677C15.6179 23.1728 15.2056 23.7641 14.9424 24.4123C14.6792 25.0606 14.5711 25.7513 14.625 26.4395V32.0833"
+                    d="M26 11.6667C28.5859 11.6667 31.0658 12.5886 32.8943 14.2296C34.7228 15.8705 35.75 18.0961 35.75 20.4167V30.6251H29.25V20.4167C29.25 19.6432 28.9076 18.9013 28.2981 18.3544C27.6886 17.8074 26.862 17.5001 26 17.5001C25.138 17.5001 24.3114 17.8074 23.7019 18.3544C23.0924 18.9013 22.75 19.6432 22.75 20.4167V30.6251H16.25V20.4167C16.25 18.0961 17.2772 15.8705 19.1057 14.2296C20.9342 12.5886 23.4141 11.6667 26 11.6667Z"
                     stroke="#801817"
                     strokeWidth="4"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
-                </g>
-                <defs>
-                  <clipPath id="clip0_655_1461)">
-                    <rect width="39" height="35" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
-            </SocialLink>
-          )}
+                  <path
+                    d="M9.75 13.1251H3.25V30.6251H9.75V13.1251Z"
+                    stroke="#801817"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M6.5 8.75008C8.29493 8.75008 9.75 7.44425 9.75 5.83341C9.75 4.22258 8.29493 2.91675 6.5 2.91675C4.70507 2.91675 3.25 4.22258 3.25 5.83341C3.25 7.44425 4.70507 8.75008 6.5 8.75008Z"
+                    stroke="#801817"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </SocialLink>
+            )}
+            {socialLinks.github && (
+              <SocialLink href={socialLinks.github} ariaLabel="GitHub">
+                <svg
+                  width="39"
+                  height="35"
+                  viewBox="0 0 39 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clipPath="url(#clip0_655_1461)">
+                    <path
+                      d="M14.625 27.7083C6.5 29.8958 6.5 24.0624 3.25 23.3333M26 32.0833V26.4395C26.061 25.7441 25.9563 25.0451 25.6929 24.3888C25.4295 23.7325 25.0135 23.1341 24.4725 22.6333C29.575 22.1228 34.9375 20.3874 34.9375 12.4249C34.9371 10.3888 34.0644 8.43084 32.5 6.95618C33.2408 5.17483 33.1884 3.20586 32.3537 1.45826C32.3537 1.45826 30.4363 0.947846 26 3.6166C22.2755 2.71071 18.3495 2.71071 14.625 3.6166C10.1887 0.947846 8.27125 1.45826 8.27125 1.45826C7.43661 3.20586 7.38423 5.17483 8.125 6.95618C6.54896 8.44178 5.67535 10.4175 5.6875 12.4687C5.6875 20.3728 11.05 22.1083 16.1525 22.677C15.6179 23.1728 15.2056 23.7641 14.9424 24.4123C14.6792 25.0606 14.5711 25.7513 14.625 26.4395V32.0833"
+                      stroke="#801817"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_655_1461)">
+                      <rect width="39" height="35" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </SocialLink>
+            )}
+            {socialLinks.facebook && (
+              <SocialLink href={socialLinks.facebook} ariaLabel="Facebook">
+                <svg
+                  width="39"
+                  height="35"
+                  viewBox="0 0 39 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M29.25 2.91675H24.375C22.2201 2.91675 20.1535 3.68497 18.6298 5.05243C17.106 6.41988 16.25 8.27454 16.25 10.2084V14.5834H11.375V20.4167H16.25V32.0834H22.75V20.4167H27.625L29.25 14.5834H22.75V10.2084C22.75 9.82164 22.9212 9.45071 23.226 9.17722C23.5307 8.90373 23.944 8.75008 24.375 8.75008H29.25V2.91675Z"
+                    stroke="#801817"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </SocialLink>
+            )}
+          </div>
+        </div>
+      </div>
 
-          {socialLinks.facebook && (
-            <SocialLink href={socialLinks.facebook} ariaLabel="Facebook">
-              <svg
-                width="39"
-                height="35"
-                viewBox="0 0 39 35"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M29.25 2.91675H24.375C22.2201 2.91675 20.1535 3.68497 18.6298 5.05243C17.106 6.41988 16.25 8.27454 16.25 10.2084V14.5834H11.375V20.4167H16.25V32.0834H22.75V20.4167H27.625L29.25 14.5834H22.75V10.2084C22.75 9.82164 22.9212 9.45071 23.226 9.17722C23.5307 8.90373 23.944 8.75008 24.375 8.75008H29.25V2.91675Z"
-                  stroke="#801817"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </SocialLink>
-          )}
+      {/* Hover State */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-dsc-maroon/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+        <img
+          src={image}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover opacity-60 blur-sm scale-125 transition-all duration-700 ease-in-out group-hover:scale-140 group-hover:blur-[2px]"
+        />
+        <div className="relative text-center text-white flex flex-col h-full w-full">
+          <div className="flex-1 flex flex-col items-center justify-center">
+            <h3 className="font-rethink font-bold text-3xl mb-1 transform transition-all duration-300 ease-in-out delay-150 opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0">
+              {name}
+            </h3>
+            <p className="font-rethink text-lg mb-4 transform transition-all duration-300 ease-in-out delay-200 opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0">
+              {role}
+            </p>
+            <p className="font-rethink text-base italic max-w-xs transform transition-all duration-300 ease-in-out delay-250 opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0">
+              "{quote}"
+            </p>
+          </div>
+          <div className="flex items-center justify-center gap-8 pb-8 transform transition-all duration-300 ease-in-out delay-300 opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0">
+            {socialLinks.linkedin && (
+              <SocialLink href={socialLinks.linkedin} ariaLabel="LinkedIn">
+                <svg
+                  width="39"
+                  height="35"
+                  viewBox="0 0 39 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M26 11.6667C28.5859 11.6667 31.0658 12.5886 32.8943 14.2296C34.7228 15.8705 35.75 18.0961 35.75 20.4167V30.6251H29.25V20.4167C29.25 19.6432 28.9076 18.9013 28.2981 18.3544C27.6886 17.8074 26.862 17.5001 26 17.5001C25.138 17.5001 24.3114 17.8074 23.7019 18.3544C23.0924 18.9013 22.75 19.6432 22.75 20.4167V30.6251H16.25V20.4167C16.25 18.0961 17.2772 15.8705 19.1057 14.2296C20.9342 12.5886 23.4141 11.6667 26 11.6667Z"
+                    stroke="white"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M9.75 13.1251H3.25V30.6251H9.75V13.1251Z"
+                    stroke="white"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M6.5 8.75008C8.29493 8.75008 9.75 7.44425 9.75 5.83341C9.75 4.22258 8.29493 2.91675 6.5 2.91675C4.70507 2.91675 3.25 4.22258 3.25 5.83341C3.25 7.44425 4.70507 8.75008 6.5 8.75008Z"
+                    stroke="white"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </SocialLink>
+            )}
+            {socialLinks.github && (
+              <SocialLink href={socialLinks.github} ariaLabel="GitHub">
+                <svg
+                  width="39"
+                  height="35"
+                  viewBox="0 0 39 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clipPath="url(#clip0_hover_github)">
+                    <path
+                      d="M14.625 27.7083C6.5 29.8958 6.5 24.0624 3.25 23.3333M26 32.0833V26.4395C26.061 25.7441 25.9563 25.0451 25.6929 24.3888C25.4295 23.7325 25.0135 23.1341 24.4725 22.6333C29.575 22.1228 34.9375 20.3874 34.9375 12.4249C34.9371 10.3888 34.0644 8.43084 32.5 6.95618C33.2408 5.17483 33.1884 3.20586 32.3537 1.45826C32.3537 1.45826 30.4363 0.947846 26 3.6166C22.2755 2.71071 18.3495 2.71071 14.625 3.6166C10.1887 0.947846 8.27125 1.45826 8.27125 1.45826C7.43661 3.20586 7.38423 5.17483 8.125 6.95618C6.54896 8.44178 5.67535 10.4175 5.6875 12.4687C5.6875 20.3728 11.05 22.1083 16.1525 22.677C15.6179 23.1728 15.2056 23.7641 14.9424 24.4123C14.6792 25.0606 14.5711 25.7513 14.625 26.4395V32.0833"
+                      stroke="white"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_hover_github">
+                      <rect width="39" height="35" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </SocialLink>
+            )}
+            {socialLinks.facebook && (
+              <SocialLink href={socialLinks.facebook} ariaLabel="Facebook">
+                <svg
+                  width="39"
+                  height="35"
+                  viewBox="0 0 39 35"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M29.25 2.91675H24.375C22.2201 2.91675 20.1535 3.68497 18.6298 5.05243C17.106 6.41988 16.25 8.27454 16.25 10.2084V14.5834H11.375V20.4167H16.25V32.0834H22.75V20.4167H27.625L29.25 14.5834H22.75V10.2084C22.75 9.82164 22.9212 9.45071 23.226 9.17722C23.5307 8.90373 23.944 8.75008 24.375 8.75008H29.25V2.91675Z"
+                    stroke="white"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </SocialLink>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -6628,12 +6942,14 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 
-const teamMembers = [
+const imageBasePath = "/assets/officer pictures 2025/2025-2026 Officers";
+
+const designTeamMembers = [
   {
     name: "Jaylord Jan Boladola",
     role: "Design and Content Head",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-    quote: "",
+    image: `${imageBasePath}/Creatives/Boladola/Boladola.jpg`,
+    quote: "VIVA LA VIDA",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -6643,8 +6959,8 @@ const teamMembers = [
   {
     name: "Kurt Ashton Montebon",
     role: "Design Co-Head",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-    quote: "",
+    image: `${imageBasePath}/Creatives/Montebon/Montebon.png`,
+    quote: "Choose whatever makes your heart happy and your mind stress-free.",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -6654,8 +6970,8 @@ const teamMembers = [
   {
     name: "Dave Shanna Marie Gigawin",
     role: "Design Co-Head",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-    quote: "",
+    image: `${imageBasePath}/Technology/Gigawin/Gigawin.jpg`,
+    quote: "good things take time",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -6665,8 +6981,8 @@ const teamMembers = [
   {
     name: "Arndria Basco",
     role: "Design Co-Head",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-    quote: "",
+    image: `${imageBasePath}/Creatives/Basco/Basco.png`,
+    quote: "Unsaon imung kaugmaon kung dili ka maugmaan",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -6676,8 +6992,8 @@ const teamMembers = [
   {
     name: "Elvie May Mara",
     role: "Content Co-Head",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-    quote: "",
+    image: `${imageBasePath}/Creatives/Mara/Mara.png`,
+    quote: "pwede muparking? sa imong bakante nga kasing-kasing",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -6687,8 +7003,8 @@ const teamMembers = [
   {
     name: "Julio Cedrick Maghanoy",
     role: "Content Co-Head",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
-    quote: "",
+    image: `${imageBasePath}/Creatives/Maghanoy/Maghanoy.png`,
+    quote: "The ironic tragedy that life is to be lived forward but only makes sense in reverse.",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -6696,6 +7012,24 @@ const teamMembers = [
     },
   },
 ];
+
+const developerTeamMembers = [
+      {
+        name: "Julse M. Merencillo",
+        role: "DSC Website Developer",
+        image: `${imageBasePath}/Technology/Merencillo/Merencillo.jpg`,
+        quote: "1+1=2 kaya't tayo na dalawa pls",
+        socialLinks: { linkedin: "#", github: "#", facebook: "#" },
+      },
+      {
+        name: "Kent Paulo R. Delgado",
+        role: "DSC Website Developer",
+        image: `${imageBasePath}/Lead/Delgado.jpg`,
+        quote:
+          "We can't anticipate or even predict our future, but we can begin preparing for it",
+        socialLinks: { linkedin: "#", github: "#", facebook: "#" },
+      },
+]
 
 export default function About() {
   return (
@@ -6975,12 +7309,22 @@ export default function About() {
 
         <section className="bg-white px-6 sm:px-12 lg:px-24 py-16 sm:py-20 lg:py-24">
           <div className="max-w-7xl mx-auto">
-            <h2 className="font-rethink font-bold text-dsc-maroon text-center text-4xl sm:text-5xl lg:text-[64px] leading-tight mb-12 sm:mb-16 lg:mb-20">
-              The Website Team
+            <h2 className="font-rethink font-bold text-dsc-maroon text-center text-4xl sm:text-5xl lg:text-[64px] leading-tight mb-12">
+              The Website Design Team
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-              {teamMembers.map((member) => (
+            <div className="flex flex-wrap justify-center gap-8 lg:gap-12">
+              {designTeamMembers.map((member) => (
+                <TeamMemberCard key={member.name} {...member} />
+              ))}
+            </div>
+
+            <h2 className="font-rethink font-bold text-dsc-maroon text-center text-4xl sm:text-5xl lg:text-[64px] leading-tight mt-16 mb-12">
+              The Website Developer Team
+            </h2>
+            
+            <div className="flex flex-wrap justify-center gap-8 lg:gap-12">
+              {developerTeamMembers.map((member) => (
                 <TeamMemberCard key={member.name} {...member} />
               ))}
             </div>
@@ -6995,31 +7339,12 @@ export default function About() {
 --- END FILE: client\pages\About.tsx ---
 
 --- START FILE: client\pages\Contact.tsx ---
+// client/pages/Contact.tsx
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { useState } from "react";
+import EventImageSlideshow from "@/components/EventImageSlideshow";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Handle form submission logic here
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Header />
@@ -7032,7 +7357,9 @@ export default function Contact() {
               CONNECT WITH US!
             </h1>
             <p className="font-inter text-[#717171] text-sm sm:text-base max-w-md mx-auto leading-relaxed">
-              Ready to partner with us or learn more about what we do? Contact us today for event information, sponsorship opportunities, or collaboration discussions.
+              Ready to partner with us or learn more about what we do? Contact
+              us today for event information, sponsorship opportunities, or
+              collaboration discussions.
             </p>
           </div>
 
@@ -7133,18 +7460,25 @@ export default function Contact() {
 
                 {/* Description */}
                 <p className="text-white font-inter text-sm sm:text-base text-center lg:text-left max-w-md leading-7">
-                  DSC USeP is a student-driven community for developers passionate about technology, learning, and collaboration.
+                  DSC USeP is a student-driven community for developers
+                  passionate about technology, learning, and collaboration.
                 </p>
 
                 {/* Tagline */}
                 <p className="text-white font-inter text-sm sm:text-base font-bold italic text-center lg:text-left">
-                  We are students. We are innovators. We are the future. We are DSC.
+                  We are students. We are innovators. We are the future. We are
+                  DSC.
                 </p>
 
-                {/* CTA Button */}
-                <button className="w-full sm:w-auto px-6 py-2 rounded-lg bg-gradient-to-r from-[#9A0000] via-[#AA2B2B] to-[#BA5656] text-white font-rethink font-bold text-sm shadow-[0_0_4px_0_rgba(0,0,0,0.75)] hover:opacity-90 transition-opacity">
+                {/* CTA Link */}
+                <a
+                  href="https://forms.gle/PRMHj5wAtW8xposi7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto text-center px-6 py-2 rounded-lg bg-gradient-to-r from-[#9A0000] via-[#AA2B2B] to-[#BA5656] text-white font-rethink font-bold text-sm shadow-[0_0_4px_0_rgba(0,0,0,0.75)] hover:opacity-90 transition-opacity"
+                >
                   Be a DSC member
-                </button>
+                </a>
 
                 {/* Social Links & Contact Info */}
                 <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-4">
@@ -7155,7 +7489,12 @@ export default function Contact() {
                     className="hover:opacity-70 transition-opacity"
                     aria-label="Facebook"
                   >
-                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 30 30"
+                      fill="none"
+                    >
                       <g clipPath="url(#clip0_fb)">
                         <path
                           d="M27.8855 29.4846C28.7683 29.4846 29.4842 28.7686 29.4842 27.8857V2.11488C29.4842 1.23173 28.7684 0.516052 27.8855 0.516052H2.11447C1.2313 0.516052 0.515625 1.23184 0.515625 2.115V27.8858C0.515625 28.7687 1.23119 29.4847 2.11447 29.4847H27.8855V29.4846Z"
@@ -7181,7 +7520,12 @@ export default function Contact() {
                     className="hover:opacity-70 transition-opacity"
                     aria-label="LinkedIn"
                   >
-                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 30 30"
+                      fill="none"
+                    >
                       <g clipPath="url(#clip0_li)">
                         <path
                           d="M4.83057 5.21204H25.0426V25.2966H4.83057V5.21204Z"
@@ -7205,7 +7549,12 @@ export default function Contact() {
                     className="hover:opacity-70 transition-opacity"
                     aria-label="Email"
                   >
-                    <svg width="40" height="30" viewBox="0 0 40 30" fill="none">
+                    <svg
+                      width="40"
+                      height="30"
+                      viewBox="0 0 40 30"
+                      fill="none"
+                    >
                       <g clipPath="url(#clip0_gmail)">
                         <path
                           d="M37.3178 29.9374H2.52406C1.175 29.9374 0.0390625 28.8481 0.0390625 27.4777V2.60025C0.0389063 1.26495 1.13937 0.140564 2.52406 0.140564H37.3178C38.6669 0.140564 39.8031 1.22984 39.8031 2.60025V27.4777C39.8031 28.8481 38.7025 29.9374 37.3178 29.9374Z"
@@ -7217,11 +7566,7 @@ export default function Contact() {
                           fill="#231F20"
                         />
                         <path
-                          d="M2.52422 29.9374C1.13953 29.9374 0.0390625 28.8481 0.0390625 27.4777V2.56502C0.0390625 1.19476 1.13953 0.94873 2.52422 0.94873C3.90891 0.94873 5.00953 1.22986 5.00953 2.56502V29.9374H2.52422Z"
-                          fill="#801817"
-                        />
-                        <path
-                          d="M37.3178 29.9374H34.8325V2.49481C34.8325 1.1244 35.9331 0.94873 37.3178 0.94873C38.7025 0.94873 39.8031 1.1244 39.8031 2.49481V27.513C39.8031 28.8481 38.7025 29.9374 37.3178 29.9374Z"
+                          d="M2.52422 2.56502V29.9374H5.00953V2.56502C5.00953 1.22986 3.90891 0.94873 2.52422 0.94873C1.13953 0.94873 0.0390625 1.19476 0.0390625 2.56502V27.4777C0.0390625 28.8481 1.13953 29.9374 2.52422 29.9374H37.3178C38.7025 29.9374 39.8031 28.8481 39.8031 27.513V2.49481C39.8031 1.1244 38.7025 0.94873 37.3178 0.94873C35.9331 0.94873 34.8325 1.1244 34.8325 2.49481V29.9374H37.3178L2.52422 29.9374Z"
                           fill="#801817"
                         />
                         <path
@@ -7243,66 +7588,9 @@ export default function Contact() {
                   <span>dsc@usep.edu.ph</span>
                 </div>
               </div>
-
-              {/* Right Side - Contact Form */}
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div className="flex flex-col">
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      placeholder="First Name"
-                      className="w-full px-4 py-3 rounded border border-[rgba(235,235,245,0.6)] bg-transparent text-white placeholder:text-[rgba(235,235,245,0.6)] font-inter text-sm focus:outline-none focus:border-white transition-colors"
-                      required
-                    />
-                  </div>
-
-                  <div className="flex flex-col">
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      placeholder="Last Name"
-                      className="w-full px-4 py-3 rounded border border-[rgba(235,235,245,0.6)] bg-transparent text-white placeholder:text-[rgba(235,235,245,0.6)] font-inter text-sm focus:outline-none focus:border-white transition-colors"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col">
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Email"
-                    className="w-full px-4 py-3 rounded border border-[rgba(235,235,245,0.6)] bg-transparent text-white placeholder:text-[rgba(235,235,245,0.6)] font-inter text-sm focus:outline-none focus:border-white transition-colors"
-                    required
-                  />
-                </div>
-
-                <div className="flex flex-col">
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Message"
-                    rows={6}
-                    className="w-full px-4 py-3 rounded border border-[rgba(235,235,245,0.6)] bg-transparent text-white placeholder:text-[rgba(235,235,245,0.6)] font-inter text-sm focus:outline-none focus:border-white transition-colors resize-none"
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-3 rounded bg-white text-black font-rethink font-bold text-sm hover:bg-gray-100 transition-colors"
-                >
-                  Submit
-                </button>
-              </form>
+              <div className="flex items-center justify-center aspect-video">
+                <EventImageSlideshow />
+              </div>
             </div>
           </div>
         </div>
@@ -7475,17 +7763,53 @@ export default function Events() {
 
 --- START FILE: client\pages\Index.tsx ---
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 
 export default function Index() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    // Trigger animations after component mounts
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 20,
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
       
       <main className="relative w-full min-h-[calc(100vh-109px)] overflow-hidden bg-gradient-to-b from-transparent via-transparent to-dsc-maroon/50">
-        <div className="absolute inset-0 bg-dsc-maroon/90"></div>
+        {/* Animated background overlay */}
+        <div 
+          className={`absolute inset-0 bg-dsc-maroon/90 transition-all duration-1000 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        ></div>
         
-        <div className="absolute bottom-0 right-0 pointer-events-none">
+        {/* Floating circles with parallax */}
+        <div 
+          className={`absolute bottom-0 right-0 pointer-events-none transition-all duration-1000 ${
+            isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
+          }`}
+          style={{
+            transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)`,
+            transition: 'transform 0.3s ease-out, opacity 1s, translate 1s',
+          }}
+        >
           <svg
             className="w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] lg:w-[507px] lg:h-[522px]"
             width="351"
@@ -7493,6 +7817,9 @@ export default function Index() {
             viewBox="0 0 351 522"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            style={{
+              animation: 'pulse-circle 3s ease-in-out infinite',
+            }}
           >
             <ellipse
               cx="253.5"
@@ -7505,7 +7832,15 @@ export default function Index() {
           </svg>
         </div>
 
-        <div className="absolute bottom-20 right-10 sm:right-20 lg:right-40 pointer-events-none">
+        <div 
+          className={`absolute bottom-20 right-10 sm:right-20 lg:right-40 pointer-events-none transition-all duration-1000 ${
+            isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
+          }`}
+          style={{
+            transform: `translate(${mousePosition.x * 0.8}px, ${mousePosition.y * 0.8}px)`,
+            transition: 'transform 0.2s ease-out, opacity 1s 0.2s, translate 1s 0.2s',
+          }}
+        >
           <svg
             className="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] lg:w-[190px] lg:h-[195px]"
             width="190"
@@ -7513,6 +7848,9 @@ export default function Index() {
             viewBox="0 0 190 195"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            style={{
+              animation: 'pulse-circle 3s ease-in-out infinite 1s',
+            }}
           >
             <ellipse
               cx="95"
@@ -7525,45 +7863,143 @@ export default function Index() {
           </svg>
         </div>
 
-        <img
-          src="https://api.builder.io/api/v1/image/assets/TEMP/1f2108d1133396a5240d4db939dbdea43d394f55?width=3346"
-          alt="Eagle sculpture"
-          className="absolute left-0 top-0 w-full h-full object-cover opacity-100 mix-blend-normal"
+        {/* Eagle image with zoom-in effect and subtle flying motion */}
+        <div
+          className={`absolute left-0 top-0 w-full h-full transition-all duration-1500 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
           style={{
-            objectPosition: 'center 30%',
+            transform: `scale(${isLoaded ? 1 : 1.1}) translate(${mousePosition.x * -0.3}px, ${mousePosition.y * -0.3}px)`,
+            transition: 'opacity 1.5s, transform 1.5s',
           }}
-        />
+        >
+          <img
+            src="https://api.builder.io/api/v1/image/assets/TEMP/1f2108d1133396a5240d4db939dbdea43d394f55?width=3346"
+            alt="Eagle sculpture"
+            className="w-full h-full object-cover mix-blend-normal"
+            style={{
+              objectPosition: 'center 30%',
+              animation: 'eagle-float 8s ease-in-out infinite',
+            }}
+          />
+        </div>
 
         <div className="relative z-10 flex flex-col items-end justify-center min-h-[calc(100vh-109px)] px-6 sm:px-12 lg:px-24 xl:px-32 py-12 sm:py-20">
           <div className="flex flex-col items-end text-right max-w-full lg:max-w-2xl xl:max-w-3xl">
+            {/* Logo with fade + slide from right */}
             <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/f10f1283fa9eb70525a1165aafcfeebfdf27ee14?width=408"
               alt="DSC bracket logo"
-              className="w-[120px] h-[75px] sm:w-[180px] sm:h-[115px] lg:w-[204px] lg:h-[130px] mb-6 sm:mb-8 lg:mb-10"
+              className={`w-[120px] h-[75px] sm:w-[180px] sm:h-[115px] lg:w-[204px] lg:h-[130px] mb-6 sm:mb-8 lg:mb-10 transition-all duration-1000 ${
+                isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
+              }`}
+              style={{ 
+                transitionDelay: '0.3s',
+                filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.4))',
+                animation: 'logo-glow 3s ease-in-out infinite',
+              }}
             />
             
             <div className="flex flex-col items-end">
-              <h1 className="font-signature text-white text-[60px] sm:text-[90px] lg:text-[120px] xl:text-[150px] leading-none mb-2 sm:mb-4">
+              {/* "We are" text with fade + slide */}
+              <h1 
+                className={`font-signature text-white text-[60px] sm:text-[90px] lg:text-[120px] xl:text-[150px] leading-none mb-2 sm:mb-4 transition-all duration-1000 ${
+                  isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
+                }`}
+                style={{ transitionDelay: '0.5s' }}
+              >
                 We are
               </h1>
               
-              <h2 className="font-rethink font-bold text-white text-[40px] sm:text-[60px] lg:text-[70px] xl:text-[80px] leading-none mb-6 sm:mb-8 lg:mb-10">
+              {/* "DSC" text with fade + slide + scale */}
+              <h2 
+                className={`font-rethink font-bold text-white text-[40px] sm:text-[60px] lg:text-[70px] xl:text-[80px] leading-none mb-6 sm:mb-8 lg:mb-10 transition-all duration-1000 ${
+                  isLoaded ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-20 scale-90'
+                }`}
+                style={{
+                  transitionDelay: '0.7s',
+                  textShadow: '0 0 30px rgba(255,255,255,0.3)',
+                }}
+              >
                 DSC
               </h2>
             </div>
 
-            <p className="font-rethink font-normal text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] mb-6 sm:mb-8 lg:mb-10 max-w-[90%] sm:max-w-md">
+            {/* Description with fade */}
+            <p 
+              className={`font-rethink font-normal text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] mb-6 sm:mb-8 lg:mb-10 max-w-[90%] sm:max-w-md transition-all duration-1000 ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ transitionDelay: '0.9s' }}
+            >
               We are students, we are innovators, we are the future.
             </p>
 
+            {/* Button with fade + scale + hover glow */}
             <Link
               to="/about"
-              className="bg-dsc-orange hover:bg-dsc-orange/90 text-white font-rethink font-semibold text-[16px] sm:text-[18px] lg:text-[20px] px-8 sm:px-10 lg:px-12 py-2.5 sm:py-3 rounded-[20px] transition-all hover:scale-105 active:scale-95"
+              className={`bg-dsc-orange hover:bg-dsc-orange/90 text-white font-rethink font-semibold text-[16px] sm:text-[18px] lg:text-[20px] px-8 sm:px-10 lg:px-12 py-2.5 sm:py-3 rounded-[20px] transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_30px_rgba(255,107,0,0.6)] ${
+                isLoaded ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-90'
+              }`}
+              style={{ transitionDelay: '1.1s' }}
             >
               About Us
             </Link>
           </div>
         </div>
+
+        {/* Inline styles for animations */}
+        <style>{`
+          @keyframes pulse-circle {
+            0%, 100% {
+              opacity: 0.1;
+            }
+            50% {
+              opacity: 0.2;
+            }
+          }
+
+          @keyframes eagle-float {
+            0%, 100% {
+              transform: translate(0, 0) scale(1.005);
+            }
+            25% {
+              transform: translate(0.1%, -0.2%) scale(1.006);
+            }
+            50% {
+              transform: translate(0, -0.3%) scale(1.007);
+            }
+            75% {
+              transform: translate(-0.1%, -0.2%) scale(1.006);
+            }
+          }
+
+          @keyframes logo-shine {
+            0% {
+              transform: translateX(-100%) skewX(-15deg);
+              opacity: 0;
+            }
+            40% {
+              opacity: 1;
+            }
+            60% {
+              opacity: 1;
+            }
+            100% {
+              transform: translateX(200%) skewX(-15deg);
+              opacity: 0;
+            }
+          }
+
+          @keyframes logo-glow {
+            0%, 100% {
+              filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));
+            }
+            50% {
+              filter: drop-shadow(0 0 12px rgba(255,255,255,0.6));
+            }
+          }
+        `}</style>
       </main>
     </div>
   );
@@ -7641,6 +8077,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 
+
 interface TeamMember {
   name: string;
   role: string;
@@ -7653,6 +8090,8 @@ interface TeamMember {
   };
 }
 
+const imageBasePath = "/assets/officer pictures 2025/2025-2026 Officers";
+
 const teamData: Record<
   string,
   { description?: string; members: TeamMember[] }
@@ -7662,8 +8101,7 @@ const teamData: Record<
       {
         name: "Kent Paulo R. Delgado",
         role: "Lead, DSC",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Lead/Delgado.jpg`,
         quote:
           "We can't anticipate or even predict our future, but we can begin preparing for it",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
@@ -7675,8 +8113,7 @@ const teamData: Record<
       {
         name: "Nancy S. Mozo",
         role: "Adviser",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Adviser/Mozo/Mozo.png`,
         quote: "-",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
@@ -7689,56 +8126,49 @@ const teamData: Record<
       {
         name: "Mariel Rossini C. Go",
         role: "Chief Operations Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Go/Go.PNG`,
         quote: "Stay humble, stay hungry.",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Marc Alvienth T. Hernandez",
         role: "Secretary",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Hernandez/Hernandez.png`,
         quote: "Hindi mahalaga ang magwagi, ang mahalaga, ikaw ay nakibahagi",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Baberose I. Silmaro",
         role: "Communications Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Silmaro/Silmaro.png`,
         quote: "Don't! Don't! Don't!!!... Don't stoOoOoOP~ Go OooOoonn~",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "John Marcellin E. Tan",
         role: "Events Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Tan/Tan.png`,
         quote: "Collect moments, not grudges.",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Kimberly S. Bermoy",
         role: "Events Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Bermoy/Bermoy.jpg`,
         quote: "Thank u, next",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Ken Erik Y. Justiniani",
         role: "Technical Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Justiniani/Justiniani.jpg`,
         quote: "Kapag ang jeep ay lumipad sa tubig, huwag umihi dito.",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Ace Jonathan D. Briones",
         role: "Technical Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Operations/Briones/Briones.png`,
         quote: "If there's a will, there's a water",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
@@ -7751,32 +8181,28 @@ const teamData: Record<
       {
         name: "Julse M. Merencillo",
         role: "Chief Technology Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Technology/Merencillo/Merencillo.jpg`,
         quote: "1+1=2 kaya't tayo na dalawa pls",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Kervy Chrystan G. Caranto",
         role: "Engineering Lead",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Technology/Caranto/Caranto.png`,
         quote: "There are only two hard problems in Computer Science; cache invalidation, naming things, and off-by-one errors",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Dave Shanna Marie E. Gigawin",
         role: "Design Lead",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Technology/Gigawin/Gigawin.jpg`,
         quote: "good things take time",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Decyrel P. Dahan",
         role: "Data Science Lead",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Technology/Dahan/Dahan.png`,
         quote: "HAHAHAHAHAHAHA",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
@@ -7789,24 +8215,21 @@ const teamData: Record<
       {
         name: "Lance Marvin Libron",
         role: "Chief Finance Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Finance/Libron/Libron.jpg`,
         quote: "Ang kabataan ang pag asa ng bayan",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "John Renan N. Labay",
         role: "Logistics Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Finance/Labay/Labay.jpg`,
         quote: "Life is easy when you know your priorities",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Asher Grey Morial",
         role: "Logistics Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Finance/Morial/Morial.png`,
         quote:
           "Voluntary exposure to that which freezes and terrifies you in measured proportions is curative.",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
@@ -7814,8 +8237,7 @@ const teamData: Record<
       {
         name: "Jayce Lorenz Gulmatico",
         role: "Auditor",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Finance/Gulmatico/Gulmatico.jpg`,
         quote:
           "すいらゃんがずっと作れないものは半熟のゆで卵。これだけはね、何をどう頑張ってもなぜかずっと作れない。",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
@@ -7829,40 +8251,35 @@ const teamData: Record<
       {
         name: "Jaylord Jan A. Boladola",
         role: "Chief Creatives Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Creatives/Boladola/Boladola.jpg`,
         quote: "VIVA LA VIDA",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Kurt Ashton G. Montebon",
         role: "Branding Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Creatives/Montebon/Montebon.png`,
         quote: "Choose whatever makes your heart happy and your mind stress-free.",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Arndria A. Basco",
         role: "Promotion Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Creatives/Basco/Basco.png`,
         quote: "Unsaon imung kaugmaon kung dili ka maugmaan",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Elvie May P. Mara",
         role: "Promotion Officer",
-        image:
-          "https.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Creatives/Mara/Mara.png`,
         quote: "pwede muparking? sa imong bakante nga kasing-kasing",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Julio Cedrick D. Maghanoy",
         role: "Documentation Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Creatives/Maghanoy/Maghanoy.png`,
         quote:
           "The ironic tragedy that life is to be lived forward but only makes sense in reverse.",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
@@ -7870,8 +8287,7 @@ const teamData: Record<
       {
         name: "Mcjustin Andrew S. Palen",
         role: "Documentation Officer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Creatives/Palen/Palen.jpg`,
         quote: "Small progress is still progress",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
@@ -7879,109 +8295,97 @@ const teamData: Record<
   },
 };
 
-const TeamSection = ({
+
+const SectionHeader = ({
   title,
-  description,
-  members,
-  gradient = "left",
   leftGrow = 1,
   rightGrow = 1,
 }: {
   title: string;
-  description?: string;
-  members: TeamMember[];
-  gradient?: "left" | "right" | "both";
   leftGrow?: number;
   rightGrow?: number;
-}) => {
-  return (
-    <section className="relative py-12 sm:py-16 lg:py-20">
-      <div className="relative max-w-full mx-auto">
-        <div className="flex items-center justify-center mb-8 sm:mb-12">
-          {gradient === "left" || gradient === "both" ? (
-            <div
-              style={{ flexGrow: leftGrow }}
-              className="h-[52px] bg-gradient-to-r from-transparent via-dsc-orange to-dsc-maroon"
-            />
-          ) : null}
-          <h2 className="font-rethink font-bold text-dsc-maroon text-4xl sm:text-5xl lg:text-[50px] text-center px-6 sm:px-8 whitespace-nowrap">
-            {title}
-          </h2>
-          {gradient === "right" || gradient === "both" ? (
-            <div
-              style={{ flexGrow: rightGrow }}
-              className="h-[52px] bg-gradient-to-l from-transparent via-dsc-orange to-dsc-maroon"
-            />
-          ) : null}
-        </div>
+}) => (
+  <div className="flex items-center justify-center mb-8 sm:mb-12">
+    <div
+      style={{ flexGrow: leftGrow }}
+      className="h-[52px] bg-gradient-to-r from-transparent via-dsc-orange to-dsc-maroon"
+    />
+    <h2 className="font-rethink font-bold text-dsc-maroon text-4xl sm:text-5xl lg:text-[50px] text-center px-6 sm:px-8 whitespace-nowrap">
+      {title}
+    </h2>
+    <div
+      style={{ flexGrow: rightGrow }}
+      className="h-[52px] bg-gradient-to-l from-transparent via-dsc-orange to-dsc-maroon"
+    />
+  </div>
+);
 
-        {description && (
-          <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
-            {description}
-          </p>
-        )}
-
-        <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-          {members.map((member, index) => (
-            <TeamMemberCard key={index} {...member} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 export default function Team() {
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-white relative">
       <Header />
 
-      <svg
-        className="absolute w-[507px] h-[522px] -left-[203px] top-[268px] pointer-events-none"
-        viewBox="0 0 507 522"
-        fill="none"
-      >
-        <ellipse
-          cx="253.5"
-          cy="261"
-          rx="253.5"
-          ry="261"
-          fill="#EF4F1F"
-          fillOpacity="0.5"
-        />
-      </svg>
 
-      <svg
-        className="absolute w-[292px] h-[300px] left-[147px] top-[526px] pointer-events-none"
-        viewBox="0 0 292 300"
-        fill="none"
-      >
-        <ellipse
-          cx="146"
-          cy="150"
-          rx="146"
-          ry="150"
-          fill="#801817"
-          fillOpacity="0.3"
-        />
-      </svg>
+      {/* Decorative Background Circles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Top cluster (for header and Lead) */}
+        <div className="absolute top-[200px] -left-[200px] w-[400px] h-[400px] bg-dsc-orange/30 rounded-full" />
+        <div className="absolute top-[400px] -left-[100px] w-[300px] h-[300px] bg-dsc-maroon/20 rounded-full" />
+        <div className="absolute top-[250px] -right-[250px] w-[500px] h-[500px] bg-dsc-orange/30 rounded-full" />
+        <div className="absolute top-[500px] -right-[100px] w-[200px] h-[200px] bg-dsc-maroon/20 rounded-full" />
 
-      <svg
-        className="absolute w-[507px] h-[522px] left-[1030px] top-[451px] pointer-events-none"
-        viewBox="0 0 507 522"
-        fill="none"
-      >
-        <ellipse
-          cx="253.5"
-          cy="261"
-          rx="253.5"
-          ry="261"
-          fill="#EF4F1F"
-          fillOpacity="0.4"
-        />
-      </svg>
 
-      <main className="relative">
+        {/* Operations cluster */}
+        <div className="absolute top-[1200px] -right-[200px] w-[450px] h-[450px] bg-dsc-orange/30 rounded-full" />
+        <div className="absolute top-[1350px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/20 rounded-full" />
+
+
+        {/* Technology cluster */}
+        <div className="absolute top-[2100px] -left-[250px] w-[500px] h-[500px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute top-[2300px] -left-[150px] w-[350px] h-[350px] bg-dsc-maroon/10 rounded-full" />
+
+
+        {/* Finance cluster */}
+        <div className="absolute top-[2900px] -right-[220px] w-[400px] h-[400px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute top-[3100px] -right-[120px] w-[250px] h-[250px] bg-dsc-maroon/10 rounded-full" />
+
+
+        {/* Creatives cluster */}
+        <div className="absolute top-[3800px] -left-[180px] w-[400px] h-[400px] bg-dsc-maroon/20 rounded-full" />
+        <div className="absolute top-[4000px] -left-[100px] w-[320px] h-[320px] bg-dsc-orange/15 rounded-full" />
+        <div className="absolute top-[4200px] -right-[200px] w-[450px] h-[450px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute top-[4400px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/10 rounded-full" />
+        <div className="absolute top-[4650px] -left-[220px] w-[380px] h-[380px] bg-dsc-orange/18 rounded-full" />
+
+
+        {/* Adviser cluster */}
+        <div className="absolute top-[5000px] -right-[250px] w-[500px] h-[500px] bg-dsc-orange/22 rounded-full" />
+        <div className="absolute top-[5200px] -right-[150px] w-[350px] h-[350px] bg-dsc-maroon/15 rounded-full" />
+        <div className="absolute top-[5400px] -left-[200px] w-[420px] h-[420px] bg-dsc-maroon/18 rounded-full" />
+        
+        {/* Extended bottom clusters */}
+        <div className="absolute top-[5700px] -left-[180px] w-[450px] h-[450px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute top-[5900px] -left-[100px] w-[300px] h-[300px] bg-dsc-maroon/15 rounded-full" />
+        <div className="absolute top-[6100px] -right-[220px] w-[480px] h-[480px] bg-dsc-orange/25 rounded-full" />
+        <div className="absolute top-[6300px] -right-[130px] w-[320px] h-[320px] bg-dsc-maroon/20 rounded-full" />
+        <div className="absolute top-[6550px] -left-[200px] w-[400px] h-[400px] bg-dsc-orange/18 rounded-full" />
+        <div className="absolute top-[6750px] -right-[180px] w-[380px] h-[380px] bg-dsc-maroon/16 rounded-full" />
+        <div className="absolute top-[6950px] -left-[150px] w-[350px] h-[350px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute top-[7150px] -right-[200px] w-[420px] h-[420px] bg-dsc-maroon/18 rounded-full" />
+        
+        {/* Footer area clusters */}
+        <div className="absolute top-[7350px] -left-[180px] w-[400px] h-[400px] bg-dsc-orange/22 rounded-full" />
+        <div className="absolute top-[7550px] -right-[160px] w-[360px] h-[360px] bg-dsc-maroon/20 rounded-full" />
+        <div className="absolute top-[7750px] -left-[200px] w-[450px] h-[450px] bg-dsc-orange/18 rounded-full" />
+        <div className="absolute top-[7950px] -right-[190px] w-[400px] h-[400px] bg-dsc-maroon/15 rounded-full" />
+        <div className="absolute bottom-[400px] -left-[220px] w-[500px] h-[500px] bg-dsc-orange/20 rounded-full" />
+        <div className="absolute bottom-[200px] -right-[180px] w-[420px] h-[420px] bg-dsc-maroon/18 rounded-full" />
+        <div className="absolute bottom-[50px] -left-[150px] w-[350px] h-[350px] bg-dsc-orange/16 rounded-full" />
+      </div>
+
+
+      <main className="relative z-0 overflow-x-hidden">
         <div className="px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20">
           <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
             <div className="flex items-center justify-center gap-4 sm:gap-6">
@@ -7998,10 +8402,12 @@ export default function Team() {
               </h1>
             </div>
 
+
             <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl leading-10 max-w-3xl mx-auto">
               Meet the amazing individuals behind DSC USeP Obrero, dedicated to
               establishing and nurturing a thriving tech community.
             </p>
+
 
             <div className="inline-flex items-center justify-center bg-dsc-maroon rounded-lg px-6 py-2">
               <span className="font-rethink font-bold text-white text-xl sm:text-2xl">
@@ -8011,55 +8417,118 @@ export default function Team() {
           </div>
         </div>
 
+
         <div className="flex flex-col">
-          <TeamSection
-            title="Lead"
-            members={teamData.lead.members}
-            gradient="both"
-            leftGrow={2}
-            rightGrow={2}
-          />
-          <TeamSection
-            title="Operations"
-            description={teamData.operations.description}
-            members={teamData.operations.members}
-            gradient="both"
-            leftGrow={1}
-            rightGrow={2}
-          />
-          <TeamSection
-            title="Technology"
-            description={teamData.technology.description}
-            members={teamData.technology.members}
-            gradient="both"
-            leftGrow={2}
-            rightGrow={1}
-          />
-          <TeamSection
-            title="Finance"
-            description={teamData.finance.description}
-            members={teamData.finance.members}
-            gradient="both"
-            leftGrow={1}
-            rightGrow={2}
-          />
-          <TeamSection
-            title="Creatives"
-            description={teamData.creatives.description}
-            members={teamData.creatives.members}
-            gradient="both"
-            leftGrow={2}
-            rightGrow={1}
-          />
-          <TeamSection
-            title="Adviser"
-            members={teamData.adviser.members}
-            gradient="both"
-            leftGrow={2}
-            rightGrow={2}
-          />
+          {/* Lead Section */}
+          <section className="relative py-12 sm:py-16 lg:py-20">
+            <SectionHeader title="Lead" leftGrow={2} rightGrow={2} />
+            <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+              {teamData.lead.members.map((member, index) => (
+                <TeamMemberCard key={index} {...member} />
+              ))}
+            </div>
+          </section>
+
+
+          {/* Operations Section */}
+          <section className="relative py-12 sm:py-16 lg:py-20">
+            <SectionHeader title="Operations" leftGrow={1} rightGrow={2} />
+            {teamData.operations.description && (
+              <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
+                {teamData.operations.description}
+              </p>
+            )}
+            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.operations.members.slice(0, 3).map((member, index) => (
+                  <TeamMemberCard key={index} {...member} />
+                ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.operations.members.slice(3, 5).map((member, index) => (
+                  <TeamMemberCard key={index + 3} {...member} />
+                ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.operations.members.slice(5, 7).map((member, index) => (
+                  <TeamMemberCard key={index + 5} {...member} />
+                ))}
+              </div>
+            </div>
+          </section>
+         
+          {/* Technology Section */}
+          <section className="relative py-12 sm:py-16 lg:py-20">
+            <SectionHeader title="Technology" leftGrow={2} rightGrow={1} />
+            {teamData.technology.description && (
+                <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
+                {teamData.technology.description}
+                </p>
+            )}
+            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
+                <TeamMemberCard {...teamData.technology.members[0]} />
+                <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                    {teamData.technology.members.slice(1).map((member, index) => (
+                        <TeamMemberCard key={index} {...member} />
+                    ))}
+                </div>
+            </div>
+          </section>
+
+
+          {/* Finance Section */}
+          <section className="relative py-12 sm:py-16 lg:py-20">
+            <SectionHeader title="Finance" leftGrow={1} rightGrow={2} />
+             {teamData.finance.description && (
+                <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
+                {teamData.finance.description}
+                </p>
+            )}
+            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
+                <TeamMemberCard {...teamData.finance.members[0]} />
+                <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                    {teamData.finance.members.slice(1).map((member, index) => (
+                        <TeamMemberCard key={index} {...member} />
+                    ))}
+                </div>
+            </div>
+          </section>
+         
+          {/* Creatives Section */}
+          <section className="relative py-12 sm:py-16 lg:py-20">
+            <SectionHeader title="Creatives" leftGrow={2} rightGrow={1} />
+            {teamData.creatives.description && (
+              <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
+                {teamData.creatives.description}
+              </p>
+            )}
+            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.creatives.members.slice(0, 3).map((member, index) => (
+                  <TeamMemberCard key={index} {...member} />
+                ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.creatives.members.slice(3, 6).map((member, index) => (
+                  <TeamMemberCard key={index + 3} {...member} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+
+          {/* Adviser Section */}
+          <section className="relative py-12 sm:py-16 lg:py-20">
+            <SectionHeader title="Adviser" leftGrow={2} rightGrow={2} />
+            <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+              {teamData.adviser.members.map((member, index) => (
+                <TeamMemberCard key={index} {...member} />
+              ))}
+            </div>
+          </section>
         </div>
       </main>
+
 
       <Footer />
     </div>
@@ -8270,6 +8739,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
 --- END FILE: create_snapshot.py ---
 
 --- START FILE: index.html ---
@@ -8278,7 +8748,8 @@ if __name__ == "__main__":
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello world project</title>
+    <title>DSC Official Website</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
 
   <body>
@@ -8288,32 +8759,6 @@ if __name__ == "__main__":
   </body>
 </html>
 --- END FILE: index.html ---
-
---- START FILE: netlify\functions\api.ts ---
-import serverless from "serverless-http";
-
-import { createServer } from "../../server";
-
-export const handler = serverless(createServer());
---- END FILE: netlify\functions\api.ts ---
-
---- START FILE: netlify.toml ---
-[build]
-  command = "npm run build:client"
-  functions = "netlify/functions"
-  publish = "dist/spa"
-
-
-[functions]
-  external_node_modules = ["express"]
-  node_bundler = "esbuild"
-  
-[[redirects]]
-  force = true
-  from = "/api/*"
-  status = 200
-  to = "/.netlify/functions/api/:splat"
---- END FILE: netlify.toml ---
 
 --- START FILE: package-lock.json ---
 {
@@ -16192,6 +16637,7 @@ export const handler = serverless(createServer());
     "cmdk": "^1.1.1",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
+    "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.12",
     "globals": "^16.3.0",
@@ -16382,6 +16828,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      embla-carousel-autoplay:
+        specifier: ^8.6.0
+        version: 8.6.0(embla-carousel@8.6.0)
       embla-carousel-react:
         specifier: ^8.6.0
         version: 8.6.0(react@18.3.1)
@@ -18032,6 +18481,11 @@ packages:
 
   electron-to-chromium@1.5.241:
     resolution: {integrity: sha512-ILMvKX/ZV5WIJzzdtuHg8xquk2y0BOGlFOxBVwTpbiXqWIH0hamG45ddU4R3PQ0gYu+xgo0vdHXHli9sHIGb4w==}
+
+  embla-carousel-autoplay@8.6.0:
+    resolution: {integrity: sha512-OBu5G3nwaSXkZCo1A6LTaFMZ8EpkYbwIaH+bPqdBnDGQ2fh4+NbzjXjs2SktoPNKCtflfVMc75njaDHOYXcrsA==}
+    peerDependencies:
+      embla-carousel: 8.6.0
 
   embla-carousel-react@8.6.0:
     resolution: {integrity: sha512-0/PjqU7geVmo6F734pmPqpyHqiM99olvyecY7zdweCw+6tKEXnrE90pBiBbMMU8s5tICemzpQ3hi5EpxzGW+JA==}
@@ -20661,6 +21115,10 @@ snapshots:
 
   electron-to-chromium@1.5.241: {}
 
+  embla-carousel-autoplay@8.6.0(embla-carousel@8.6.0):
+    dependencies:
+      embla-carousel: 8.6.0
+
   embla-carousel-react@8.6.0(react@18.3.1):
     dependencies:
       embla-carousel: 8.6.0
@@ -21848,29 +22306,32 @@ export function createServer() {
 
   app.get("/api/events/:year/:folder/images", async (req, res) => {
     const { year, folder } = req.params;
+    // Point to the 'events' directory for the slider's featured images
     const base = path.join(
       process.cwd(),
       "public",
       "assets",
-      "events all pictures",
+      "events",
       year,
-      folder
+      folder,
     );
 
     try {
       const dirents = await fs.readdir(base, { withFileTypes: true });
       const images = dirents
         .filter(
-          (d) => d.isFile() && /\.(jpe?g|png|gif|webp|avif)$/i.test(d.name)
+          (d) => d.isFile() && /\.(jpe?g|png|gif|webp|avif)$/i.test(d.name),
         )
         .map(
           (d) =>
-            `/assets/events all pictures/${encodeURIComponent(
-              year
+            // Update the URL to match the new directory
+            `/assets/events/${encodeURIComponent(
+              year,
             )}/${encodeURIComponent(folder)}/${encodeURIComponent(d.name)}`
         );
       res.status(200).json({ images });
     } catch (err) {
+      // It's okay if a folder doesn't exist, just return no images.
       res.status(200).json({ images: [] });
     }
   });
@@ -21878,35 +22339,45 @@ export function createServer() {
   // Return all images under `public/assets/events all pictures` as public URLs
   app.get("/api/event-photos", async (_req, res) => {
     const base = path.join(process.cwd(), "public", "assets", "events all pictures");
-    const yearFilter = typeof _req.query.year === "string" ? _req.query.year : undefined;
 
     try {
       const images: string[] = [];
       const years = await fs.readdir(base, { withFileTypes: true });
 
-      for (const y of years) {
-        if (!y.isDirectory()) continue;
-        const year = y.name;
-        if (yearFilter && year !== yearFilter) continue;
+      for (const yearDir of years) {
+        if (!yearDir.isDirectory()) continue;
+        const year = yearDir.name;
+
         const yearPath = path.join(base, year);
-        let dirents = [] as any[];
         try {
-          dirents = await fs.readdir(yearPath, { withFileTypes: true });
+          const eventFolders = await fs.readdir(yearPath, { withFileTypes: true });
+
+          for (const eventDir of eventFolders) {
+            if (!eventDir.isDirectory()) continue;
+            const eventFolder = eventDir.name;
+            const eventPath = path.join(yearPath, eventFolder);
+
+            try {
+              const imageFiles = await fs.readdir(eventPath);
+              for (const imageFile of imageFiles) {
+                if (/\.(jpe?g|png|gif|webp|avif)$/i.test(imageFile)) {
+                  const url = `/assets/events all pictures/${encodeURIComponent(year)}/${encodeURIComponent(eventFolder)}/${encodeURIComponent(imageFile)}`;
+                  images.push(url);
+                }
+              }
+            } catch (e) {
+              // Ignore if a subdirectory can't be read
+            }
+          }
         } catch (e) {
+          // Ignore if a year directory can't be read
           continue;
         }
-
-        for (const d of dirents) {
-          if (!d.isFile()) continue;
-          if (!/\.(jpe?g|png|gif|webp|avif)$/i.test(d.name)) continue;
-          const url = `/assets/events all pictures/${encodeURIComponent(year)}/${encodeURIComponent(d.name)}`;
-          images.push(url);
-        }
       }
-
       res.status(200).json({ images });
     } catch (err) {
-      res.status(200).json({ images: [] });
+      console.error("Failed to read event photos:", err);
+      res.status(500).json({ images: [], error: "Could not retrieve photos." });
     }
   });
 
@@ -22227,6 +22698,169 @@ export default {
 } satisfies Config;
 --- END FILE: tailwind.config.ts ---
 
+--- START FILE: tempCodeRunnerFile.py ---
+import os
+from pathlib import Path
+
+# --- SCRIPT CONFIGURATION ---
+
+# 1. SET YOUR PROJECT'S ROOT DIRECTORY HERE
+#    - '.' means the script will run on the folder it's placed in.
+#    - You can also use an absolute path, e.g., Path("C:/Users/YourUser/Projects/SPORTS-SCOREBOARD-PRO")
+PROJECT_ROOT = Path('.')
+
+# 2. SET THE NAME OF THE OUTPUT FILE
+OUTPUT_FILENAME = "project_snapshot.txt"
+
+# 3. ADD ANY FILES, FOLDERS, OR EXTENSIONS TO IGNORE
+#    - This script already ignores common folders like '.git' and 'node_modules'.
+#    - Add anything specific to your project you want to exclude.
+#    - Wildcards like '*.log' are supported.
+IGNORE_PATTERNS = {
+    # Version Control & IDE
+    '.git',
+    '.vscode',
+    '.idea',
+
+    # Dependencies & Build Output
+    'node_modules',
+    'dist',
+    'build',
+    'out',
+    'coverage',
+
+    # Environment & System Files
+    '.env',
+    '.env.local',
+    '.env.development.local',
+    '.env.test.local',
+    '.env.production.local',
+    '.DS_Store',
+
+    # Python specific
+    '__pycache__',
+    '*.pyc',
+    '.venv',
+    'venv',
+
+    # Logs and the output file itself
+    '*.log',
+    OUTPUT_FILENAME,
+
+    # Common binary file extensions (content will be skipped)
+    '*.png', '*.jpg', '*.jpeg', '*.gif', '*.ico', '*.svg',
+    '*.pdf', '*.zip', '*.gz', '*.tar', '*.rar',
+    '*.woff', '*.woff2', '*.ttf', '*.eot', '*.otf',
+    '*.mp3', '*.wav', '*.mp4', '*.mov', '*.webm',
+}
+
+def is_ignored(path: Path, root: Path, ignore_patterns: set) -> bool:
+    """
+    Checks if a file or directory should be ignored based on the patterns.
+    """
+    # Check against patterns relative to the project root
+    try:
+        relative_path_str = str(path.relative_to(root))
+        if any(part in ignore_patterns for part in relative_path_str.split(os.sep)):
+            return True
+    except ValueError:
+        pass  # Path is not within the root, should not happen in this script flow
+
+    # Check against file/folder name and glob patterns
+    return (
+        path.name in ignore_patterns or
+        any(path.match(p) for p in ignore_patterns if '*' in p)
+    )
+
+def generate_directory_tree(root_path: Path, ignore_patterns: set, prefix: str = "") -> list:
+    """
+    Generates a list of strings representing the directory tree view.
+    """
+    if not root_path.is_dir():
+        return []
+
+    items = sorted([item for item in root_path.iterdir() if not is_ignored(item, PROJECT_ROOT, ignore_patterns)])
+    tree_lines = []
+    for i, item in enumerate(items):
+        connector = "└── " if i == len(items) - 1 else "├── "
+        tree_lines.append(f"{prefix}{connector}{item.name}")
+        if item.is_dir():
+            extension = "    " if i == len(items) - 1 else "│   "
+            tree_lines.extend(generate_directory_tree(item, ignore_patterns, prefix + extension))
+    return tree_lines
+
+def get_project_files(root_path: Path, ignore_patterns: set) -> list:
+    """
+    Walks the directory and returns a sorted list of file paths to include.
+    """
+    files_to_include = []
+    for root, _, files in os.walk(root_path):
+        root_path_obj = Path(root)
+        if is_ignored(root_path_obj, root_path, ignore_patterns):
+            continue
+        for file in files:
+            file_path = root_path_obj / file
+            if not is_ignored(file_path, root_path, ignore_patterns):
+                files_to_include.append(file_path)
+    return sorted(files_to_include)
+
+def main():
+    """
+    Main function to generate the project snapshot file.
+    """
+    print("Starting project snapshot generation...")
+    
+    output_file_path = PROJECT_ROOT / OUTPUT_FILENAME
+
+    with open(output_file_path, "w", encoding="utf-8") as f:
+        # --- 1. Write the Directory Tree ---
+        f.write("PROJECT DIRECTORY TREE (Filtered View)\n")
+        f.write("======================================================================\n")
+        
+        # Display the root folder name at the top of the tree
+        f.write(f"{PROJECT_ROOT.resolve().name}\n")
+        
+        tree_lines = generate_directory_tree(PROJECT_ROOT, IGNORE_PATTERNS)
+        f.write("\n".join(tree_lines))
+        f.write("\n\n\n") # Add spacing before file contents
+
+        # --- 2. Write File Contents ---
+        project_files = get_project_files(PROJECT_ROOT, IGNORE_PATTERNS)
+        
+        print(f"Found {len(project_files)} files to include.")
+
+        for file_path in project_files:
+            try:
+                relative_path = file_path.relative_to(PROJECT_ROOT)
+                print(f"  -> Processing: {relative_path}")
+                
+                f.write(f"--- START FILE: {relative_path} ---\n")
+                
+                # Read file content with robust error handling
+                try:
+                    content = file_path.read_text(encoding="utf-8", errors="ignore")
+                    f.write(content)
+                    # Ensure a newline at the end of the file content
+                    if content and not content.endswith('\n'):
+                        f.write('\n')
+                except Exception as e:
+                    f.write(f"*** Error reading file: {e} ***\n")
+                    
+                f.write(f"--- END FILE: {relative_path} ---\n\n")
+            except Exception as e:
+                print(f"  -> ERROR processing file {file_path}: {e}")
+
+
+    print("----------------------------------------------------------------------")
+    print(f"Success! Project snapshot created at: {output_file_path.resolve()}")
+    print("You can now copy the contents of this file.")
+    print("----------------------------------------------------------------------")
+
+if __name__ == "__main__":
+    main()
+    
+--- END FILE: tempCodeRunnerFile.py ---
+
 --- START FILE: tsconfig.json ---
 {
   "compilerOptions": {
@@ -22271,6 +22905,36 @@ export default {
   "exclude": ["node_modules", "dist"]
 }
 --- END FILE: tsconfig.json ---
+
+--- START FILE: vercel.json ---
+
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/spa"
+      }
+    },
+    {
+      "src": "api/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.ts"
+    },
+    {
+      "source": "/((?!api|assets|robots.txt).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+--- END FILE: vercel.json ---
 
 --- START FILE: vite.config.server.ts ---
 import { defineConfig } from "vite";

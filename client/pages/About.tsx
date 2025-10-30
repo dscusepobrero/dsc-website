@@ -2,11 +2,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
 
+const imageBasePath = "/assets/officer pictures 2025/2025-2026 Officers";
+
 const designTeamMembers = [
   {
     name: "Jaylord Jan Boladola",
     role: "Design and Content Head",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+    image: `${imageBasePath}/Creatives/Boladola/Boladola.jpg`,
     quote: "VIVA LA VIDA",
     socialLinks: {
       linkedin: "#",
@@ -17,7 +19,7 @@ const designTeamMembers = [
   {
     name: "Kurt Ashton Montebon",
     role: "Design Co-Head",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+    image: `${imageBasePath}/Creatives/Montebon/Montebon.png`,
     quote: "Choose whatever makes your heart happy and your mind stress-free.",
     socialLinks: {
       linkedin: "#",
@@ -28,7 +30,7 @@ const designTeamMembers = [
   {
     name: "Dave Shanna Marie Gigawin",
     role: "Design Co-Head",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+    image: `${imageBasePath}/Technology/Gigawin/Gigawin.jpg`,
     quote: "good things take time",
     socialLinks: {
       linkedin: "#",
@@ -39,7 +41,7 @@ const designTeamMembers = [
   {
     name: "Arndria Basco",
     role: "Design Co-Head",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+    image: `${imageBasePath}/Creatives/Basco/Basco.png`,
     quote: "Unsaon imung kaugmaon kung dili ka maugmaan",
     socialLinks: {
       linkedin: "#",
@@ -50,7 +52,7 @@ const designTeamMembers = [
   {
     name: "Elvie May Mara",
     role: "Content Co-Head",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+    image: `${imageBasePath}/Creatives/Mara/Mara.png`,
     quote: "pwede muparking? sa imong bakante nga kasing-kasing",
     socialLinks: {
       linkedin: "#",
@@ -61,7 +63,7 @@ const designTeamMembers = [
   {
     name: "Julio Cedrick Maghanoy",
     role: "Content Co-Head",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+    image: `${imageBasePath}/Creatives/Maghanoy/Maghanoy.png`,
     quote: "The ironic tragedy that life is to be lived forward but only makes sense in reverse.",
     socialLinks: {
       linkedin: "#",
@@ -75,16 +77,14 @@ const developerTeamMembers = [
       {
         name: "Julse M. Merencillo",
         role: "DSC Website Developer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Technology/Merencillo/Merencillo.jpg`,
         quote: "1+1=2 kaya't tayo na dalawa pls",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
       },
       {
         name: "Kent Paulo R. Delgado",
         role: "DSC Website Developer",
-        image:
-          "https://api.builder.io/api/v1/image/assets/TEMP/adad03e7a0496ac3a0afd2a1d18afd1b3e862ef0?width=596",
+        image: `${imageBasePath}/Lead/Delgado.jpg`,
         quote:
           "We can't anticipate or even predict our future, but we can begin preparing for it",
         socialLinks: { linkedin: "#", github: "#", facebook: "#" },
