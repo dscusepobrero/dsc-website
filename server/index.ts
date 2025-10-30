@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import fs from "fs/promises";
 import path from "path";
-import { handleDemo } from "./routes/demo";
+import { handleDemo } from "./routes/demo.js";
 
 export function createServer() {
   const app = express();
