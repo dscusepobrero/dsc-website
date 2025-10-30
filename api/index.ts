@@ -1,4 +1,4 @@
-import { createServer } from '../server';
+import { createServer } from '../server.js';
 
 /**
  * This file acts as the entry point for Vercel's serverless functions.
