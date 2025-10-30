@@ -55,24 +55,33 @@ export default function PhotoGallery({
       }
 
       // Otherwise load all photos for the gallery
+      let discovered: string[] = [];
       try {
-        const res = await fetch(`/api/event-photos`);
-        if (!res.ok) throw new Error("Failed to fetch gallery photos");
-        const data = (await res.json()) as EventImagesResponse;
-        let discovered = data.images || [];
-        if (mounted && discovered.length > 0) {
-          // --- NEW: Shuffle the array to make the gallery feel more dynamic ---
-          // Fisher-Yates shuffle algorithm
-          for (let i = discovered.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [discovered[i], discovered[j]] = [discovered[j], discovered[i]];
-          }
-          // --- End of new code ---
-          setImages(discovered);
-          return;
-        }
+        // First, try to fetch the static manifest (for production)
+        const res = await fetch(`/image-manifest.json`);
+        if (!res.ok) throw new Error("Manifest not found, falling back to API.");
+        const data = await res.json();
+        discovered = data.images || [];
       } catch (err) {
-        // keep fallback
+        // If manifest fails, fetch from the API (for local development)
+        console.warn("Could not fetch manifest, falling back to API for photo gallery.", err);
+        try {
+          const res = await fetch(`/api/event-photos`);
+          if (!res.ok) throw new Error("Failed to fetch gallery photos from API.");
+          const data = (await res.json()) as EventImagesResponse;
+          discovered = data.images || [];
+        } catch (apiErr) {
+          console.error("Failed to load gallery images from both manifest and API:", apiErr);
+        }
+      }
+
+      if (mounted && discovered.length > 0) {
+        // Fisher-Yates shuffle algorithm
+        for (let i = discovered.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [discovered[i], discovered[j]] = [discovered[j], discovered[i]];
+        }
+        setImages(discovered);
       }
     }
 

@@ -12,20 +12,33 @@ export default function EventImageSlideshow() {
 
   useEffect(() => {
     async function loadImages() {
+      let discovered: string[] = [];
       try {
-        const res = await fetch(`/api/event-photos`);
-        if (!res.ok) throw new Error("Failed to fetch gallery photos");
+        // First, try to fetch the static manifest (for production)
+        const res = await fetch(`/image-manifest.json`);
+        if (!res.ok) throw new Error("Manifest not found, falling back to API.");
         const data = await res.json();
-        const discovered = data.images || [];
+        discovered = data.images || [];
+      } catch (err) {
+        // If manifest fails, fetch from the API (for local development)
+        console.warn("Could not fetch manifest, falling back to API for slideshow images.", err);
+        try {
+          const res = await fetch(`/api/event-photos`);
+          if (!res.ok) throw new Error("Failed to fetch gallery photos from API.");
+          const data = await res.json();
+          discovered = data.images || [];
+        } catch (apiErr) {
+          console.error("Failed to load slideshow images from both manifest and API:", apiErr);
+        }
+      }
 
+      if (discovered.length > 0) {
         // Shuffle the array for variety on each page load
         for (let i = discovered.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [discovered[i], discovered[j]] = [discovered[j], discovered[i]];
         }
         setImages(discovered);
-      } catch (err) {
-        console.error("Failed to load slideshow images:", err);
       }
     }
 

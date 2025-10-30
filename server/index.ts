@@ -46,7 +46,7 @@ export function createServer() {
     }
   });
 
-  // Return all images under `public/assets/events all pictures` as public URLs
+  // RESTORE THIS ENDPOINT for local development fallback
   app.get("/api/event-photos", async (_req, res) => {
     // Vercel build places the 'public' directory at the root of the serverless function.
     // We construct the path from there.
