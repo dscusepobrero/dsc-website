@@ -1,7 +1,31 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
+import { motion, Variants } from "framer-motion";
 
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // Time delay between each child section
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
 
 interface TeamMember {
   name: string;
@@ -220,7 +244,6 @@ const teamData: Record<
   },
 };
 
-
 const SectionHeader = ({
   title,
   leftGrow = 1,
@@ -245,12 +268,10 @@ const SectionHeader = ({
   </div>
 );
 
-
 export default function Team() {
   return (
     <div className="min-h-screen bg-white relative">
       <Header />
-
 
       {/* Decorative Background Circles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -260,21 +281,17 @@ export default function Team() {
         <div className="absolute top-[250px] -right-[250px] w-[500px] h-[500px] bg-dsc-orange/30 rounded-full" />
         <div className="absolute top-[500px] -right-[100px] w-[200px] h-[200px] bg-dsc-maroon/20 rounded-full" />
 
-
         {/* Operations cluster */}
         <div className="absolute top-[1200px] -right-[200px] w-[450px] h-[450px] bg-dsc-orange/30 rounded-full" />
         <div className="absolute top-[1350px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/20 rounded-full" />
-
 
         {/* Technology cluster */}
         <div className="absolute top-[2100px] -left-[250px] w-[500px] h-[500px] bg-dsc-orange/20 rounded-full" />
         <div className="absolute top-[2300px] -left-[150px] w-[350px] h-[350px] bg-dsc-maroon/10 rounded-full" />
 
-
         {/* Finance cluster */}
         <div className="absolute top-[2900px] -right-[220px] w-[400px] h-[400px] bg-dsc-orange/20 rounded-full" />
         <div className="absolute top-[3100px] -right-[120px] w-[250px] h-[250px] bg-dsc-maroon/10 rounded-full" />
-
 
         {/* Creatives cluster */}
         <div className="absolute top-[3800px] -left-[180px] w-[400px] h-[400px] bg-dsc-maroon/20 rounded-full" />
@@ -282,7 +299,6 @@ export default function Team() {
         <div className="absolute top-[4200px] -right-[200px] w-[450px] h-[450px] bg-dsc-orange/20 rounded-full" />
         <div className="absolute top-[4400px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/10 rounded-full" />
         <div className="absolute top-[4650px] -left-[220px] w-[380px] h-[380px] bg-dsc-orange/18 rounded-full" />
-
 
         {/* Adviser cluster */}
         <div className="absolute top-[5000px] -right-[250px] w-[500px] h-[500px] bg-dsc-orange/22 rounded-full" />
@@ -309,9 +325,16 @@ export default function Team() {
         <div className="absolute bottom-[50px] -left-[150px] w-[350px] h-[350px] bg-dsc-orange/16 rounded-full" />
       </div>
 
-
-      <main className="relative z-0 overflow-x-hidden">
-        <div className="px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20">
+      <motion.main
+        className="relative z-0 overflow-x-hidden"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div
+          className="px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20"
+          variants={itemVariants}
+        >
           <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
             <div className="flex items-center justify-center gap-4 sm:gap-6">
               <h1 className="font-rethink font-bold text-dsc-maroon text-4xl sm:text-5xl lg:text-[50px]">
@@ -327,12 +350,10 @@ export default function Team() {
               </h1>
             </div>
 
-
             <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl leading-10 max-w-3xl mx-auto">
               Meet the amazing individuals behind DSC USeP Obrero, dedicated to
               establishing and nurturing a thriving tech community.
             </p>
-
 
             <div className="inline-flex items-center justify-center bg-dsc-maroon rounded-lg px-6 py-2">
               <span className="font-rethink font-bold text-white text-xl sm:text-2xl">
@@ -340,23 +361,27 @@ export default function Team() {
               </span>
             </div>
           </div>
-        </div>
-
+        </motion.div>
 
         <div className="flex flex-col">
           {/* Lead Section */}
-          <section className="relative py-12 sm:py-16 lg:py-20">
+          <motion.section
+            className="relative py-12 sm:py-16 lg:py-20"
+            variants={itemVariants}
+          >
             <SectionHeader title="Lead" leftGrow={2} rightGrow={2} />
             <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
               {teamData.lead.members.map((member, index) => (
                 <TeamMemberCard key={index} {...member} />
               ))}
             </div>
-          </section>
-
+          </motion.section>
 
           {/* Operations Section */}
-          <section className="relative py-12 sm:py-16 lg:py-20">
+          <motion.section
+            className="relative py-12 sm:py-16 lg:py-20"
+            variants={itemVariants}
+          >
             <SectionHeader title="Operations" leftGrow={1} rightGrow={2} />
             {teamData.operations.description && (
               <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
@@ -365,62 +390,78 @@ export default function Team() {
             )}
             <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
               <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                {teamData.operations.members.slice(0, 3).map((member, index) => (
+                {teamData.operations.members
+                  .slice(0, 3)
+                  .map((member, index) => (
+                    <TeamMemberCard key={index} {...member} />
+                  ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.operations.members
+                  .slice(3, 5)
+                  .map((member, index) => (
+                    <TeamMemberCard key={index + 3} {...member} />
+                  ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.operations.members
+                  .slice(5, 7)
+                  .map((member, index) => (
+                    <TeamMemberCard key={index + 5} {...member} />
+                  ))}
+              </div>
+            </div>
+          </motion.section>
+
+          {/* Technology Section */}
+          <motion.section
+            className="relative py-12 sm:py-16 lg:py-20"
+            variants={itemVariants}
+          >
+            <SectionHeader title="Technology" leftGrow={2} rightGrow={1} />
+            {teamData.technology.description && (
+              <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
+                {teamData.technology.description}
+              </p>
+            )}
+            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
+              <TeamMemberCard {...teamData.technology.members[0]} />
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.technology.members
+                  .slice(1)
+                  .map((member, index) => (
+                    <TeamMemberCard key={index} {...member} />
+                  ))}
+              </div>
+            </div>
+          </motion.section>
+
+          {/* Finance Section */}
+          <motion.section
+            className="relative py-12 sm:py-16 lg:py-20"
+            variants={itemVariants}
+          >
+            <SectionHeader title="Finance" leftGrow={1} rightGrow={2} />
+            {teamData.finance.description && (
+              <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
+                {teamData.finance.description}
+              </p>
+            )}
+            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
+              <TeamMemberCard {...teamData.finance.members[0]} />
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.finance.members.slice(1).map((member, index) => (
                   <TeamMemberCard key={index} {...member} />
                 ))}
               </div>
-              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                {teamData.operations.members.slice(3, 5).map((member, index) => (
-                  <TeamMemberCard key={index + 3} {...member} />
-                ))}
-              </div>
-              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                {teamData.operations.members.slice(5, 7).map((member, index) => (
-                  <TeamMemberCard key={index + 5} {...member} />
-                ))}
-              </div>
             </div>
-          </section>
-         
-          {/* Technology Section */}
-          <section className="relative py-12 sm:py-16 lg:py-20">
-            <SectionHeader title="Technology" leftGrow={2} rightGrow={1} />
-            {teamData.technology.description && (
-                <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
-                {teamData.technology.description}
-                </p>
-            )}
-            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
-                <TeamMemberCard {...teamData.technology.members[0]} />
-                <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                    {teamData.technology.members.slice(1).map((member, index) => (
-                        <TeamMemberCard key={index} {...member} />
-                    ))}
-                </div>
-            </div>
-          </section>
+          </motion.section>
 
-
-          {/* Finance Section */}
-          <section className="relative py-12 sm:py-16 lg:py-20">
-            <SectionHeader title="Finance" leftGrow={1} rightGrow={2} />
-             {teamData.finance.description && (
-                <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
-                {teamData.finance.description}
-                </p>
-            )}
-            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
-                <TeamMemberCard {...teamData.finance.members[0]} />
-                <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                    {teamData.finance.members.slice(1).map((member, index) => (
-                        <TeamMemberCard key={index} {...member} />
-                    ))}
-                </div>
-            </div>
-          </section>
-         
           {/* Creatives Section */}
-          <section className="relative py-12 sm:py-16 lg:py-20">
+          <motion.section
+            className="relative py-12 sm:py-16 lg:py-20"
+            variants={itemVariants}
+          >
             <SectionHeader title="Creatives" leftGrow={2} rightGrow={1} />
             {teamData.creatives.description && (
               <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
@@ -429,31 +470,36 @@ export default function Team() {
             )}
             <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
               <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                {teamData.creatives.members.slice(0, 3).map((member, index) => (
-                  <TeamMemberCard key={index} {...member} />
-                ))}
+                {teamData.creatives.members
+                  .slice(0, 3)
+                  .map((member, index) => (
+                    <TeamMemberCard key={index} {...member} />
+                  ))}
               </div>
               <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                {teamData.creatives.members.slice(3, 6).map((member, index) => (
-                  <TeamMemberCard key={index + 3} {...member} />
-                ))}
+                {teamData.creatives.members
+                  .slice(3, 6)
+                  .map((member, index) => (
+                    <TeamMemberCard key={index + 3} {...member} />
+                  ))}
               </div>
             </div>
-          </section>
-
+          </motion.section>
 
           {/* Adviser Section */}
-          <section className="relative py-12 sm:py-16 lg:py-20">
+          <motion.section
+            className="relative py-12 sm:py-16 lg:py-20"
+            variants={itemVariants}
+          >
             <SectionHeader title="Adviser" leftGrow={2} rightGrow={2} />
             <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
               {teamData.adviser.members.map((member, index) => (
                 <TeamMemberCard key={index} {...member} />
               ))}
             </div>
-          </section>
+          </motion.section>
         </div>
-      </main>
-
+      </motion.main>
 
       <Footer />
     </div>

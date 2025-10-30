@@ -1,6 +1,6 @@
 PROJECT DIRECTORY TREE (Filtered View)
 ======================================================================
-dsc-website
+Project-DSC-Website
 ├── .builder
 │   └── rules
 │       ├── deploy-app.mdc
@@ -150,6 +150,8 @@ dsc-website
 │   │               ├── Gigawin
 │   │               └── Merencillo
 │   └── robots.txt
+├── scripts
+│   └── generate-manifest.mjs
 ├── server
 │   ├── index.ts
 │   ├── node-build.ts
@@ -480,7 +482,7 @@ const data: MyRouteResponse = await response.json();
 --- END FILE: AGENTS.md ---
 
 --- START FILE: api\index.ts ---
-import { createServer } from '../server';
+import { createServer } from '../server/index.js';
 
 /**
  * This file acts as the entry point for Vercel's serverless functions.
@@ -549,20 +551,33 @@ export default function EventImageSlideshow() {
 
   useEffect(() => {
     async function loadImages() {
+      let discovered: string[] = [];
       try {
-        const res = await fetch(`/api/event-photos`);
-        if (!res.ok) throw new Error("Failed to fetch gallery photos");
+        // First, try to fetch the static manifest (for production)
+        const res = await fetch(`/image-manifest.json`);
+        if (!res.ok) throw new Error("Manifest not found, falling back to API.");
         const data = await res.json();
-        const discovered = data.images || [];
+        discovered = data.images || [];
+      } catch (err) {
+        // If manifest fails, fetch from the API (for local development)
+        console.warn("Could not fetch manifest, falling back to API for slideshow images.", err);
+        try {
+          const res = await fetch(`/api/event-photos`);
+          if (!res.ok) throw new Error("Failed to fetch gallery photos from API.");
+          const data = await res.json();
+          discovered = data.images || [];
+        } catch (apiErr) {
+          console.error("Failed to load slideshow images from both manifest and API:", apiErr);
+        }
+      }
 
+      if (discovered.length > 0) {
         // Shuffle the array for variety on each page load
         for (let i = discovered.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [discovered[i], discovered[j]] = [discovered[j], discovered[i]];
         }
         setImages(discovered);
-      } catch (err) {
-        console.error("Failed to load slideshow images:", err);
       }
     }
 
@@ -1280,24 +1295,33 @@ export default function PhotoGallery({
       }
 
       // Otherwise load all photos for the gallery
+      let discovered: string[] = [];
       try {
-        const res = await fetch(`/api/event-photos`);
-        if (!res.ok) throw new Error("Failed to fetch gallery photos");
-        const data = (await res.json()) as EventImagesResponse;
-        let discovered = data.images || [];
-        if (mounted && discovered.length > 0) {
-          // --- NEW: Shuffle the array to make the gallery feel more dynamic ---
-          // Fisher-Yates shuffle algorithm
-          for (let i = discovered.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [discovered[i], discovered[j]] = [discovered[j], discovered[i]];
-          }
-          // --- End of new code ---
-          setImages(discovered);
-          return;
-        }
+        // First, try to fetch the static manifest (for production)
+        const res = await fetch(`/image-manifest.json`);
+        if (!res.ok) throw new Error("Manifest not found, falling back to API.");
+        const data = await res.json();
+        discovered = data.images || [];
       } catch (err) {
-        // keep fallback
+        // If manifest fails, fetch from the API (for local development)
+        console.warn("Could not fetch manifest, falling back to API for photo gallery.", err);
+        try {
+          const res = await fetch(`/api/event-photos`);
+          if (!res.ok) throw new Error("Failed to fetch gallery photos from API.");
+          const data = (await res.json()) as EventImagesResponse;
+          discovered = data.images || [];
+        } catch (apiErr) {
+          console.error("Failed to load gallery images from both manifest and API:", apiErr);
+        }
+      }
+
+      if (mounted && discovered.length > 0) {
+        // Fisher-Yates shuffle algorithm
+        for (let i = discovered.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [discovered[i], discovered[j]] = [discovered[j], discovered[i]];
+        }
+        setImages(discovered);
       }
     }
 
@@ -6941,6 +6965,31 @@ export function cn(...inputs: ClassValue[]) {
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
+import { motion, Variants } from "framer-motion";
+
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.25,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
 
 const imageBasePath = "/assets/officer pictures 2025/2025-2026 Officers";
 
@@ -7036,18 +7085,32 @@ export default function About() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      <main className="w-full">
-        <section className="relative bg-white px-6 sm:px-12 lg:px-24 pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 lg:pb-24 overflow-hidden">
+      <motion.main
+        className="w-full"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.section
+          className="relative bg-white px-6 sm:px-12 lg:px-24 pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 lg:pb-24 overflow-hidden"
+          variants={itemVariants}
+        >
           <img
             src="https://api.builder.io/api/v1/image/assets/TEMP/d9ba77265078fd003cc3c5e3f64b2c190fc062a0?width=1166"
             alt=""
             className="absolute top-4 left-0 w-[300px] sm:w-[450px] lg:w-[583px] h-auto opacity-70 pointer-events-none"
+            style={{ animation: "image-float 10s ease-in-out infinite" }}
           />
-          <img
-            src="https://api.builder.io/api/v1/image/assets/TEMP/d9ba77265078fd003cc3c5e3f64b2c190fc062a0?width=1166"
-            alt=""
-            className="absolute bottom-4 right-0 w-[300px] sm:w-[450px] lg:w-[583px] h-auto opacity-70 pointer-events-none transform-gpu scale-x-[-1] scale-y-[-1]"
-          />
+          <div
+            className="absolute bottom-4 right-0 w-[300px] sm:w-[450px] lg:w-[583px] h-auto pointer-events-none transform-gpu"
+            style={{ animation: "image-float 10s ease-in-out infinite -5s" }}
+          >
+            <img
+              src="https://api.builder.io/api/v1/image/assets/TEMP/d9ba77265078fd003cc3c5e3f64b2c190fc062a0?width=1166"
+              alt=""
+              className="w-full h-full opacity-70 scale-x-[-1] scale-y-[-1]"
+            />
+          </div>
 
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
@@ -7202,10 +7265,11 @@ export default function About() {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        <section
+        <motion.section
           className="relative bg-gradient-to-b from-red-900 to-red-700 text-white px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20 overflow-hidden"
+          variants={itemVariants}
         >
           <div className="absolute inset-0 z-0">
             <div className="absolute -top-24 -left-48 w-96 h-96 bg-white/10 rounded-full" />
@@ -7305,9 +7369,12 @@ export default function About() {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        <section className="bg-white px-6 sm:px-12 lg:px-24 py-16 sm:py-20 lg:py-24">
+        <motion.section
+          className="bg-white px-6 sm:px-12 lg:px-24 py-16 sm:py-20 lg:py-24"
+          variants={itemVariants}
+        >
           <div className="max-w-7xl mx-auto">
             <h2 className="font-rethink font-bold text-dsc-maroon text-center text-4xl sm:text-5xl lg:text-[64px] leading-tight mb-12">
               The Website Design Team
@@ -7329,8 +7396,20 @@ export default function About() {
               ))}
             </div>
           </div>
-        </section>
-      </main>
+        </motion.section>
+      </motion.main>
+      
+      {/* Inline styles for the levitating animation */}
+      <style>{`
+        @keyframes image-float {
+          0%, 100% {
+            transform: translate(0, 0);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+      `}</style>
 
       <Footer />
     </div>
@@ -7343,6 +7422,31 @@ export default function About() {
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EventImageSlideshow from "@/components/EventImageSlideshow";
+import { motion, Variants } from "framer-motion"; // Import Variants type
+
+// Animation variants for the container and its children
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3, // Time delay between each child animation
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 }, // Start invisible and 20px down
+  visible: {
+    opacity: 1,
+    y: 0, // Animate to visible and original position
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
 
 export default function Contact() {
   return (
@@ -7350,9 +7454,16 @@ export default function Contact() {
       <Header />
 
       <main className="flex-1 py-12 sm:py-16 lg:py-20 px-6 sm:px-12 lg:px-24">
-        <div className="max-w-[1440px] mx-auto">
+        {/* Changed this div to a motion.div to act as the animation container */}
+        <motion.div
+          className="max-w-[1440px] mx-auto"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {/* Header Section */}
-          <div className="text-center mb-12 sm:mb-16">
+          {/* Changed this div to a motion.div to animate as one block */}
+          <motion.div className="text-center mb-12 sm:mb-16" variants={itemVariants}>
             <h1 className="font-rethink font-bold text-[#FE1B1B] text-3xl sm:text-4xl lg:text-[45px] mb-2">
               CONNECT WITH US!
             </h1>
@@ -7361,10 +7472,14 @@ export default function Contact() {
               us today for event information, sponsorship opportunities, or
               collaboration discussions.
             </p>
-          </div>
+          </motion.div>
 
           {/* Main Contact Container */}
-          <div className="relative bg-dsc-maroon rounded-[15px] shadow-[0_0_60px_30px_rgba(0,0,0,0.03)] overflow-hidden">
+          {/* Changed this div to a motion.div to animate the main card */}
+          <motion.div
+            className="relative bg-dsc-maroon rounded-[15px] shadow-[0_0_60px_30px_rgba(0,0,0,0.03)] overflow-hidden"
+            variants={itemVariants}
+          >
             {/* Background Eagle Image */}
             <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/6baeeaab227fea6423f62cc9113eadbb79a8e205?width=1384"
@@ -7592,8 +7707,8 @@ export default function Contact() {
                 <EventImageSlideshow />
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </main>
 
       <Footer />
@@ -7608,15 +7723,48 @@ import Footer from "@/components/Footer";
 import EventSlider from "@/components/EventSlider";
 import PhotoGallery from "@/components/PhotoGallery";
 import MilestonesTimeline from "@/components/MilestonesTimeline";
+import { motion, Variants } from "framer-motion";
+
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.25, // Delay between each child section animation
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
 
 export default function Events() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
 
-      <main className="w-full">
+      <motion.main
+        className="w-full"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* Section 1: Projects & Initiatives (White) */}
-        <section className="bg-white px-6 sm:px-12 lg:px-24 pt-8 sm:pt-12 lg:pt-16 pb-12 sm:pb-16 lg:pb-20">
+        <motion.section
+          className="bg-white px-6 sm:px-12 lg:px-24 pt-8 sm:pt-12 lg:pt-16 pb-12 sm:pb-16 lg:pb-20"
+          variants={itemVariants}
+        >
           <div className="max-w-7xl mx-auto text-center space-y-6 sm:space-y-8">
             <h1 className="font-rethink font-bold text-dsc-maroon text-4xl sm:text-5xl lg:text-[55px] leading-tight">
               Projects & Initiatives
@@ -7625,20 +7773,24 @@ export default function Events() {
               Our ongoing and recent work in the community.
             </p>
           </div>
-        </section>
+        </motion.section>
 
         {/* Section 2: Event Slider (Red) */}
-        <section
+        <motion.section
           className="relative w-full py-10 sm:py-12 lg:py-16"
           style={{ background: "rgba(128, 24, 23, 0.96)" }}
+          variants={itemVariants}
         >
           <div className="px-6 sm:px-8 lg:px-12">
             <EventSlider />
           </div>
-        </section>
+        </motion.section>
 
         {/* Section 3: DSC in Action Title (White) */}
-        <section className="bg-white px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20">
+        <motion.section
+          className="bg-white px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20"
+          variants={itemVariants}
+        >
           <div className="max-w-7xl mx-auto text-center space-y-6 sm:space-y-8">
             <h2 className="font-rethink font-bold text-dsc-maroon text-4xl sm:text-5xl lg:text-[55px] leading-tight">
               DSC in Action
@@ -7647,15 +7799,16 @@ export default function Events() {
               Key achievements and memorable moments
             </p>
           </div>
-        </section>
+        </motion.section>
 
         {/* Section 4: Photo Gallery (Red) */}
-        <section
+        <motion.section
           className="relative px-6 sm:px-12 lg:px-24 py-8 sm:py-10 lg:py-12 overflow-hidden"
           style={{
             background:
               "linear-gradient(180deg, rgba(239, 79, 31, 0.00) 56.56%, rgba(239, 79, 31, 0.50) 99.88%), #801817",
           }}
+          variants={itemVariants}
         >
           {/* SVGs */}
           <svg
@@ -7737,10 +7890,13 @@ export default function Events() {
               <PhotoGallery direction="left" />
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Milestones Section */}
-        <section className="bg-white px-6 sm:px-12 lg:px-24 py-16 sm:py-20 lg:py-24">
+        <motion.section
+          className="bg-white px-6 sm:px-12 lg:px-24 py-16 sm:py-20 lg:py-24"
+          variants={itemVariants}
+        >
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12 sm:mb-16 lg:mb-20">
               <h2 className="font-rethink font-bold text-dsc-maroon text-4xl sm:text-5xl lg:text-[55px] leading-tight mb-4">
@@ -7752,8 +7908,8 @@ export default function Events() {
             </div>
             <MilestonesTimeline />
           </div>
-        </section>
-      </main>
+        </motion.section>
+      </motion.main>
 
       <Footer />
     </div>
@@ -8076,7 +8232,31 @@ export default function Placeholder({ pageName }: PlaceholderProps) {
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
+import { motion, Variants } from "framer-motion";
 
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // Time delay between each child section
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
 
 interface TeamMember {
   name: string;
@@ -8295,7 +8475,6 @@ const teamData: Record<
   },
 };
 
-
 const SectionHeader = ({
   title,
   leftGrow = 1,
@@ -8320,12 +8499,10 @@ const SectionHeader = ({
   </div>
 );
 
-
 export default function Team() {
   return (
     <div className="min-h-screen bg-white relative">
       <Header />
-
 
       {/* Decorative Background Circles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -8335,21 +8512,17 @@ export default function Team() {
         <div className="absolute top-[250px] -right-[250px] w-[500px] h-[500px] bg-dsc-orange/30 rounded-full" />
         <div className="absolute top-[500px] -right-[100px] w-[200px] h-[200px] bg-dsc-maroon/20 rounded-full" />
 
-
         {/* Operations cluster */}
         <div className="absolute top-[1200px] -right-[200px] w-[450px] h-[450px] bg-dsc-orange/30 rounded-full" />
         <div className="absolute top-[1350px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/20 rounded-full" />
-
 
         {/* Technology cluster */}
         <div className="absolute top-[2100px] -left-[250px] w-[500px] h-[500px] bg-dsc-orange/20 rounded-full" />
         <div className="absolute top-[2300px] -left-[150px] w-[350px] h-[350px] bg-dsc-maroon/10 rounded-full" />
 
-
         {/* Finance cluster */}
         <div className="absolute top-[2900px] -right-[220px] w-[400px] h-[400px] bg-dsc-orange/20 rounded-full" />
         <div className="absolute top-[3100px] -right-[120px] w-[250px] h-[250px] bg-dsc-maroon/10 rounded-full" />
-
 
         {/* Creatives cluster */}
         <div className="absolute top-[3800px] -left-[180px] w-[400px] h-[400px] bg-dsc-maroon/20 rounded-full" />
@@ -8357,7 +8530,6 @@ export default function Team() {
         <div className="absolute top-[4200px] -right-[200px] w-[450px] h-[450px] bg-dsc-orange/20 rounded-full" />
         <div className="absolute top-[4400px] -right-[150px] w-[300px] h-[300px] bg-dsc-maroon/10 rounded-full" />
         <div className="absolute top-[4650px] -left-[220px] w-[380px] h-[380px] bg-dsc-orange/18 rounded-full" />
-
 
         {/* Adviser cluster */}
         <div className="absolute top-[5000px] -right-[250px] w-[500px] h-[500px] bg-dsc-orange/22 rounded-full" />
@@ -8384,9 +8556,16 @@ export default function Team() {
         <div className="absolute bottom-[50px] -left-[150px] w-[350px] h-[350px] bg-dsc-orange/16 rounded-full" />
       </div>
 
-
-      <main className="relative z-0 overflow-x-hidden">
-        <div className="px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20">
+      <motion.main
+        className="relative z-0 overflow-x-hidden"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div
+          className="px-6 sm:px-12 lg:px-24 py-12 sm:py-16 lg:py-20"
+          variants={itemVariants}
+        >
           <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
             <div className="flex items-center justify-center gap-4 sm:gap-6">
               <h1 className="font-rethink font-bold text-dsc-maroon text-4xl sm:text-5xl lg:text-[50px]">
@@ -8402,12 +8581,10 @@ export default function Team() {
               </h1>
             </div>
 
-
             <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl leading-10 max-w-3xl mx-auto">
               Meet the amazing individuals behind DSC USeP Obrero, dedicated to
               establishing and nurturing a thriving tech community.
             </p>
-
 
             <div className="inline-flex items-center justify-center bg-dsc-maroon rounded-lg px-6 py-2">
               <span className="font-rethink font-bold text-white text-xl sm:text-2xl">
@@ -8415,23 +8592,27 @@ export default function Team() {
               </span>
             </div>
           </div>
-        </div>
-
+        </motion.div>
 
         <div className="flex flex-col">
           {/* Lead Section */}
-          <section className="relative py-12 sm:py-16 lg:py-20">
+          <motion.section
+            className="relative py-12 sm:py-16 lg:py-20"
+            variants={itemVariants}
+          >
             <SectionHeader title="Lead" leftGrow={2} rightGrow={2} />
             <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
               {teamData.lead.members.map((member, index) => (
                 <TeamMemberCard key={index} {...member} />
               ))}
             </div>
-          </section>
-
+          </motion.section>
 
           {/* Operations Section */}
-          <section className="relative py-12 sm:py-16 lg:py-20">
+          <motion.section
+            className="relative py-12 sm:py-16 lg:py-20"
+            variants={itemVariants}
+          >
             <SectionHeader title="Operations" leftGrow={1} rightGrow={2} />
             {teamData.operations.description && (
               <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
@@ -8440,62 +8621,78 @@ export default function Team() {
             )}
             <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
               <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                {teamData.operations.members.slice(0, 3).map((member, index) => (
+                {teamData.operations.members
+                  .slice(0, 3)
+                  .map((member, index) => (
+                    <TeamMemberCard key={index} {...member} />
+                  ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.operations.members
+                  .slice(3, 5)
+                  .map((member, index) => (
+                    <TeamMemberCard key={index + 3} {...member} />
+                  ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.operations.members
+                  .slice(5, 7)
+                  .map((member, index) => (
+                    <TeamMemberCard key={index + 5} {...member} />
+                  ))}
+              </div>
+            </div>
+          </motion.section>
+
+          {/* Technology Section */}
+          <motion.section
+            className="relative py-12 sm:py-16 lg:py-20"
+            variants={itemVariants}
+          >
+            <SectionHeader title="Technology" leftGrow={2} rightGrow={1} />
+            {teamData.technology.description && (
+              <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
+                {teamData.technology.description}
+              </p>
+            )}
+            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
+              <TeamMemberCard {...teamData.technology.members[0]} />
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.technology.members
+                  .slice(1)
+                  .map((member, index) => (
+                    <TeamMemberCard key={index} {...member} />
+                  ))}
+              </div>
+            </div>
+          </motion.section>
+
+          {/* Finance Section */}
+          <motion.section
+            className="relative py-12 sm:py-16 lg:py-20"
+            variants={itemVariants}
+          >
+            <SectionHeader title="Finance" leftGrow={1} rightGrow={2} />
+            {teamData.finance.description && (
+              <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
+                {teamData.finance.description}
+              </p>
+            )}
+            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
+              <TeamMemberCard {...teamData.finance.members[0]} />
+              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
+                {teamData.finance.members.slice(1).map((member, index) => (
                   <TeamMemberCard key={index} {...member} />
                 ))}
               </div>
-              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                {teamData.operations.members.slice(3, 5).map((member, index) => (
-                  <TeamMemberCard key={index + 3} {...member} />
-                ))}
-              </div>
-              <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                {teamData.operations.members.slice(5, 7).map((member, index) => (
-                  <TeamMemberCard key={index + 5} {...member} />
-                ))}
-              </div>
             </div>
-          </section>
-         
-          {/* Technology Section */}
-          <section className="relative py-12 sm:py-16 lg:py-20">
-            <SectionHeader title="Technology" leftGrow={2} rightGrow={1} />
-            {teamData.technology.description && (
-                <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
-                {teamData.technology.description}
-                </p>
-            )}
-            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
-                <TeamMemberCard {...teamData.technology.members[0]} />
-                <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                    {teamData.technology.members.slice(1).map((member, index) => (
-                        <TeamMemberCard key={index} {...member} />
-                    ))}
-                </div>
-            </div>
-          </section>
+          </motion.section>
 
-
-          {/* Finance Section */}
-          <section className="relative py-12 sm:py-16 lg:py-20">
-            <SectionHeader title="Finance" leftGrow={1} rightGrow={2} />
-             {teamData.finance.description && (
-                <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
-                {teamData.finance.description}
-                </p>
-            )}
-            <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
-                <TeamMemberCard {...teamData.finance.members[0]} />
-                <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                    {teamData.finance.members.slice(1).map((member, index) => (
-                        <TeamMemberCard key={index} {...member} />
-                    ))}
-                </div>
-            </div>
-          </section>
-         
           {/* Creatives Section */}
-          <section className="relative py-12 sm:py-16 lg:py-20">
+          <motion.section
+            className="relative py-12 sm:py-16 lg:py-20"
+            variants={itemVariants}
+          >
             <SectionHeader title="Creatives" leftGrow={2} rightGrow={1} />
             {teamData.creatives.description && (
               <p className="font-rethink text-black text-lg sm:text-xl lg:text-2xl text-center max-w-4xl mx-auto mb-12 sm:mb-16 leading-10">
@@ -8504,31 +8701,36 @@ export default function Team() {
             )}
             <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-12">
               <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                {teamData.creatives.members.slice(0, 3).map((member, index) => (
-                  <TeamMemberCard key={index} {...member} />
-                ))}
+                {teamData.creatives.members
+                  .slice(0, 3)
+                  .map((member, index) => (
+                    <TeamMemberCard key={index} {...member} />
+                  ))}
               </div>
               <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
-                {teamData.creatives.members.slice(3, 6).map((member, index) => (
-                  <TeamMemberCard key={index + 3} {...member} />
-                ))}
+                {teamData.creatives.members
+                  .slice(3, 6)
+                  .map((member, index) => (
+                    <TeamMemberCard key={index + 3} {...member} />
+                  ))}
               </div>
             </div>
-          </section>
-
+          </motion.section>
 
           {/* Adviser Section */}
-          <section className="relative py-12 sm:py-16 lg:py-20">
+          <motion.section
+            className="relative py-12 sm:py-16 lg:py-20"
+            variants={itemVariants}
+          >
             <SectionHeader title="Adviser" leftGrow={2} rightGrow={2} />
             <div className="flex flex-wrap justify-center gap-8 sm:gap-10 lg:gap-12">
               {teamData.adviser.members.map((member, index) => (
                 <TeamMemberCard key={index} {...member} />
               ))}
             </div>
-          </section>
+          </motion.section>
         </div>
-      </main>
-
+      </motion.main>
 
       <Footer />
     </div>
@@ -8820,6 +9022,7 @@ if __name__ == "__main__":
         "cmdk": "^1.1.1",
         "cors": "^2.8.5",
         "date-fns": "^4.1.0",
+        "embla-carousel-autoplay": "^8.6.0",
         "embla-carousel-react": "^8.6.0",
         "framer-motion": "^12.23.12",
         "globals": "^16.3.0",
@@ -13086,6 +13289,16 @@ if __name__ == "__main__":
       "dev": true,
       "license": "MIT"
     },
+    "node_modules/embla-carousel-autoplay": {
+      "version": "8.6.0",
+      "resolved": "https://registry.npmjs.org/embla-carousel-autoplay/-/embla-carousel-autoplay-8.6.0.tgz",
+      "integrity": "sha512-OBu5G3nwaSXkZCo1A6LTaFMZ8EpkYbwIaH+bPqdBnDGQ2fh4+NbzjXjs2SktoPNKCtflfVMc75njaDHOYXcrsA==",
+      "dev": true,
+      "license": "MIT",
+      "peerDependencies": {
+        "embla-carousel": "8.6.0"
+      }
+    },
     "node_modules/embla-carousel-react": {
       "version": "8.6.0",
       "resolved": "https://registry.npmjs.org/embla-carousel-react/-/embla-carousel-react-8.6.0.tgz",
@@ -16577,7 +16790,7 @@ if __name__ == "__main__":
   },
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:client && npm run build:server",
+    "build": "node scripts/generate-manifest.mjs && npm run build:client && npm run build:server",
     "build:client": "vite build",
     "build:server": "vite build --config vite.config.server.ts",
     "start": "node dist/server/node-build.mjs",
@@ -22280,13 +22493,66 @@ User-agent: *
 Allow: /
 --- END FILE: public\robots.txt ---
 
+--- START FILE: scripts\generate-manifest.mjs ---
+// scripts/generate-manifest.mjs
+import fs from 'fs/promises';
+import path from 'path';
+
+const publicDir = path.join(process.cwd(), 'public');
+const assetsDir = path.join(publicDir, 'assets', 'events all pictures');
+const outputFile = path.join(publicDir, 'image-manifest.json');
+
+async function generateManifest() {
+  console.log('Generating image manifest...');
+  const allImages = [];
+
+  try {
+    const yearDirs = await fs.readdir(assetsDir, { withFileTypes: true });
+
+    for (const yearDir of yearDirs) {
+      if (!yearDir.isDirectory()) continue;
+
+      const yearPath = path.join(assetsDir, yearDir.name);
+      const eventDirs = await fs.readdir(yearPath, { withFileTypes: true });
+
+      for (const eventDir of eventDirs) {
+        if (!eventDir.isDirectory()) continue;
+
+        const eventPath = path.join(yearPath, eventDir.name);
+        const imageFiles = await fs.readdir(eventPath);
+
+        for (const imageFile of imageFiles) {
+          if (/\.(jpe?g|png|gif|webp|avif)$/i.test(imageFile)) {
+            const imageUrl = `/assets/events all pictures/${encodeURIComponent(
+              yearDir.name,
+            )}/${encodeURIComponent(eventDir.name)}/${encodeURIComponent(
+              imageFile,
+            )}`;
+            allImages.push(imageUrl);
+          }
+        }
+      }
+    }
+
+    await fs.writeFile(outputFile, JSON.stringify({ images: allImages }, null, 2));
+    console.log(`✅ Image manifest created at ${outputFile} with ${allImages.length} images.`);
+  } catch (error) {
+    console.error('❌ Error generating image manifest:', error);
+    // Create an empty manifest on error to prevent build failures
+    await fs.writeFile(outputFile, JSON.stringify({ images: [] }, null, 2));
+  }
+}
+
+generateManifest();
+--- END FILE: scripts\generate-manifest.mjs ---
+
 --- START FILE: server\index.ts ---
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import fs from "fs/promises";
 import path from "path";
-import { handleDemo } from "./routes/demo";
+import { handleDemo } from "./routes/demo.js";
 
 export function createServer() {
   const app = express();
@@ -22306,15 +22572,9 @@ export function createServer() {
 
   app.get("/api/events/:year/:folder/images", async (req, res) => {
     const { year, folder } = req.params;
-    // Point to the 'events' directory for the slider's featured images
-    const base = path.join(
-      process.cwd(),
-      "public",
-      "assets",
-      "events",
-      year,
-      folder,
-    );
+    // Vercel build places the 'public' directory at the root of the serverless function.
+    // We construct the path from there.
+    const base = path.resolve("./public", "assets", "events", year, folder);
 
     try {
       const dirents = await fs.readdir(base, { withFileTypes: true });
@@ -22324,7 +22584,6 @@ export function createServer() {
         )
         .map(
           (d) =>
-            // Update the URL to match the new directory
             `/assets/events/${encodeURIComponent(
               year,
             )}/${encodeURIComponent(folder)}/${encodeURIComponent(d.name)}`
@@ -22336,9 +22595,11 @@ export function createServer() {
     }
   });
 
-  // Return all images under `public/assets/events all pictures` as public URLs
+  // RESTORE THIS ENDPOINT for local development fallback
   app.get("/api/event-photos", async (_req, res) => {
-    const base = path.join(process.cwd(), "public", "assets", "events all pictures");
+    // Vercel build places the 'public' directory at the root of the serverless function.
+    // We construct the path from there.
+    const base = path.resolve("./public", "assets", "events all pictures");
 
     try {
       const images: string[] = [];
@@ -22350,7 +22611,9 @@ export function createServer() {
 
         const yearPath = path.join(base, year);
         try {
-          const eventFolders = await fs.readdir(yearPath, { withFileTypes: true });
+          const eventFolders = await fs.readdir(yearPath, {
+            withFileTypes: true,
+          });
 
           for (const eventDir of eventFolders) {
             if (!eventDir.isDirectory()) continue;
@@ -22361,7 +22624,11 @@ export function createServer() {
               const imageFiles = await fs.readdir(eventPath);
               for (const imageFile of imageFiles) {
                 if (/\.(jpe?g|png|gif|webp|avif)$/i.test(imageFile)) {
-                  const url = `/assets/events all pictures/${encodeURIComponent(year)}/${encodeURIComponent(eventFolder)}/${encodeURIComponent(imageFile)}`;
+                  const url = `/assets/events all pictures/${encodeURIComponent(
+                    year,
+                  )}/${encodeURIComponent(
+                    eventFolder,
+                  )}/${encodeURIComponent(imageFile)}`;
                   images.push(url);
                 }
               }
@@ -22387,7 +22654,7 @@ export function createServer() {
 
 --- START FILE: server\node-build.ts ---
 import path from "path";
-import { createServer } from "./index";
+import { createServer } from "./index.js";
 import * as express from "express";
 
 const app = createServer();
@@ -22907,7 +23174,6 @@ if __name__ == "__main__":
 --- END FILE: tsconfig.json ---
 
 --- START FILE: vercel.json ---
-
 {
   "version": 2,
   "builds": [
@@ -22920,7 +23186,10 @@ if __name__ == "__main__":
     },
     {
       "src": "api/index.ts",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["public/assets/**"]
+      }
     }
   ],
   "rewrites": [
