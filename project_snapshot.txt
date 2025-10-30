@@ -1418,7 +1418,8 @@ export default function TeamMemberCard({
   socialLinks,
 }: TeamMemberCardProps) {
   return (
-    <div className="group relative w-[330px] h-[482px] rounded-lg overflow-hidden shadow-[13px_13px_6.2px_0_rgba(239,79,31,0.25)] hover:shadow-[15px_15px_8px_0_rgba(239,79,31,0.3)] transition-all duration-300 ease-in-out hover:-translate-y-2">
+    // UPDATED: Made the card width responsive for smaller screens.
+    <div className="group relative w-full max-w-[330px] sm:w-[330px] mx-auto h-[482px] rounded-lg overflow-hidden shadow-[13px_13px_6.2px_0_rgba(239,79,31,0.25)] hover:shadow-[15px_15px_8px_0_rgba(239,79,31,0.3)] transition-all duration-300 ease-in-out hover:-translate-y-2">
       {/* Default State */}
       <div className="absolute inset-0 flex flex-col bg-white transition-opacity duration-300 ease-in-out group-hover:opacity-0">
         <div className="w-full h-[247px] bg-gray-100 overflow-hidden">
@@ -6962,6 +6963,7 @@ export function cn(...inputs: ClassValue[]) {
 --- END FILE: client\lib\utils.ts ---
 
 --- START FILE: client\pages\About.tsx ---
+// client/pages/About.tsx
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TeamMemberCard from "@/components/TeamMemberCard";
@@ -7053,7 +7055,8 @@ const designTeamMembers = [
     name: "Julio Cedrick Maghanoy",
     role: "Content Co-Head",
     image: `${imageBasePath}/Creatives/Maghanoy/Maghanoy.png`,
-    quote: "The ironic tragedy that life is to be lived forward but only makes sense in reverse.",
+    quote:
+      "The ironic tragedy that life is to be lived forward but only makes sense in reverse.",
     socialLinks: {
       linkedin: "#",
       github: "#",
@@ -7063,22 +7066,22 @@ const designTeamMembers = [
 ];
 
 const developerTeamMembers = [
-      {
-        name: "Julse M. Merencillo",
-        role: "DSC Website Developer",
-        image: `${imageBasePath}/Technology/Merencillo/Merencillo.jpg`,
-        quote: "1+1=2 kaya't tayo na dalawa pls",
-        socialLinks: { linkedin: "#", github: "#", facebook: "#" },
-      },
-      {
-        name: "Kent Paulo R. Delgado",
-        role: "DSC Website Developer",
-        image: `${imageBasePath}/Lead/Delgado.jpg`,
-        quote:
-          "We can't anticipate or even predict our future, but we can begin preparing for it",
-        socialLinks: { linkedin: "#", github: "#", facebook: "#" },
-      },
-]
+  {
+    name: "Julse M. Merencillo",
+    role: "DSC Website Developer",
+    image: `${imageBasePath}/Technology/Merencillo/Merencillo.jpg`,
+    quote: "1+1=2 kaya't tayo na dalawa pls",
+    socialLinks: { linkedin: "#", github: "#", facebook: "#" },
+  },
+  {
+    name: "Kent Paulo R. Delgado",
+    role: "DSC Website Developer",
+    image: `${imageBasePath}/Lead/Delgado.jpg`,
+    quote:
+      "We can't anticipate or even predict our future, but we can begin preparing for it",
+    socialLinks: { linkedin: "#", github: "#", facebook: "#" },
+  },
+];
 
 export default function About() {
   return (
@@ -7277,7 +7280,7 @@ export default function About() {
             <div className="absolute top-1/2 -right-48 w-96 h-96 bg-white/10 rounded-full" />
             <div className="absolute bottom-0 -left-32 w-64 h-64 bg-white/5 rounded-full" />
           </div>
-          
+
           <div className="max-w-7xl mx-auto relative z-10 space-y-12 sm:space-y-16 lg:space-y-20">
             {/* Mission Section */}
             <div>
@@ -7285,9 +7288,10 @@ export default function About() {
                 OUR MISSION
               </h2>
               <p className="font-rethink text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-6xl">
-                To empower and inspire students at the University of Southeastern
-                Philippines by providing access to diverse technologies and
-                fostering a collaborative learning environment. We promote{" "}
+                To empower and inspire students at the University of
+                Southeastern Philippines by providing access to diverse
+                technologies and fostering a collaborative learning
+                environment. We promote{" "}
                 <span className="font-bold">
                   innovation, research, creativity, and technological passion
                 </span>{" "}
@@ -7299,8 +7303,9 @@ export default function About() {
                 <span className="font-bold">
                   strategic partnerships and collaborations
                 </span>
-                , we enable members to play an active role in advancing technology
-                and promoting socio-economic progress—positioning them as{" "}
+                , we enable members to play an active role in advancing
+                technology and promoting socio-economic progress—positioning
+                them as{" "}
                 <span className="font-bold">catalysts for positive change</span>{" "}
                 in an ever-evolving digital world.
               </p>
@@ -7316,8 +7321,8 @@ export default function About() {
                 <span className="font-bold">
                   leading student-driven tech community
                 </span>{" "}
-                that shapes the next generation of innovators and leaders. We aim
-                to equip students with the{" "}
+                that shapes the next generation of innovators and leaders. We
+                aim to equip students with the{" "}
                 <span className="font-bold">
                   skills, mindset, and opportunities
                 </span>{" "}
@@ -7325,8 +7330,8 @@ export default function About() {
                 <span className="font-bold">
                   education, collaboration, and innovation
                 </span>
-                , we envision a future where our members leave a lasting impact on
-                the local and global tech landscape.
+                , we envision a future where our members leave a lasting impact
+                on the local and global tech landscape.
               </p>
             </div>
 
@@ -7347,24 +7352,24 @@ export default function About() {
                   commitment to the community.
                 </p>
                 <p>
-                  <span className="font-bold">E – Excellence</span> We strive for
-                  academic and technical excellence by continuously learning and
-                  applying our skills effectively.
+                  <span className="font-bold">E – Excellence</span> We strive
+                  for academic and technical excellence by continuously learning
+                  and applying our skills effectively.
                 </p>
                 <p>
                   <span className="font-bold">A – Adaptability</span> We embrace
-                  change, learn from challenges, and stay agile in a fast-evolving
-                  tech landscape.
+                  change, learn from challenges, and stay agile in a
+                  fast-evolving tech landscape.
                 </p>
                 <p>
-                  <span className="font-bold">T – Tech-Driven Innovation</span> We
-                  are passionate about technology and use it as a tool for creative
-                  problem-solving and real-world impact.
+                  <span className="font-bold">T – Tech-Driven Innovation</span>{" "}
+                  We are passionate about technology and use it as a tool for
+                  creative problem-solving and real-world impact.
                 </p>
                 <p>
-                  <span className="font-bold">E – Empowerment</span> We uplift one
-                  another, create inclusive spaces, and help students realize their
-                  potential as future leaders.
+                  <span className="font-bold">E – Empowerment</span> We uplift
+                  one another, create inclusive spaces, and help students
+                  realize their potential as future leaders.
                 </p>
               </div>
             </div>
@@ -7379,8 +7384,8 @@ export default function About() {
             <h2 className="font-rethink font-bold text-dsc-maroon text-center text-4xl sm:text-5xl lg:text-[64px] leading-tight mb-12">
               The Website Design Team
             </h2>
-
-            <div className="flex flex-wrap justify-center gap-8 lg:gap-12">
+            {/* UPDATED: Replaced flex-wrap with a responsive grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 justify-items-center">
               {designTeamMembers.map((member) => (
                 <TeamMemberCard key={member.name} {...member} />
               ))}
@@ -7389,8 +7394,8 @@ export default function About() {
             <h2 className="font-rethink font-bold text-dsc-maroon text-center text-4xl sm:text-5xl lg:text-[64px] leading-tight mt-16 mb-12">
               The Website Developer Team
             </h2>
-            
-            <div className="flex flex-wrap justify-center gap-8 lg:gap-12">
+            {/* UPDATED: Replaced flex-wrap with a responsive grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 justify-items-center">
               {developerTeamMembers.map((member) => (
                 <TeamMemberCard key={member.name} {...member} />
               ))}
@@ -7398,7 +7403,7 @@ export default function About() {
           </div>
         </motion.section>
       </motion.main>
-      
+
       {/* Inline styles for the levitating animation */}
       <style>{`
         @keyframes image-float {
@@ -7454,16 +7459,16 @@ export default function Contact() {
       <Header />
 
       <main className="flex-1 py-12 sm:py-16 lg:py-20 px-6 sm:px-12 lg:px-24">
-        {/* Changed this div to a motion.div to act as the animation container */}
         <motion.div
           className="max-w-[1440px] mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Header Section */}
-          {/* Changed this div to a motion.div to animate as one block */}
-          <motion.div className="text-center mb-12 sm:mb-16" variants={itemVariants}>
+          <motion.div
+            className="text-center mb-12 sm:mb-16"
+            variants={itemVariants}
+          >
             <h1 className="font-rethink font-bold text-[#FE1B1B] text-3xl sm:text-4xl lg:text-[45px] mb-2">
               CONNECT WITH US!
             </h1>
@@ -7474,13 +7479,10 @@ export default function Contact() {
             </p>
           </motion.div>
 
-          {/* Main Contact Container */}
-          {/* Changed this div to a motion.div to animate the main card */}
           <motion.div
             className="relative bg-dsc-maroon rounded-[15px] shadow-[0_0_60px_30px_rgba(0,0,0,0.03)] overflow-hidden"
             variants={itemVariants}
           >
-            {/* Background Eagle Image */}
             <img
               src="https://api.builder.io/api/v1/image/assets/TEMP/6baeeaab227fea6423f62cc9113eadbb79a8e205?width=1384"
               alt=""
@@ -7488,7 +7490,6 @@ export default function Contact() {
               style={{ filter: "drop-shadow(0 0 4px rgba(0, 0, 0, 0.75))" }}
             />
 
-            {/* Decorative Circles */}
             <svg
               className="absolute right-0 bottom-0 w-[247px] h-[245px] pointer-events-none hidden lg:block"
               width="173"
@@ -7516,9 +7517,7 @@ export default function Contact() {
             </svg>
 
             <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 p-8 sm:p-12 lg:p-16">
-              {/* Left Side - Info Section */}
               <div className="flex flex-col items-center lg:items-start gap-6 lg:gap-8">
-                {/* Logo */}
                 <div className="flex items-center gap-4">
                   <svg
                     className="w-[60px] h-[42px] sm:w-[89px] sm:h-[62px] flex-shrink-0"
@@ -7573,19 +7572,16 @@ export default function Contact() {
                   </div>
                 </div>
 
-                {/* Description */}
                 <p className="text-white font-inter text-sm sm:text-base text-center lg:text-left max-w-md leading-7">
                   DSC USeP is a student-driven community for developers
                   passionate about technology, learning, and collaboration.
                 </p>
 
-                {/* Tagline */}
                 <p className="text-white font-inter text-sm sm:text-base font-bold italic text-center lg:text-left">
                   We are students. We are innovators. We are the future. We are
                   DSC.
                 </p>
 
-                {/* CTA Link */}
                 <a
                   href="https://forms.gle/PRMHj5wAtW8xposi7"
                   target="_blank"
@@ -7595,7 +7591,6 @@ export default function Contact() {
                   Be a DSC member
                 </a>
 
-                {/* Social Links & Contact Info */}
                 <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-4">
                   <a
                     href="https://www.facebook.com/DSCUSePObrero"
@@ -7703,7 +7698,8 @@ export default function Contact() {
                   <span>dsc@usep.edu.ph</span>
                 </div>
               </div>
-              <div className="flex items-center justify-center aspect-video">
+              {/* UPDATED: Added responsive aspect ratio for the slideshow */}
+              <div className="flex items-center justify-center w-full aspect-square lg:aspect-video">
                 <EventImageSlideshow />
               </div>
             </div>
