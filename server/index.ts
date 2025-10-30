@@ -5,11 +5,6 @@ import fs from "fs/promises";
 import path from "path";
 import { handleDemo } from "./routes/demo";
 
-// Get the directory of the current module
-const __dirname = import.meta.dirname;
-// Construct a path to the project's root directory, which is one level up from `server/`
-const projectRoot = path.join(__dirname, '..');
-
 export function createServer() {
   const app = express();
 
@@ -28,15 +23,9 @@ export function createServer() {
 
   app.get("/api/events/:year/:folder/images", async (req, res) => {
     const { year, folder } = req.params;
-    // Use the robust projectRoot path
-    const base = path.join(
-      projectRoot,
-      "public",
-      "assets",
-      "events",
-      year,
-      folder,
-    );
+    // Vercel build places the 'public' directory at the root of the serverless function.
+    // We construct the path from there.
+    const base = path.resolve("./public", "assets", "events", year, folder);
 
     try {
       const dirents = await fs.readdir(base, { withFileTypes: true });
@@ -46,7 +35,6 @@ export function createServer() {
         )
         .map(
           (d) =>
-            // Update the URL to match the new directory
             `/assets/events/${encodeURIComponent(
               year,
             )}/${encodeURIComponent(folder)}/${encodeURIComponent(d.name)}`
@@ -60,8 +48,9 @@ export function createServer() {
 
   // Return all images under `public/assets/events all pictures` as public URLs
   app.get("/api/event-photos", async (_req, res) => {
-    // Use the robust projectRoot path
-    const base = path.join(projectRoot, "public", "assets", "events all pictures");
+    // Vercel build places the 'public' directory at the root of the serverless function.
+    // We construct the path from there.
+    const base = path.resolve("./public", "assets", "events all pictures");
 
     try {
       const images: string[] = [];
@@ -73,7 +62,9 @@ export function createServer() {
 
         const yearPath = path.join(base, year);
         try {
-          const eventFolders = await fs.readdir(yearPath, { withFileTypes: true });
+          const eventFolders = await fs.readdir(yearPath, {
+            withFileTypes: true,
+          });
 
           for (const eventDir of eventFolders) {
             if (!eventDir.isDirectory()) continue;
@@ -84,7 +75,11 @@ export function createServer() {
               const imageFiles = await fs.readdir(eventPath);
               for (const imageFile of imageFiles) {
                 if (/\.(jpe?g|png|gif|webp|avif)$/i.test(imageFile)) {
-                  const url = `/assets/events all pictures/${encodeURIComponent(year)}/${encodeURIComponent(eventFolder)}/${encodeURIComponent(imageFile)}`;
+                  const url = `/assets/events all pictures/${encodeURIComponent(
+                    year,
+                  )}/${encodeURIComponent(
+                    eventFolder,
+                  )}/${encodeURIComponent(imageFile)}`;
                   images.push(url);
                 }
               }
