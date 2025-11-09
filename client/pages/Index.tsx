@@ -162,8 +162,8 @@ export default function Index() {
             </div>
 
             {/* Description with fade */}
-            <p 
-              className={`font-rethink font-normal text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] mb-6 sm:mb-8 lg:mb-10 max-w-[90%] sm:max-w-md transition-all duration-1000 ${
+            <p
+              className={`font-rethink font-normal text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] mb-6 sm:mb-8 lg:mb-10 max-w-[90%] sm:max-w-md transition-all duration-1000 whitespace-nowrap ${
                 isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: '0.9s' }}
