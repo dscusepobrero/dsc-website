@@ -50,7 +50,7 @@ const teamData: Record<
       {
         name: "Kent Paulo R. Delgado",
         role: "Lead, DSC",
-        image: `${imageBasePath}/Lead/Delgado.JPG`,
+        image: `${imageBasePath}/Lead/Delgado.webp`,
         quote:
           "We can't anticipate or even predict our future, but we can begin preparing for it",
         socialLinks: { linkedin: "http://www.linkedin.com/in/kent-paulo-delgado-ba3591314",
@@ -64,7 +64,7 @@ const teamData: Record<
       {
         name: "Nancy S. Mozo",
         role: "Adviser",
-        image: `${imageBasePath}/Adviser/Mozo/Mozo.png`,
+        image: `${imageBasePath}/Adviser/Mozo/Mozo.webp`,
         quote: "-",
         socialLinks: {},
       },
@@ -77,14 +77,14 @@ const teamData: Record<
       {
         name: "Mariel Rossini C. Go",
         role: "Chief Operations Officer",
-        image: `${imageBasePath}/Operations/Go/Go.JPG`,
+        image: `${imageBasePath}/Operations/Go/Go.webp`,
         quote: "Stay humble, stay hungry.",
         socialLinks: { facebook: "https://www.facebook.com/rossini.22.02" },
       },
       {
         name: "Marc Alvienth T. Hernandez",
         role: "Secretary",
-        image: `${imageBasePath}/Operations/Hernandez/Hernandez.JPG`,
+        image: `${imageBasePath}/Operations/Hernandez/Hernandez.webp`,
         quote: "Hindi mahalaga ang magwagi, ang mahalaga, ikaw ay nakibahagi",
         socialLinks: { linkedin: "http://www.linkedin.com/in/marc-alvienth-hernandez-370382324",
                        github: "https://github.com/Albyent",
@@ -93,14 +93,14 @@ const teamData: Record<
       {
         name: "Baberose I. Silmaro",
         role: "Communications Officer",
-        image: `${imageBasePath}/Operations/Silmaro/Silmaro.JPG`,
+        image: `${imageBasePath}/Operations/Silmaro/Silmaro.webp`,
         quote: "Don't! Don't! Don't!!!... Don't stoOoOoOP~ Go OooOoonn~",
         socialLinks: { facebook: "https://www.facebook.com/baberose.silmaro.7" },
       },
       {
         name: "John Marcellin E. Tan",
         role: "Events Officer",
-        image: `${imageBasePath}/Operations/Tan/Tan.JPG`,
+        image: `${imageBasePath}/Operations/Tan/Tan.webp`,
         quote: "Collect moments, not grudges.",
         socialLinks: { linkedin: "http://www.linkedin.com/in/john-marcellin-tan-bb6bb2382",
                        github: "https://github.com/JMarcellin",
@@ -109,21 +109,21 @@ const teamData: Record<
       {
         name: "Kimberly S. Bermoy",
         role: "Events Officer",
-        image: `${imageBasePath}/Operations/Bermoy/Bermoy.JPG`,
+        image: `${imageBasePath}/Operations/Bermoy/Bermoy.webp`,
         quote: "Thank u, next",
         socialLinks: { facebook: "https://www.facebook.com/kimberlysaromines.bermoy" },
       },
       {
         name: "Ken Erik Y. Justiniani",
         role: "Technical Officer",
-        image: `${imageBasePath}/Operations/Justiniani/Justiniani.JPG`,
+        image: `${imageBasePath}/Operations/Justiniani/Justiniani.webp`,
         quote: "Kapag ang jeep ay lumipad sa tubig, huwag umihi dito.",
         socialLinks: { facebook: "https://www.facebook.com/ken.justiniani" },
       },
       {
         name: "Ace Jonathan D. Briones",
         role: "Technical Officer",
-        image: `${imageBasePath}/Operations/Briones/Briones.JPG`,
+        image: `${imageBasePath}/Operations/Briones/Briones.webp`,
         quote: "If there's a will, there's a water",
         socialLinks: { facebook: "https://www.facebook.com/ace.jonathan.367220/" },
       },
@@ -136,7 +136,7 @@ const teamData: Record<
       {
         name: "Julse M. Merencillo",
         role: "Chief Technology Officer",
-        image: `${imageBasePath}/Technology/Merencillo/Merencillo.JPG`,
+        image: `${imageBasePath}/Technology/Merencillo/Merencillo.webp`,
         quote: "1 + 1 = 2 with a parse error at 42",
         socialLinks: { linkedin: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
                        github: "https://github.com/julse-merencillo",
@@ -145,21 +145,21 @@ const teamData: Record<
       {
         name: "Kervy Chrystan G. Caranto",
         role: "Engineering Lead",
-        image: `${imageBasePath}/Technology/Caranto/Caranto.JPG`,
+        image: `${imageBasePath}/Technology/Caranto/Caranto.webp`,
         quote: "There are only two hard problems in Computer Science; cache invalidation, naming things, and off-by-one errors",
         socialLinks: { facebook: "https://www.facebook.com/java.lang.System.exit" },
       },
       {
         name: "Dave Shanna Marie E. Gigawin",
         role: "Design Lead",
-        image: `${imageBasePath}/Technology/Gigawin/Gigawin.JPG`,
+        image: `${imageBasePath}/Technology/Gigawin/Gigawin.webp`,
         quote: "good things take time",
         socialLinks: { facebook: "https://www.facebook.com/dave.shanna.2024" },
       },
       {
         name: "Decyrel P. Dahan",
         role: "Data Science Lead",
-        image: `${imageBasePath}/Technology/Dahan/Dahan.JPG`,
+        image: `${imageBasePath}/Technology/Dahan/Dahan.webp`,
         quote: "HAHAHAHAHAHAHA",
         socialLinks: { facebook: "https://www.facebook.com/junjun.panolin.1/" },
       },
@@ -172,21 +172,21 @@ const teamData: Record<
       {
         name: "Lance Marvin Libron",
         role: "Chief Finance Officer",
-        image: `${imageBasePath}/Finance/Libron/Libron.JPG`,
+        image: `${imageBasePath}/Finance/Libron/Libron.webp`,
         quote: "Ang kabataan ang pag asa ng bayan",
         socialLinks: { facebook: "https://www.facebook.com/LanceLibron" },
       },
       {
         name: "John Renan N. Labay",
         role: "Logistics Officer",
-        image: `${imageBasePath}/Finance/Labay/Labay.JPG`,
+        image: `${imageBasePath}/Finance/Labay/Labay.webp`,
         quote: "Life is easy when you know your priorities",
         socialLinks: { facebook: "https://www.facebook.com/johnrenan.labay" },
       },
       {
         name: "Asher Grey Morial",
         role: "Logistics Officer",
-        image: `${imageBasePath}/Finance/Morial/Morial.JPG`,
+        image: `${imageBasePath}/Finance/Morial/Morial.webp`,
         quote:
           "Voluntary exposure to that which freezes and terrifies you in measured proportions is curative.",
         socialLinks: { facebook: "https://www.facebook.com/EnderLocke" },
@@ -194,7 +194,7 @@ const teamData: Record<
       {
         name: "Jayce Lorenz Gulmatico",
         role: "Auditor",
-        image: `${imageBasePath}/Finance/Gulmatico/Gulmatico.JPG`,
+        image: `${imageBasePath}/Finance/Gulmatico/Gulmatico.webp`,
         quote:
           "すいらゃんがずっと作れないものは半熟のゆで卵。これだけはね、何をどう頑張ってもなぜかずっと作れない。",
         socialLinks: { facebook: "https://www.facebook.com/jl.gulmatico.2025" },
@@ -208,14 +208,14 @@ const teamData: Record<
       {
         name: "Jaylord Jan A. Boladola",
         role: "Chief Creatives Officer",
-        image: `${imageBasePath}/Creatives/Boladola/Boladola.JPG`,
+        image: `${imageBasePath}/Creatives/Boladola/Boladola.webp`,
         quote: "VIVA LA VIDA",
         socialLinks: { facebook: "https://www.facebook.com/jaylord.jan" },
       },
       {
         name: "Kurt Ashton G. Montebon",
         role: "Branding Officer",
-        image: `${imageBasePath}/Creatives/Montebon/Montebon.JPG`,
+        image: `${imageBasePath}/Creatives/Montebon/Montebon.webp`,
         quote: "Choose whatever makes your heart happy and your mind stress-free.",
         socialLinks: { linkedin: "https://www.linkedin.com/in/kurt-ashton-montebon-827662370/",
                        github: "https://github.com/iinfxnity",
@@ -224,7 +224,7 @@ const teamData: Record<
       {
         name: "Arndria A. Basco",
         role: "Promotion Officer",
-        image: `${imageBasePath}/Creatives/Basco/Basco.JPG`,
+        image: `${imageBasePath}/Creatives/Basco/Basco.webp`,
         quote: "Unsaon imung kaugmaon kung dili ka maugmaan",
         socialLinks: { github: "https://github.com/Drea-rya",
                        facebook: "https://www.facebook.com/arndria.basco" },
@@ -232,14 +232,14 @@ const teamData: Record<
       {
         name: "Elvie May P. Mara",
         role: "Promotion Officer",
-        image: `${imageBasePath}/Creatives/Mara/Mara.JPG`,
+        image: `${imageBasePath}/Creatives/Mara/Mara.webp`,
         quote: "pwede muparking? sa imong bakante nga kasing-kasing",
         socialLinks: { facebook: "https://www.facebook.com/elvie.mara09" },
       },
       {
         name: "Julio Cedrick D. Maghanoy",
         role: "Documentation Officer",
-        image: `${imageBasePath}/Creatives/Maghanoy/Maghanoy.JPG`,
+        image: `${imageBasePath}/Creatives/Maghanoy/Maghanoy.webp`,
         quote:
           "The ironic tragedy that life is to be lived forward but only makes sense in reverse.",
         socialLinks: { facebook: "https://www.facebook.com/juliocedrick" },
@@ -247,7 +247,7 @@ const teamData: Record<
       {
         name: "Mcjustin Andrew S. Palen",
         role: "Documentation Officer",
-        image: `${imageBasePath}/Creatives/Palen/Palen.JPG`,
+        image: `${imageBasePath}/Creatives/Palen/Palen.webp`,
         quote: "Small progress is still progress",
         socialLinks: { facebook: "https://www.facebook.com/mcjustin.mm/" },
       },
