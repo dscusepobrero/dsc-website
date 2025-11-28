@@ -11,9 +11,6 @@
     {
       "src": "api/index.ts",
       "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["public/assets/**"]
-      }
     }
   ],
   "rewrites": [
