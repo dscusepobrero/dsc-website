@@ -78,6 +78,14 @@ const events: EventSlide[] = [
      folder: "DSC Speedrun Ethereum",
      image: encodeURI("/assets/events/2025-2026/DSC Speedrun Ethereum/7.jpg"),
   },
+  {
+    title: "DSC KadaDev Infosession",
+    date: "November 2025",
+    description: "This info session, in partnership with KadaKareer, brought together vibrant minds eager to learn, share, and grow; meeting the passionate DSC core team and exploring our club’s direction and opportunities.",
+     year: "2025-2026",
+     folder: "DSC KadaDev Infosession 2025",
+     image: encodeURI("/assets/events/2025-2026/DSC KadaDev Infosession 2025/8.jpg"),
+  },
 ];
 
 export default function EventSlider() {

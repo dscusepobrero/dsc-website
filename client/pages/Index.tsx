@@ -149,7 +149,7 @@ export default function Index() {
         </div>
             {/* Description with fade */}
             <p
-              className={`font-rethink font-normal text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] mb-2 sm:mb-2 lg:mb-2 max-w-[90%] sm:max-w-md transition-all duration-1000 ${
+              className={`font-rethink font-normal text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] mb-2 sm:mb-4 lg:mb-2 max-w-[90%] sm:max-w-md transition-all duration-1000 ${
                 isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: '0.9s' }}
@@ -167,7 +167,7 @@ export default function Index() {
             </p>
 
             <p
-              className={`font-rethink font-normal text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] mb-6 sm:mb-6 lg:mb-2 max-w-[90%] sm:max-w-md transition-all duration-1000 ${
+              className={`font-rethink font-normal text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] mb-6 sm:mb-6 lg:mb-6 max-w-[90%] sm:max-w-md transition-all duration-1000 ${
                 isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: '0.9s' }}
