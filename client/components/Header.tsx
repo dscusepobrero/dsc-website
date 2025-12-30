@@ -14,7 +14,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="w-full h-[109px] bg-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] sticky top-0 z-50">
+    <header className="w-full h-[90px] bg-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] sticky top-0 z-50">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 h-full flex items-center justify-between">
         <Link to="/" className="flex items-center gap-4">
           <svg

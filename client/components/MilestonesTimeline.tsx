@@ -61,6 +61,12 @@ const milestones: Milestone[] = [
     description:
       "Launched a modern, accessible platform for our community members.",
   },
+  {
+    date: "November 2025",
+    title: "DSC KadaDev Infosession 2025",
+    description:
+      "Introduction of the core team of DSC along with our strong partnership with KadaKareer"
+  },
 ];
 
 export default function MilestonesTimeline() {

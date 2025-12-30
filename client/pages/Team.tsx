@@ -138,8 +138,7 @@ const teamData: Record<
         role: "Chief Technology Officer",
         image: `${imageBasePath}/Technology/Merencillo/Merencillo.webp`,
         quote: "1 + 1 = 2 with a parse error at 42",
-        socialLinks: { linkedin: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-                       github: "https://github.com/julse-merencillo",
+        socialLinks: { github: "https://github.com/julse-merencillo",
                        facebook: "https://www.facebook.com/merencillo.julse" },
       },
       {

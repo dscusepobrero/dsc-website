@@ -28,7 +28,7 @@ export default function Index() {
     <div className="min-h-screen bg-white">
       <Header />
       
-      <main className="relative w-full min-h-[calc(100vh-109px)] overflow-hidden bg-gradient-to-b from-transparent via-transparent to-dsc-maroon/50">
+      <main className="relative w-full min-h-[calc(100vh-90px)] overflow-hidden bg-gradient-to-b from-transparent via-transparent to-dsc-maroon/50">
         {/* Animated background overlay */}
         <div 
           className={`absolute inset-0 bg-dsc-maroon/90 transition-all duration-1000 ${
@@ -129,46 +129,50 @@ export default function Index() {
               className={`w-[120px] h-[75px] sm:w-[180px] sm:h-[115px] lg:w-[204px] lg:h-[130px] mb-6 sm:mb-8 lg:mb-10 transition-all duration-1000 ${
                 isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
               }`}
-              style={{ 
+              style={{
                 transitionDelay: '0.3s',
                 filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.4))',
                 animation: 'logo-glow 3s ease-in-out infinite',
               }}
             />
-            
-            <div className="flex flex-col items-end">
-              {/* "We are" text with fade + slide */}
-              <h1 
-                className={`font-signature text-white text-[60px] sm:text-[90px] lg:text-[120px] xl:text-[150px] leading-none mb-2 sm:mb-4 transition-all duration-1000 ${
-                  isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
-                }`}
-                style={{ transitionDelay: '0.5s' }}
-              >
-                We are
-              </h1>
-              
-              {/* "DSC" text with fade + slide + scale */}
-              <h2 
-                className={`font-rethink font-bold text-white text-[40px] sm:text-[60px] lg:text-[70px] xl:text-[80px] leading-none mb-6 sm:mb-8 lg:mb-10 transition-all duration-1000 ${
-                  isLoaded ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-20 scale-90'
-                }`}
-                style={{
-                  transitionDelay: '0.7s',
-                  textShadow: '0 0 30px rgba(255,255,255,0.3)',
-                }}
-              >
-                DSC
-              </h2>
-            </div>
 
+        {/* Container for "We are DSC" */}
+        <div className={`flex flex-row flex-nowrap items-end gap-x-10 sm:gap-x-16 mb-6 sm:mb-8 lg:mb-10 transition-all duration-1000 ${
+            isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
+        }`}
+            style={{ transitionDelay: '0.5s' }}>
+
+            {/* "We are" text */}
+            <h1 className="font-signature text-white text-[60px] sm:text-[90px] lg:text-[120px] xl:text-[150px] leading-none whitespace-nowrap">
+                We are DSC
+            </h1>
+        </div>
             {/* Description with fade */}
-            <p 
-              className={`font-rethink font-normal text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] mb-6 sm:mb-8 lg:mb-10 max-w-[90%] sm:max-w-md transition-all duration-1000 ${
+            <p
+              className={`font-rethink font-normal text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] mb-2 sm:mb-2 lg:mb-2 max-w-[90%] sm:max-w-md transition-all duration-1000 ${
                 isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: '0.9s' }}
             >
-              We are students, we are innovators, we are the future.
+              We are students.
+            </p>
+
+            <p
+              className={`font-rethink font-normal text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] mb-2 sm:mb-2 lg:mb-2 max-w-[90%] sm:max-w-md transition-all duration-1000 ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ transitionDelay: '0.9s' }}
+            >
+              We are innovators.
+            </p>
+
+            <p
+              className={`font-rethink font-normal text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[20px] mb-6 sm:mb-6 lg:mb-2 max-w-[90%] sm:max-w-md transition-all duration-1000 ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ transitionDelay: '0.9s' }}
+            >
+              We are the future.
             </p>
 
             {/* Button with fade + scale + hover glow */}
