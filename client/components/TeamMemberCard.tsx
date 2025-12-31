@@ -22,7 +22,6 @@ const SocialLink = ({
   ariaLabel: string;
 }) => {
   const isValidLink = href && href !== "#";
-
   if (isValidLink) {
     return (
       <a
@@ -31,19 +30,14 @@ const SocialLink = ({
         rel="noopener noreferrer"
         className="hover:opacity-70 transition-all duration-200 hover:-translate-y-1"
         aria-label={ariaLabel}
-        // 2. Prevent the card from closing when clicking a link
+        // Prevents the card from toggling when you click a social icon
         onClick={(e) => e.stopPropagation()}
       >
         {children}
       </a>
     );
   }
-
-  return (
-    <span className="cursor-default" aria-label={ariaLabel}>
-      {children}
-    </span>
-  );
+  return <span className="cursor-default" aria-label={ariaLabel}>{children}</span>;
 };
 
 export default function TeamMemberCard({
@@ -53,34 +47,50 @@ export default function TeamMemberCard({
   quote,
   socialLinks,
 }: TeamMemberCardProps) {
-  // 3. Track if the card is clicked/toggled
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Helper to combine the state and the hover class
-  const activeClasses = isExpanded ? "opacity-100 pointer-events-auto" : "opacity-0 group-hover:opacity-100";
-  const hiddenClasses = isExpanded ? "opacity-0 pointer-events-none" : "opacity-100 group-hover:opacity-0";
+  // 1. Handle Desktop Hover: Only trigger if the pointer is a mouse
+  const handlePointerEnter = (e: React.PointerEvent) => {
+    if (e.pointerType === 'mouse') setIsExpanded(true);
+  };
+
+  const handlePointerLeave = (e: React.PointerEvent) => {
+    if (e.pointerType === 'mouse') setIsExpanded(false);
+  };
+
+  // 2. Handle Mobile Tap: Toggles state regardless of pointer type
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  // 3. Visibility Classes (Removed 'group-hover' to stop sticky hover)
+  const overlayClasses = isExpanded
+    ? "opacity-100 pointer-events-auto"
+    : "opacity-0 pointer-events-none";
+
+  const defaultClasses = isExpanded
+    ? "opacity-0"
+    : "opacity-100";
+
+  // Shared animation logic for text/icons
+  const animateIn = isExpanded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6";
 
   return (
     <div
-      // 4. Toggle state on click
-      onClick={() => setIsExpanded(!isExpanded)}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
+      onClick={handleToggle}
       className="group relative flex-shrink-0 w-[320px] max-w-[calc(100vw-2rem)] mx-auto h-[482px] rounded-lg overflow-hidden shadow-[13px_13px_6.2px_0_rgba(239,79,31,0.25)] hover:shadow-[15px_15px_8px_0_rgba(239,79,31,0.3)] transition-all duration-300 ease-in-out hover:-translate-y-2 cursor-pointer"
     >
       {/* Default State */}
-      <div className={`absolute inset-0 flex flex-col bg-white transition-opacity duration-300 ease-in-out ${hiddenClasses}`}>
+      <div className={`absolute inset-0 flex flex-col bg-white transition-opacity duration-300 ease-in-out ${defaultClasses}`}>
         <div className="w-full h-[247px] bg-gray-100 overflow-hidden">
           <img src={image} alt={name} className="w-full h-full object-cover" />
         </div>
         <div className="p-4 flex-1 flex flex-col">
-          <h3 className="font-rethink font-bold text-2xl text-gray-900 mb-2">
-            {name}
-          </h3>
-          <p className="font-rethink text-base text-gray-600 mb-4 whitespace-pre-line">
-            {role}
-          </p>
-          <p className="font-rethink text-sm text-gray-500 italic mb-6 h-20 overflow-y-auto">
-            "{quote}"
-          </p>
+          <h3 className="font-rethink font-bold text-2xl text-gray-900 mb-2">{name}</h3>
+          <p className="font-rethink text-base text-gray-600 mb-4 whitespace-pre-line">{role}</p>
+          <p className="font-rethink text-sm text-gray-500 italic mb-6 h-20 overflow-y-auto">"{quote}"</p>
           <div className="flex items-center gap-4 mt-auto">
             {socialLinks.linkedin && (
               <SocialLink href={socialLinks.linkedin} ariaLabel="LinkedIn">
@@ -165,28 +175,23 @@ export default function TeamMemberCard({
       </div>
 
       {/* Hover State */}
-       <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 bg-dsc-maroon/70 transition-opacity duration-300 ease-in-out ${activeClasses}`}>
+       <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 bg-dsc-maroon/80 transition-opacity duration-300 ease-in-out ${overlayClasses}`}>
         <img
           src={image}
           alt=""
           aria-hidden="true"
-          // 5. Apply scale/blur based on state or hover
-          className={`absolute inset-0 w-full h-full object-cover opacity-60 blur-sm scale-125 transition-all duration-700 ease-in-out
-            ${isExpanded ? 'scale-140 blur-[2px]' : 'group-hover:scale-140 group-hover:blur-[2px]'}`}
+          className={`absolute inset-0 w-full h-full object-cover opacity-60 transition-all duration-700 ease-in-out
+            ${isExpanded ? 'scale-125 blur-[2px]' : 'scale-100 blur-0'}`}
         />
         <div className="relative text-center text-white flex flex-col h-full w-full">
           <div className="flex-1 flex flex-col items-center justify-center">
-            {/* 6. Apply text animations based on state or hover */}
-            <h3 className={`font-rethink font-bold text-3xl mb-1 transform transition-all duration-300 ease-in-out delay-150
-              ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0'}`}>
+            <h3 className={`font-rethink font-bold text-3xl mb-1 transform transition-all duration-300 ease-in-out delay-75 ${animateIn}`}>
               {name}
             </h3>
-            <p className={`font-rethink text-lg mb-4 transform transition-all duration-300 ease-in-out delay-200
-              ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0'}`}>
+            <p className={`font-rethink text-lg mb-4 transform transition-all duration-300 ease-in-out delay-150 ${animateIn}`}>
               {role}
             </p>
-            <p className={`font-rethink text-base italic max-w-xs transform transition-all duration-300 ease-in-out delay-250
-              ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0'}`}>
+            <p className={`font-rethink text-base italic max-w-xs transform transition-all duration-300 ease-in-out delay-200 ${animateIn}`}>
               "{quote}"
             </p>
           </div>
