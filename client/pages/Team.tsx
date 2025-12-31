@@ -65,7 +65,7 @@ const teamData: Record<
         name: "Nancy S. Mozo",
         role: "Adviser",
         image: `${imageBasePath}/Adviser/Mozo/Mozo.webp`,
-        quote: "-",
+        quote: "",
         socialLinks: {},
       },
     ],
