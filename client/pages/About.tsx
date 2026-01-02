@@ -88,6 +88,13 @@ const developerTeamMembers = [
                    facebook: "https://www.facebook.com/merencillo.julse" },
   },
   {
+    name: "Dave Shanna Marie E. Gigawin",
+    role: "Design Lead",
+    image: `${imageBasePath}/Technology/Gigawin/Gigawin.webp`,
+    quote: "good things take time",
+    socialLinks: { facebook: "https://www.facebook.com/dave.shanna.2024" },
+  },
+  {
     name: "Kent Paulo R. Delgado",
     role: "DSC Website Developer",
     image: `${imageBasePath}/Lead/Delgado.webp`,
@@ -410,7 +417,7 @@ export default function About() {
               The Website Developer Team
             </h2>
             {/* UPDATED: Replaced flex-wrap with a responsive grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 justify-items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 justify-items-center">
               {developerTeamMembers.map((member) => (
                 <TeamMemberCard key={member.name} {...member} />
               ))}
